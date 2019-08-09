@@ -1,0 +1,635 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>参数编辑器 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="参数编辑器是仅供游戏程序设计师使用的“内部工具”。设计内部工具时不必考虑“好不好看”的问题,而且也不必为了DLL发布而另外写安装程序,所以写起来不会得手碍脚。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter  active " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E5%8F%82%E6%95%B0%E7%BC%96%E8%BE%91%E5%99%A8" name="%E5%8F%82%E6%95%B0%E7%BC%96%E8%BE%91%E5%99%A8">参数编辑器</h3>
+<p>参数编辑器是仅供游戏程序设计师使用的“内部工具”。设计内部工具时不必考虑“好不好看”的问题,而且也不必为了DLL发布而另外写安装程序,所以写起来不会得手碍脚。</p>
+<p>反向思考回来,如果写这个内部工具都已经焦头烂额的话,以后要修改规格时更不知该如何下手,因此千万不要写得太复杂。</p>
+<h4 id="%E9%9B%8F%E5%BD%A2" name="%E9%9B%8F%E5%BD%A2">雏形</h4>
+<p>这里是套用VisualC++的向导功能,尽量降低工作量的负担。参数编辑器比较接近“商业应用软件”或“公用软件”,所以多利用MFC会比较好做。操作的程序步骤如下所示。</p>
+<p>①先到VisualC++的菜单,选【File】-【New...】命令,如图8-1所示。</p>
+<p>②跳出“New”的对话框后,选择“MFCAppWizard(exe)”并输入“ProjectName”,如图8-2所示。</p>
+<p>③进入“MFCAppWizard-step1”,选取“Dialogbased”,如图8-3所示。</p>
+<p>④在“MFC AppWizard-step2/4”输入“DialogTitle”,本例使用“参数编辑器”当标题,如图8-4所示。</p>
+<p>⑤接着只要根据默认值进行下去,最后在上图单击“Finlsh”钮即可自动由向导产生预设的程序代码,如图8-5所示。</p>
+<p>这样就是一个对话框(Dialog-Based)的雏形。这个实例我们取的ProjectName是“ParamEdit”,而在(4)的“DialogTitle”取名为“参数编辑器”。反正标题可以随时更换,如果还想不到什么好名字,先直接写“参数编辑器”也没关系。</p>
+<p>对话框是指由“对话框”组成的应用软件,因为这里的交互式编辑数值,所以只要有对话框就能用。</p>
+<h4 id="%E5%AF%B9%E8%AF%9D%E6%A1%86" name="%E5%AF%B9%E8%AF%9D%E6%A1%86">对话框</h4>
+<p>下一个操作是利用Visua1C++的"DialogEditor”制作对话框。参数名称的“标签”和编辑用的防解力“编辑器”、“下拉式列表框”要逐一列入,控制项的排列方式可参见图8-6。</p>
+<p>所有元件都就定位之后,再对各个元件“按下鼠标右键”,选取【Propertis...】指令并修改ID。沿用默认值的ID比较不容易表达真正意思,例如“IDDEDIT1”等等,故请配合功能命名。</p>
+<p>继续用“鼠标右键”菜单中的【ClassWizard(W)】令,启动“ClassWizard”,如图8-7所示。</p>
+<p>每个控制项都要分配1个成员变量。附赠光盘的“chapter8”文件夹下有一个参数编辑器实例的project文件,有需要的人可参考使用。关于类ID的命名、成员变量分配方式等,则请参见该project文件。</p>
+<p>到此,编辑画面已经差不多都完成了。虽然没有任何编写程序代码的工作,不过这些已经有固定格式的部分都可以利用向导自动帮我们来做。</p>
+<h4 id="%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81" name="%E7%BC%96%E5%86%99%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81">编写程序代码</h4>
+<p>利用向导能完成的部分只到画面而已,处理的内容还是需要自行编写代码。</p>
+<h5 id="%E8%AF%BB%E5%8F%96%2F%E5%86%99%E5%85%A5%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6" name="%E8%AF%BB%E5%8F%96%2F%E5%86%99%E5%85%A5%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6">读取/写入参数文件</h5>
+<p>第一个需要有的是读取/写入文件的处理,那就从这里开始吧!</p>
+<p>读取/写入参数文件(ParamFile.h)</p>
+<pre><code class="C++">#ifndef __PARAMFILE_H__
+#define __PARAMFILE_H__
+
+#include &lt;string&gt;
+#include &lt;map&gt;
+
+class CParamFile {
+  public:
+    struct parameter {
+        char    name[16];           // 人物名称
+        short   level;              // 等级
+        short   experience;         // 经验值
+        short   move_dist;          // 移动距离
+        short   attack_dist;        // 攻击距离
+        short   attack_power;       // 攻击力
+        short   magic_power;        // 魔法力
+        short   defence_power;      // 防御力
+        short   resistance;         // 抵抗力
+        short   hit_point;          // HP
+        short   magic_point;        // MP
+        short   magic;              // 使用魔法
+        short   filler;             // 补满
+    } ;
+
+  public:
+    bool Load(const char *name);
+    bool Save(const char *name);
+
+    const parameter *Find(const char *name);
+    void Add(const char *name, const parameter &amp;param);
+
+    void FindFirst();
+    bool FindNext(char *name);
+
+  protected:
+    typedef std::map&lt;std::string, parameter&gt; params_t;
+    params_t params;
+    params_t::iterator iter;
+} ;
+
+#endif</code></pre>
+<p>读取/写入参数文件(ParamFile.cpp)</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include "ParamFile.h"
+using namespace std;
+//
+// 从文件读取参数
+//
+bool CParamFile::Load(const char *name)
+{
+    FILE *fp = fopen(name, "rb");
+    if (fp == 0)
+        return false;
+
+    long count;
+    if (fread(&amp;count, 1, sizeof(count), fp) == sizeof(count)) {
+        for (long i=0; i&lt;count; i++) {
+            parameter p;
+            if (fread(&amp;p, 1, sizeof(p), fp) == sizeof(p)) {
+                params[p.name] = p;
+            }
+        }
+    }
+    fclose(fp);
+
+    return true;
+}
+//
+// 把参数写进文件
+//
+bool CParamFile::Save(const char *name)
+{
+    FILE *fp = fopen(name, "wb");
+    if (fp == 0)
+        return false;
+
+    long count = params.size();
+    fwrite(&amp;count, 1, sizeof(count), fp);
+    for (params_t::iterator p = params.begin(); p != params.end(); ++p) {
+        fwrite(&amp;p-&gt;second, 1, sizeof(p-&gt;second), fp);
+    }
+    fclose(fp);
+
+    return true;
+}
+//
+// 搜寻内部表格中设定名称所对应的参数
+//
+const CParamFile::parameter *CParamFile::Find(const char *name)
+{
+    params_t::iterator p = params.find(name);
+    if (p == params.end())  // 无此参数
+        return 0;
+    return &amp;p-&gt;second;
+}
+//
+// 登录到参数表格
+//
+void CParamFile::Add(const char *name, const CParamFile::parameter &amp;param)
+{
+    params[name] = param;
+}
+//
+// 准备名称一览表
+//
+void CParamFile::FindFirst()
+{
+    iter = params.end();
+}
+//
+// 读出1个名称
+//
+bool CParamFile::FindNext(char *name)
+{
+    if (iter == params.end())
+        iter = params.begin();
+    else
+        ++iter;
+    if (iter == params.end())
+        return false;
+
+    strncpy(name, iter-&gt;second.name, 16);
+    return true;
+}</code></pre>
+<p>稍微解释一下程序代码的内容。</p>
+<p><strong>从文件读出参数-CParamFile::Load</strong></p>
+<p><strong>将参数写入文件-CParamFile::Save</strong></p>
+<p>参数文件须为“二进制文件”。</p>
+<p>装入和存储处理是密不可分的组合,如欲修改时,当然两边都要同步修改。否则会无法读取既有文件。</p>
+<p><strong>搜寻名称所对应的参数-CParamFile::Find</strong></p>
+<p>参数表格是使用<code>std:map</code>。</p>
+<p>以字符串为关键字进行搜寻时,男庸质疑应该使用map容器。万一情况不妙还可最后再改,而且STL的成员函数是“同一处理则用同一名称”,所以修改比较容易。在此若利用map容器做搜寻,亦可使用前面出现频率较高的find。</p>
+<p><strong>登录到参数表格-CParamFile::Add</strong></p>
+<p>利用下面这1行执行登录到参数表格的动作。</p>
+<pre><code class="C++">params [name] = param:</code></pre>
+<p><strong>取得名称一览表-CParamFile::FindFirst/CParamFile::FindNext</strong></p>
+<p>名称一览表须登录到下拉式列表框,因此要有一个这样的功能。
+这个函数是为了让类间的关系“不紧密”。</p>
+<h5 id="%E5%8F%82%E6%95%B0%E7%9A%84%E7%BC%96%E8%BE%91%E5%A4%84%E7%90%86" name="%E5%8F%82%E6%95%B0%E7%9A%84%E7%BC%96%E8%BE%91%E5%A4%84%E7%90%86">参数的编辑处理</h5>
+<p>接下来是编辑参数的相关处理。</p>
+<p>编辑参数(ParamEditDlg.cpp)</p>
+<pre><code class="C++">// ParamEditDlg.cpp : 实现程序(implementation file)
+//
+
+#include "stdafx.h"
+#include "ParamEdit.h"
+#include "ParamEditDlg.h"
+#include "AddDlg.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// CParamEditDlg 对话框(dialog)
+CParamEditDlg::CParamEditDlg(CWnd* pParent /*=NULL*/)
+    : CDialog(CParamEditDlg::IDD, pParent)
+{
+    //{{AFX_DATA_INIT(CParamEditDlg)
+    m_attack = 0;
+    m_attack_dist = 0;
+    m_defence = 0;
+    m_hp = 0;
+    m_level = 0;
+    m_magic_power = 0;
+    m_move_dist = 0;
+    m_mp = 0;
+    m_resistance = 0;
+    m_magic = -1;
+    //}}AFX_DATA_INIT
+    // 备注：LoadIcon不要求Win32的DestroyIcon的子序列
+    // Note that LoadIcon does not require a subsequent DestroyIcon in Win32
+    m_hIcon = AfxGetApp()-&gt;LoadIcon(IDR_MAINFRAME);
+}
+
+void CParamEditDlg::DoDataExchange(CDataExchange* pDX)
+{
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CParamEditDlg)
+    DDX_Control(pDX, IDC_NAME, m_name);
+    DDX_Text(pDX, IDC_ATTACK, m_attack);
+    DDV_MinMaxInt(pDX, m_attack, 1, 9999);
+    DDX_Text(pDX, IDC_ATTACKDIST, m_attack_dist);
+    DDV_MinMaxInt(pDX, m_attack_dist, 1, 10);
+    DDX_Text(pDX, IDC_DEFENCE, m_defence);
+    DDV_MinMaxInt(pDX, m_defence, 1, 9999);
+    DDX_Text(pDX, IDC_HP, m_hp);
+    DDV_MinMaxInt(pDX, m_hp, 1, 9999);
+    DDX_Text(pDX, IDC_LEVEL, m_level);
+    DDV_MinMaxInt(pDX, m_level, 1, 99);
+    DDX_Text(pDX, IDC_MAGICPOWER, m_magic_power);
+    DDV_MinMaxInt(pDX, m_magic_power, 1, 9999);
+    DDX_Text(pDX, IDC_MOVEDIST, m_move_dist);
+    DDV_MinMaxInt(pDX, m_move_dist, 1, 10);
+    DDX_Text(pDX, IDC_MP, m_mp);
+    DDV_MinMaxInt(pDX, m_mp, 1, 9999);
+    DDX_Text(pDX, IDC_RESISTANCE, m_resistance);
+    DDV_MinMaxInt(pDX, m_resistance, 1, 9999);
+    DDX_CBIndex(pDX, IDC_MAGIC, m_magic);
+    //}}AFX_DATA_MAP
+}
+
+BEGIN_MESSAGE_MAP(CParamEditDlg, CDialog)
+    //{{AFX_MSG_MAP(CParamEditDlg)
+    ON_WM_PAINT()
+    ON_WM_QUERYDRAGICON()
+    ON_CBN_SELCHANGE(IDC_NAME, OnSelchangeName)
+    ON_BN_CLICKED(IDC_ADD, OnAdd)
+    ON_BN_CLICKED(IDC_SET, OnSet)
+    //}}AFX_MSG_MAP
+END_MESSAGE_MAP()
+
+#define PARAMFILE   "parameter.dat"
+
+/////////////////////////////////////////////////////////////////////////////
+// CParamEditDlg message handlers 事件处理程序
+
+BOOL CParamEditDlg::OnInitDialog()
+{
+    CDialog::OnInitDialog();
+
+    // 设定此对话框用的图形按钮。若应用软件的主窗口不是
+    // 对话框时，则自动不设定框架
+    // Set the icon for this dialog.  The framework does this automatically
+    //  when the application's main window is not a dialog
+    SetIcon(m_hIcon, TRUE);         // Set big icon
+    SetIcon(m_hIcon, FALSE);        // Set small icon
+
+    // TODO: 如欲进行特别的初始化时，请新增在这里
+    // TODO: Add extra initialization here
+    params.Load(PARAMFILE);
+
+    char name[16];
+    params.FindFirst();
+    while (params.FindNext(name)) {
+        m_name.AddString(name);
+    }
+    m_name.SetCurSel(0);
+    ChangeName();
+
+    return TRUE;  // 若传回TRUE，则保留控制项里所设定的反白光棒（focus）
+                  // return TRUE  unless you set the focus to a control
+}
+
+// 如欲在对话盒内新增最小化按钮，则须有一段绘制图形按钮
+// 的程序代码（如下所示）。由于MFC应用软件是使用document/view
+// 模型，因此框架会自动去处理这个处理动作。
+// If you add a minimize button to your dialog, you will need the code below
+//  to draw the icon.  For MFC applications using the document/view model,
+//  this is automatically done for you by the framework.
+
+void CParamEditDlg::OnPaint() 
+{
+    if (IsIconic())
+    {
+                           // 绘制用的装置环境组态（DC：device context）
+        CPaintDC dc(this); // device context for painting
+
+        SendMessage(WM_ICONERASEBKGND, (WPARAM) dc.GetSafeHdc(), 0);
+
+        // 用户端方形区域的正中央
+        // Center icon in client rectangle
+        int cxIcon = GetSystemMetrics(SM_CXICON);
+        int cyIcon = GetSystemMetrics(SM_CYICON);
+        CRect rect;
+        GetClientRect(&amp;rect);
+        int x = (rect.Width() - cxIcon + 1) / 2;
+        int y = (rect.Height() - cyIcon + 1) / 2;
+
+        // 绘制图示
+        // Draw the icon
+        dc.DrawIcon(x, y, m_hIcon);
+    }
+    else
+    {
+        CDialog::OnPaint();
+    }
+}
+
+// 为了在user拖曳缩到最小的窗口时能显示光标，
+// 系统会调用这里
+// The system calls this to obtain the cursor to display while the user drags
+//  the minimized window.
+HCURSOR CParamEditDlg::OnQueryDragIcon()
+{
+    return (HCURSOR) m_hIcon;
+}
+
+void CParamEditDlg::OnOK() 
+{
+    // TODO:其他验证用的程序代码要新增在此
+    // TODO: Add your control notification handler code here
+    params.Save(PARAMFILE);
+
+    CDialog::OnOK();
+}
+
+void CParamEditDlg::OnSelchangeName() 
+{
+    // TODO:控制项通知处理程序用的程序代码要新增在此
+    // TODO: Add your control notification handler code here    
+    ChangeName();
+}
+
+void CParamEditDlg::OnAdd() 
+{
+    // TODO:控制项通知处理程序用的程序代码要新增在此
+    // TODO: Add your control notification handler code here
+    CAddDlg dlg;
+    if (dlg.DoModal() == IDOK) {
+        if (m_name.FindStringExact(-1, dlg.m_name) != CB_ERR) {
+            MessageBox("这个名称与已经登录的名称重复！");
+        }
+        else {
+            m_name.SetCurSel(m_name.AddString(dlg.m_name));
+            ChangeName();
+        }
+    }
+}
+
+void CParamEditDlg::ChangeName()
+{
+    int index = m_name.GetCurSel();
+    CString str;
+    m_name.GetLBText(index, str);
+    const CParamFile::parameter *p = params.Find(str);
+    if (p == 0) {
+        m_attack = 1;
+        m_attack_dist = 1;
+        m_defence = 1;
+        m_hp = 1;
+        m_level = 1;
+        m_magic_power = 1;
+        m_move_dist = 1;
+        m_mp = 1;
+        m_resistance = 1;
+        m_magic = 0;
+    }
+    else {
+        m_attack = p-&gt;attack_power;
+        m_attack_dist = p-&gt;attack_dist;
+        m_defence = p-&gt;defence_power;
+        m_hp = p-&gt;hit_point;
+        m_level = p-&gt;level;
+        m_magic_power = p-&gt;magic_power;
+        m_move_dist = p-&gt;move_dist;
+        m_mp = p-&gt;magic_point;
+        m_resistance = p-&gt;resistance;
+        m_magic = p-&gt;magic;
+    }
+    UpdateData(FALSE);
+}
+
+void CParamEditDlg::OnSet() 
+{
+    // TODO:控制项通知处理程序用的程序代码要新增在此
+    // TODO: Add your control notification handler code here
+
+    if (UpdateData(TRUE)) {
+        CParamFile::parameter p;
+
+        int index = m_name.GetCurSel();
+        CString str;
+        m_name.GetLBText(index, str);
+
+        memset(&amp;p, sizeof(p), 0);
+        strncpy(p.name, str, 16);
+        p.attack_power = m_attack;
+        p.attack_dist = m_attack_dist;
+        p.defence_power = m_defence;
+        p.hit_point = m_hp;
+        p.level = m_level;
+        p.magic_power = m_magic_power;
+        p.move_dist = m_move_dist;
+        p.magic_point = m_mp;
+        p.resistance = m_resistance;
+        p.magic = m_magic;
+
+        params.Add(str, p);
+    }
+}</code></pre>
+<p>向导能把对话框的代码写到某个程度,所以再“新增”一些必要功能进去就好。</p>
+<p><strong>读取文件</strong></p>
+<p>文件的读取动作是在初始化对话框时(OnlnitDialog)进行的。</p>
+<pre><code class="C++">BOOL CParamEditDlg::OnInitDialog()
+{
+    ...
+
+    // TODO: 如欲进行特别的初始化时，请新增在这里
+    // TODO: Add extra initialization here
+    params.Load(PARAMFILE);
+
+    char name[16];
+    params.FindFirst();
+    while (params.FindNext(name)) {
+        m_name.AddString(name);
+    }
+    m_name.SetCurSel(0);
+    ChangeName();
+
+    return TRUE;  // 若传回TRUE，则保留控制项里所设定的反白光棒（focus）
+                  // return TRUE  unless you set the focus to a control
+}</code></pre>
+<p>使用AddString将名称登录到下拉式列表框,直到FindNext返回false为止。</p>
+<p>登录结束后,选择第1个(SetCurSel),利用第1个所对应的参数初始化各个控制项(ChangeName)。</p>
+<p><strong>写入文件</strong></p>
+<p>写入操作是指当按下对话框的OK按钮时(OnOK)能够写入。</p>
+<pre><code class="C++">void CParamEditDlg::OnOK() 
+{
+    // TODO:其他验证用的程序代码要新增在此
+    // TODO: Add your control notification handler code here
+    params.Save(PARAMFILE);
+
+    CDialog::OnOK();
+}</code></pre>
+<p><strong>初始化各控制项</strong></p>
+<p>建立<code>CParamEditDlg::ChangeName</code>,设定控制项的数值。设定数值需先设定到成员变量后再利用UpdateData。UpdateData的使用方式则是利用调用DoDatExchange的操作,把各值从成员变量设定到控制项(或反向设定)。</p>
+<p>DoDataExchange其实就是向导利用变量和控制项ID做为参数,去调用一些函数。这样设定之后,就不需要担心控制项ID的部分会不好处理。</p>
+<p><strong>新增</strong></p>
+<p>在登录新参数时能单击Add按钮。“Add”按钮会调用OnAdd,OnAdd则产生CAddDlg后,利用对话框输入名称。</p>
+<p>CAddDlg则是利用“对话框编辑器”产生对话框,再用“类向导”设定跟变量的对应关系。</p>
+<p>从参数表格看不到新增的部分,所以所有变量均需设为“1”。</p>
+<p><strong>设定</strong></p>
+<p>为了怕编辑操作有误,当单击“Set”按钮时要能写入表格。单击“Set”按钮后,利用UpdateData从“控制项”把值读到“成员变量”,然后再调用<code>CFileParam::Add</code>进行登录。</p>
+<p>或许内容不像VisualBasic那么丰富,毕竟对话框的编程量不大,至少可以做到这个程度。</p>
+<p>不过它的功能比较弱,例如对话框的形式就不能做缩到最小的处理等等,但是在内部工具和分配的部分已经缠绰有余了。</p>
+<h4 id="%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B" name="%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B">执行程序实例</h4>
+<p>别着急喘口气,先赶快来执行参数编辑器。程序实例就在附赠光盘的“chapter8”文件夹之下。</p>
+<p>从光盘复制到硬盘时,应该连参数的数据文件也会一起复制进来,所以一开始有些参数就已经登录进去了,如图8-8所示。</p>
+<p>这样就能产生或编辑参数,不过光是这样并没有什么意义。总是要到游戏本身能利用参数编辑器所编辑的数据文件,忙了这么久才有意义嘛!</p>
+<p>要是没有先设计编辑工具,又怎么去产生参数数据文件呢?所以才会先从编辑器开始做起。</p>
+<p><strong>利用dummy</strong></p>
+<p>在之前的章节中,我们介绍到像这样必须要有编辑工具才能进行的部分,有时可以做成“dummy”。这个时候,我们把参数直接写在“Params.cpp”里面,可是现在有了参数编辑器,这个程序代码也就无用武之地了。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html" class="navigation navigation-prev " aria-label="参数">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html" class="navigation navigation-next " aria-label="增补其他功能">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "参数编辑器",
+            "next": {
+                "title": "增补其他功能"
+            },
+            "previous": {
+                "title": "参数"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

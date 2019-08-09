@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>显示CG · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Windows平台的CG标准格式应该是指BMP格式(*.bmp)。虽然近年来推出的新版本Windows系统也可使用JPEG格式做为背景图片(或底色图案),改变了一般用户眼中的图案标准,不过对程序设计师而言,(内部的)标准格式仍然是BMP格式。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter  active " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E6%98%BE%E7%A4%BACG" name="%E6%98%BE%E7%A4%BACG">显示CG</h3>
+<p>Windows平台的CG标准格式应该是指BMP格式(*.bmp)。虽然近年来推出的新版本Windows系统也可使用JPEG格式做为背景图片(或底色图案),改变了一般用户眼中的图案标准,不过对程序设计师而言,(内部的)标准格式仍然是BMP格式。</p>
+<h4 id="BMP%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%A6%82%E8%A6%81" name="BMP%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%A6%82%E8%A6%81">BMP格式的概要</h4>
+<p>若从BMP的演变来说明的话,恐怕会过于繁杂而难以吸收理解,故在此特别简单说明一下其概要。
+Windows所处理的BMP可分成如下三种:</p>
+<ul>
+<li>DDB(DeviceDependentBitmap:与设备有关的BMP格式)由HMITMAP型处理常式来处理,使用CreateBitmap等产生</li>
+<li>DIB(DeviceIndependentBitmap:与设备无关的BMP格式)规定内存上的格式,没有产生的API</li>
+<li>DIBSection(兼具以上两者特长的BMP格式)使用CreateDIBSection产生</li>
+</ul>
+<p>为什么会有高达三种不同的BMP格式?原因应该是在早期的Windows系统上,“无法有效处理”跟设备无关、规定内存上规格的BMP格式(即D1B)。DDB虽然跟设备有关,但处理速度较快:而DIB因为与设备无关,所以能直接从程序端操作内存,即使有百般的不情愿,当时的电脑配备规格仍然必须同时具备这两种不同的格式。第三种DIBSection则是后来才新增的格式。</p>
+<p>以我们现在所使用的电脑配备规格(事实上是指显卡)来看,它对DIB或DDB的绘制速度几乎一样,因此如果需要直接操作内存图像并显示在画面上,直接就用DIBSection也没有问题。</p>
+<p>如果不显示到画面上的话,使用DIBSection会消耗珍贵的Windows系统资源。DIB已经有能力进行跟DIBSection图像同样的处理,除非有其他特殊理由,否则应该使用DIB会比较好。</p>
+<p>那么,“什么时候才要用DDB?”,答案是必须有HBITMAP型处理常式,且不会操作到内存图像。换句话说,如果程序有需要的时候才用DDB。这是“只能这么做”的特殊情形,不必烦恼要用哪一种BMP格式,应该很容易分辨(也许还有其他DDB、DIB曾经存在的原因,不过这都已经是“过去式”)。</p>
+<h4 id="ODIB%E7%9A%84%E7%BB%93%E6%9E%84" name="ODIB%E7%9A%84%E7%BB%93%E6%9E%84">ODIB的结构</h4>
+<p>在此先把DIB建立和操作整理成类,以便后面使用。DIB不是用Windows的AP1产生,而是要根据Windows系统的“规则”才能产生。先介绍一下DIB的结构。</p>
+<p>DIB是图形图像,具有尺寸大小,色彩等的信息。这些信息都记录在"BITMAPINFO结构体”上。处理DIB的API(SetDIBitsToDevice等)则使用BITMAPINFO的指针(pointer)做为参数。</p>
+<p>BITMAPINFO结构体的格式如下:</p>
+<pre><code class="C++">typedef struct tagBITMAPINFO {
+    BITMAPINFOHEADER    bmiHeader;
+    RGBQUAD             bmiColors[1];
+} BITMAPINFO</code></pre>
+<p>DIB的大小、色彩则记录在BITMAPINFOHEADER结构体里。BITMAPINFOHEADER结构的格式如下:</p>
+<pre><code class="C++">typedef struct tagBITMAPINFOHEADER{
+        DWORD      biSize;
+        LONG       biWidth;
+        LONG       biHeight;
+        WORD       biPlanes;
+        WORD       biBitCount;
+        DWORD      biCompression;
+        DWORD      biSizeImage;
+        LONG       biXPelsPerMeter;
+        LONG       biYPelsPerMeter;
+        DWORD      biClrUsed;
+        DWORD      biClrImportant;
+} BITMAPINFOHEADER, *PBITMAPINFOHEADER;</code></pre>
+<p>DIB的可显示色彩包括有“2色(1bpp)”,“16色(4bpp)”、“256色(8bpp)”、“65,536色(16bpp)”和“1,677万色(24/32bpp)”,到“256色”为止的DIB是“调色板”上的系统色彩。</p>
+<p>在这些色彩显示模式当中,1bpp和4bpp比较接近用1byte处理多个像素的感觉,所以操作比较复杂。其实这两种显示模式所能表现的色彩并不多,各位可以暂时把它放在一旁。</p>
+<p>BITMAPINFOHEADER之成员变量的设定值即如表3-1所示。</p>
+<p>"biXPelsPerMeter" "biYPelsPerMeter"是设定分辨率(即每公尺所含像素数),但程序实例并不会用到,故设为“0”。</p>
+<p>如果有先写好的头文件(header),后面只要再保留图形要用的内存空间即可,不过这里也有一定的规则。这条规则就是“每条扫描线要包括4byte”,所以要做一个无条件进位的换算动作。DIB的扫描线(scanline)是指“1条横线”。</p>
+<p>无条件进位的计算如下:</p>
+<pre><code class="C++">// 求出1条扫描线的必要byte数
+inline unsigned CDib::ScanBytes(int pixWidth, int pixDepth)
+{
+    return (unsigned)(((long)pixWidth * pixDepth + 31) / 32) * 4;
+}</code></pre>
+<p>pixDepth则是“位数”,计算单位是1位。计算式是先加31后再除以32,所得商数即为byte数,最后再乘以4就可以得知该图形换算后应该是几个4byte。</p>
+<p>将前面所得数值乘上图形高度,即可得到必要byte数。</p>
+<pre><code class="C++">bitsAlloc = ScanBytes(width,depth) * helght;</code></pre>
+<p>保留这个数量的内存空间之后,DIB的产生过程也到此结束。这里使用GlobalAlloc来保留足够的内存空间,各位想改用new、HeapAlloc也没关系,当然也可以自己另写一个内存空间保留函数。反正只要能“保留内存空间”的动作就行。</p>
+<p>DIB类的程序代码如后。</p>
+<p>DIB类(Dib.h)</p>
+<pre><code class="C++">#ifndef __Dib_h__
+#define __Dib_h__
+
+#include "Misc.h"
+
+class CFile;
+
+//
+//  DIB
+//
+class CDib {
+  public:
+    CDib() :W(0), H(0), D(0), hGlobal(0), Bits(0), Info(0) {}
+    CDib(int width, int height, int depth);
+    virtual ~CDib();
+
+    BOOL Create(int width, int height, int depth);
+    BOOL LoadBMP(CFile &amp;file, int ox=0, int oy=0);
+
+    const BITMAPINFO *GetInfo() const { return Info; }
+
+    const void *GetBits() const { return Bits; }
+    void *GetBits() { return Bits; }
+
+    const void *GetBits(int x, int y) const;
+    void *GetBits(int x, int y);
+
+    BOOL IsOK() const { return Bits != 0; }
+    int Width() const { return W; }
+    int Height() const { return H; }
+    int Depth() const { return D; }
+    unsigned BytesPerLine() const { return bytes_per_line; }
+    unsigned BytesPerPixel() const { return bytes_per_pixel; }
+    CSize Size() const { return CSize(W, H); }
+
+    void Clear();
+
+    static unsigned ScanBytes(int pixWidth, int pixDepth);
+    static unsigned PixelBytes(int pixDepth);
+
+  protected:
+    HGLOBAL     hGlobal;
+    void       *Bits;
+    BITMAPINFO *Info;
+    unsigned    bytes_per_line;
+    unsigned    bytes_per_pixel;
+    int         W;
+    int         H;
+    int         D;
+} ;
+
+// inline 成員函数
+
+// 求出1条扫描线的必要byte数
+
+inline unsigned CDib::ScanBytes(int pixWidth, int pixDepth)
+{
+    return (unsigned)(((long)pixWidth * pixDepth + 31) / 32) * 4;
+}
+
+// 求出1个像素的必要byte数
+
+inline unsigned CDib::PixelBytes(int pixDepth)
+{
+    return (unsigned)((pixDepth + 7) / 8);
+}
+
+// 求出该坐标的指针
+
+inline const void *CDib::GetBits(int x, int y) const
+{
+    return (const void *)((const char *)GetBits() + (H - y - 1) * bytes_per_line + x * bytes_per_pixel);
+}
+
+inline void *CDib::GetBits(int x, int y)
+{
+    return (void *)((char *)GetBits() + (H - y - 1) * bytes_per_line + x * bytes_per_pixel);
+}
+
+#endif
+</code></pre>
+<p>DIB类(Dib.cpp)</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include "Dib.h"
+#include "Misc.h"
+#include "File.h"
+
+//
+// 构造函数
+//
+// 以IsOK()成员函式来判断Create是否有错误
+//
+CDib::CDib(int width, int height, int depth)
+    :Bits(0), Info(0), hGlobal(0)
+{
+    Create(width, height, depth);
+}
+
+//
+// 析构函数
+//
+CDib::~CDib()
+{
+    if (hGlobal) {
+        ::GlobalUnlock(hGlobal);
+        ::GlobalFree(hGlobal);
+    }
+}
+
+//
+// 产生DIB
+//
+BOOL CDib::Create(int width, int height, int depth)
+{
+    W = width;
+    H = height;
+    D = depth;
+
+    bytes_per_line = ScanBytes(width, depth);
+    bytes_per_pixel = PixelBytes(depth);
+
+    long    bitsAlloc = bytes_per_line * height;
+    long    headerSize = sizeof(BITMAPINFOHEADER);
+    if (depth == 8)
+        headerSize += sizeof(RGBQUAD) * 256;
+
+    if ((hGlobal = ::GlobalAlloc(GMEM_MOVEABLE, bitsAlloc + headerSize)) == 0)
+        return FALSE;
+
+    Info = (BITMAPINFO *)::GlobalLock(hGlobal);
+    Bits = (void *)((char *)Info + headerSize);
+
+    Info-&gt;bmiHeader.biSize          = sizeof(BITMAPINFOHEADER);
+    Info-&gt;bmiHeader.biWidth         = width;
+    Info-&gt;bmiHeader.biHeight        = height;
+    Info-&gt;bmiHeader.biBitCount      = (unsigned short)depth;
+    Info-&gt;bmiHeader.biPlanes        = 1;
+    Info-&gt;bmiHeader.biXPelsPerMeter = 0;
+    Info-&gt;bmiHeader.biYPelsPerMeter = 0;
+    Info-&gt;bmiHeader.biClrUsed       = 0;
+    Info-&gt;bmiHeader.biClrImportant  = 0;
+    Info-&gt;bmiHeader.biCompression   = BI_RGB;
+    Info-&gt;bmiHeader.biSizeImage     = bitsAlloc;
+
+    return TRUE;
+}
+
+//
+// 用0清除DIB的位元图像
+//
+void CDib::Clear()
+{
+    memset(GetBits(), 0, bytes_per_line * H);
+}
+
+//
+// 读入BMP档
+//
+//  若并无DIB，则产生一个跟BMP同样大小的DIB
+//
+BOOL CDib::LoadBMP(CFile &amp;file, int ox, int oy)
+{
+    BITMAPFILEHEADER    header;
+    BITMAPINFOHEADER    infoHeader;
+    if (file.Read(&amp;header, sizeof(header)) != sizeof(header)
+     || header.bfType != ((WORD) ('M' &lt;&lt; 8) | 'B')
+     || file.Read(&amp;infoHeader, sizeof(infoHeader)) != sizeof(infoHeader)
+     || infoHeader.biSize &lt; sizeof(BITMAPINFOHEADER)
+     || infoHeader.biCompression != BI_RGB)
+        return FALSE;
+
+    int     width = infoHeader.biWidth;
+    int     height = infoHeader.biHeight;
+    int     depth = infoHeader.biBitCount;
+    if (!IsOK()) {
+        if (!Create(width + ox, height + oy, depth))
+            return FALSE;
+    }
+    if (width + ox &gt; Width() || height + oy &gt; Height() || depth != Depth())
+        return FALSE;
+
+    int     bits_offset = sizeof(BITMAPFILEHEADER) + infoHeader.biSize;
+    if (depth == 8) {
+        int csize = sizeof(RGBQUAD) * 256;
+        if (file.Read(Info-&gt;bmiColors, csize) != csize)
+            return FALSE;
+        bits_offset += csize;
+    }
+    file.Seek(bits_offset, CFile::begin);
+
+    int     length = width * BytesPerPixel();
+    int     filler = ScanBytes(width, depth) - length;
+
+    for (int y=height-1; y&gt;=0; y--) {
+        if (file.Read(GetBits(ox, oy + y), length) != length)
+            return FALSE;
+        if (filler)
+            file.Seek(filler, CFile::current);
+    }
+    return TRUE;
+}</code></pre>
+<h5 id="%E8%AF%BB%E5%85%A5BMP%E6%96%87%E4%BB%B6-CDib%3ALoadBMP" name="%E8%AF%BB%E5%85%A5BMP%E6%96%87%E4%BB%B6-CDib%3ALoadBMP">读入BMP文件-CDib:LoadBMP</h5>
+<p>DIB类的代码中还有另一个“读入BMP文件”的函数,这也是一个很重要的函数。BMP文件的作用不只是要简化结构而己,BMP的格式还要能把DIB直接转成文件,数据排列等都要跟DIB一模一样,如图3-3所示。</p>
+<p>接在BITMAPFILEHEADER的后面是BITMAPINFO,里面的信息则跟产生DIB时所使用的信息一样。后面的位图像也是跟DIB同样的阵列。</p>
+<p>如果DIB和BMP文件两者的文件大小完全相同,当然就很简单,不过这部分可没那么容易,各位还要考虑到实际游戏的使用状况,把它设计成读入到大型DIB的其中一部分才行。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html" class="navigation navigation-prev " aria-label="开启窗口">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html" class="navigation navigation-next " aria-label="显示CG的应用软件">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "显示CG",
+            "next": {
+                "title": "显示CG的应用软件"
+            },
+            "previous": {
+                "title": "开启窗口"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

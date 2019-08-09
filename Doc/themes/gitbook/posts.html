@@ -1,0 +1,76 @@
+{layout name="gitbook/layout" /}
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="{$state.post.link}">{$state.post.title}</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                {$state.post.html|raw}
+                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {notempty name="state.post.prev_id"}
+        <a href="{$state.post.prev_link}" class="navigation navigation-prev " aria-label="{$state.post.prev_title}">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        {/notempty}
+        {notempty name="state.post.next_id"}
+        <a href="{$state.post.next_link}" class="navigation navigation-next " aria-label="{$state.post.next_title}">
+            <i class="fa fa-angle-right"></i>
+        </a>
+        {/notempty}       
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "{$state.post.title}",
+            "next": {
+                "title": "{$state.post.next_title}"
+            },
+            "previous": {
+                "title": "{$state.post.prev_title}"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "{$state.link.domain}",
+        "book": {}
+    });
+});
+</script>

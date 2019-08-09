@@ -1,0 +1,1131 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>读入地图数据 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="第1章到第5章的程序实例都是直接把人物数量和位置排列等写在程序里面,不过如果能改从配置文件读入这些相关信息的话会更方便。要是每次修改敌方人数或位置排列就要重新修改、创建程序,不仅事倍功半,而且万一游戏原始设计师跟写程序的设计师刚好是分工合作,不只有一个人可能修改这个源程序时,很容易乱成一团。最根本的问题是,游戏原始设计师也必须具备程序设计的基本常识和一套完整的开发操作系统。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter  active " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E8%AF%BB%E5%85%A5%E5%9C%B0%E5%9B%BE%E6%95%B0%E6%8D%AE" name="%E8%AF%BB%E5%85%A5%E5%9C%B0%E5%9B%BE%E6%95%B0%E6%8D%AE">读入地图数据</h3>
+<p>第1章到第5章的程序实例都是直接把人物数量和位置排列等写在程序里面,不过如果能改从配置文件读入这些相关信息的话会更方便。</p>
+<p>要是每次修改敌方人数或位置排列就要重新修改、创建程序,不仅事倍功半,而且万一游戏原始设计师跟写程序的设计师刚好是分工合作,不只有一个人可能修改这个源程序时,很容易乱成一团。最根本的问题是,游戏原始设计师也必须具备程序设计的基本常识和一套完整的开发操作系统。</p>
+<h4 id="%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6" name="%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">写配置文件</h4>
+<p>如果我们决定要使用专业的工具软件(如地图编辑器等),整个程序写起来会大费周折,所以暂时先在“文本文件”设置就好。到时候真的有必要的话,大不了再另外写一个能产生text格式配置文件的工具软件。请别误会,并不是说只是文本文件而已,就不该使用工具软件。</p>
+<p>配置文件(map1.txt)</p>
+<pre><code>; map data
+
+mapsize 10 10   ;地图大小
+mapimage map1   ;地图CG
+
+;伙伴
+player 1 "主公" fighter
+player 2 "魔法师" witch
+player 3 "神官" priest
+
+;敌人
+enemy 1 "怪物" eye
+enemy 2 "泥巴怪" puyo
+
+;障碍物
+object 1 "树林" tree2
+
+;地图初始值
+;
+;■ 禁止出入的地区
+;□ 可任意出入
+;一  player 1
+;二  player 2
+;三  player 3
+;四  player 4
+;１  enemy 1
+;２  enemy 2
+;３  enemy 3
+;４  enemy 4
+;Ⅰ  object 1
+;Ⅱ  object 2
+;Ⅲ  object 3
+;
+map
+□□□□□□□□Ⅰ□
+□□□□ⅠⅠ□２□Ⅰ
+□□□□□□□２□□
+□二□□□□□□１□
+□Ⅰ一□□Ⅰ□□１□
+□三□□□□□□１□
+□□□□□□□□１□
+□□□□ⅠⅠ□２□□
+□□□□□□□２□Ⅰ
+□□□□□□□□Ⅰ□</code></pre>
+<p>利用这个配置文件所设定的项目有:</p>
+<ul>
+<li>地图大小: mapsize 宽 高</li>
+<li>地图背景CG: mapimage 文件名</li>
+<li>游戏玩家的人物: player编号 姓名 CG文件名</li>
+<li>敌对的人物 : enemy编号 姓名 CG文件名</li>
+<li>障碍物: object编号 姓名 CG文件名</li>
+<li>初始位置排列: map</li>
+</ul>
+<p>地图初始位置排列中的字符和方格的对应关系如下:
+■ : 禁止出入的地区
+□ : 可任意出入
+一~九 : 对应到player的“编号”
+1~9 : 对应到enemy的“编号”
+I~IX:对应到object的“编号”</p>
+<p>因为现在还不用画面卷轴调整地图大小,所以是固定成“10×10”,但程序还是要写成能自由设定,如需修改时也比较方便。</p>
+<p>除了初始位置排列之外,所有设定项目都是单行单项,只要逐行处理即可。对了,“:”后面的字符串是注解。</p>
+<h4 id="%E8%AF%BB%E5%85%A5%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6" name="%E8%AF%BB%E5%85%A5%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6">读入文本文件</h4>
+<p>前面已经把配置文件做成文本文件的格式,所以现在需要有能读入并分析文本文件的类。</p>
+<h5 id="%E8%AF%BB%E5%85%A5%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6" name="%E8%AF%BB%E5%85%A5%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6">读入文本文件</h5>
+<p><strong>TextReader.h/TextReader.cpp</strong></p>
+<p>先做一个读入文本文件的类(Tex(Reader类)。</p>
+<p>读入文本文件(TextReader.h)</p>
+<pre><code class="C++">#ifndef __TEXTREADER_H__
+#define __TEXTREADER_H__
+//
+// Script数据
+//
+class ScriptData {
+  public:
+    ScriptData(): status(0), lineno(0), string(0) {}
+    ScriptData(const char *ptr, int no): status(0), lineno((unsigned short)no), string(ptr) {}
+
+  public:
+    unsigned char status;
+    unsigned short lineno;
+    const char *string;
+} ;
+
+//
+// 读入script文件的类
+//
+class TextReader {
+  public:
+    TextReader(const char *name);
+    ~TextReader();
+
+    // 取得已储存文件的文件名
+    const char *GetFileName() const { return filename.c_str(); }
+    // 读入1行
+    const char *GetString() { return data.size() &gt; read_index? data[read_index++].string: 0; }
+    // 取得最后读入该行的行号
+    int GetLineNo() const { return data[read_index-1].lineno; }
+    // 文件是否已读取完毕
+    bool IsOk() const { return buffer != 0; }
+    operator bool() const { return IsOk(); }
+
+    // 读入位置数据
+    int GetPosition() const { return read_index; }
+    // 设定位置数据
+    void SetPosition(int position) { read_index = position; }
+    // 返回1个读出位置
+    void Back() { read_index--; }
+
+  private:
+    string filename;
+    vector&lt;ScriptData&gt; data;
+    char *buffer;
+    int read_index;
+} ;
+
+#endif</code></pre>
+<p>读入文本文件(TextReader.cpp)</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include "TextReader.h"
+//
+// 构造函数
+//
+TextReader::TextReader(const char *name)
+    :filename(name), read_index(0), buffer(0)
+{
+    CSecurityAttributes sa;
+    HANDLE hFile = ::CreateFile(name, GENERIC_READ, 0, &amp;sa, OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN, 0);
+    if (hFile != INVALID_HANDLE_VALUE) {
+                // 求出档案大小
+        DWORD length = ::GetFileSize(hFile, 0);
+        buffer = new char [length + 1];
+        DWORD nread;
+        if (!::ReadFile(hFile, buffer, length, &amp;nread, 0)
+                || length != nread) {   // error
+            delete buffer;
+            buffer = 0;
+        }
+        else {
+            char *endptr = buffer + length;
+            char *p = buffer;
+            int lineno = 1;
+            *endptr = '\0';     // 卫兵
+            while (p &lt; endptr &amp;&amp; *p != '\027') {
+                data.push_back(ScriptData(p, lineno));
+                while (UC(*p) &gt;= ' ' || *p == '\t')
+                    p++;
+
+                if (*p == '\0')     // 最后没有换行符
+                    break;
+
+                if (*p == '\r')     // Windows的换行符是"/r/n"
+                    *p++ = '\0';    // 所以字符串后面要以'/r'结尾
+                if (*p == '\n')
+                    *p++ = '\0';
+                lineno++;
+            }
+        }
+        ::CloseHandle(hFile);
+    }
+    data.push_back(ScriptData("end", 0));   // 最后面多加一个空的"end"
+}
+//
+// 析构函数
+//
+TextReader::~TextReader()
+{
+    delete buffer;
+}</code></pre>
+<p>以构造函数读入所有的文件内容,存储到vector。然后再用GetString成员函数逐行读出。</p>
+<p>GetFileName和GetLineNo分别是出现错误消息时显示该文件名以及错误行的成员函数。文本文件既然是人动手写成的东西,几乎是百分之百会有几个错误,因此错误消息必须让看的人容易看出错误发生在哪里。</p>
+<p>TextReader类的参照则如下所示。</p>
+<pre><code class="C++">TextReader::TextReader(constcharasut*name);</code></pre>
+<p>构造函数。把文本文件文件名设定到name。</p>
+<pre><code class="C++">const char *TextReader::GetFileName()const;</code></pre>
+<p>取得已有存储的文件名。</p>
+<pre><code class="C++">const char *TextReader:GetString();</code></pre>
+<p>读入1行的字符串,读入位置移到下一行。</p>
+<pre><code class="C++">int TextReader:GetLineNo() const;</code></pre>
+<p>取得最后读入该行的行号。</p>
+<pre><code class="C++">bool TextReader:IsOk() const;</code></pre>
+<p>若己读入文件则为true,若发生错误则返回false。</p>
+<pre><code class="C++">int TextReader:GetPosition() const:</code></pre>
+<p>返回当前的读入位置。</p>
+<pre><code class="C++">void TextReader:SetPosition(int position);</code></pre>
+<p>把读入位置设到指定位置(position)。</p>
+<pre><code class="C++">void TextReader::Back();</code></pre>
+<p>返回1个读入位置。</p>
+<p>读入文本文件(TextReader)类和接下来要说明的词法分析(Lexer)类也会用在读入“情境脚本(scenarioscript,详见下一章的说明)”(甚至可以说这里只是借用人家专用的类而已)。因此,有些地图配置文件的读入会又臭又长。</p>
+<h5 id="%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%28lexicalanalyze%29" name="%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%28lexicalanalyze%29">词法分析(lexicalanalyze)</h5>
+<p><strong>Lexer.h/Lexer.cpp</strong></p>
+<p>接着要做一个词法分析用的类。词法分析听起来好像工程浩大,其实也没那么夸张,只是利用空白(space)把字符串区隔成单字。</p>
+<p>为了让后面的处理好做事,分析过的单字都配给一个“字符串”或“数值串”的标识。若为字符串则配给“IsString”标识,若为数值串则配给“IsNumber”标识。</p>
+<p>请见下面的字符串分析实例。</p>
+<p>字符串: abc 123 xyz</p>
+<ul>
+<li>单字    标识</li>
+<li>"abc" IsString</li>
+<li>"123" IsNumber</li>
+<li>"xyz" IsString</li>
+</ul>
+<p>字符串: ”123”</p>
+<ul>
+<li>单字    标识</li>
+<li>"123" IsString</li>
+<li>若数字前后有“””,则视为字符串</li>
+</ul>
+<p>字符串:“123 xyz”</p>
+<ul>
+<li>单字   标识</li>
+<li>"123 xyz" IsString</li>
+<li>若空白的前后有“叶”,则视为同一字符串</li>
+</ul>
+<p>字符串:abc-xyz</p>
+<ul>
+<li>单字   标识</li>
+<li>"abc" IsString</li>
+<li>"-" IsMinus</li>
+<li>"xyz" IsString</li>
+<li>中间有符号,则视为不同字符串</li>
+</ul>
+<p>从上面几个实例可知,这不只是用空白分割而已,处理时还要根据字符种类更改标识,或前后加上“11”让它里面也能有空白。</p>
+<p>程序语言中所称的“词法分析”通常会需要进行保留字判断,或有更复杂的处理动作。它的处理比单纯的单字分割(tokendivision,记号分割)更复杂,这里所介绍的实例刚好属于比较中等的处理。</p>
+<p>词法分析(Lexer.h)</p>
+<pre><code class="C++">#ifndef __lexer_h__
+#define __lexer_h__
+//
+// 储存分析结果的结构体
+//
+struct LexValue {
+    string value;
+    int type;
+} ;
+//
+// Lexer类
+//
+class Lexer {
+  public:
+    // 记号种类
+    enum    {
+        IsNumber,
+        IsString,
+        IsDelimitter,
+        IsLabel,
+        IsMinus,
+    } ;
+
+  private:
+    enum    {
+        IsSpace = IsMinus + 1,
+        IsTerminater,
+        IsQuotation,
+    } ;
+
+  public:
+    Lexer(const char *str);
+
+    int NumToken() const { return nToken; }
+    void NextToken() { Count++; }
+
+    const char *GetString(int index=-1);
+    bool GetValue(int *value, int index=-1);
+    int GetType(int index=-1);
+
+  protected:
+    const char *SkipSpace(const char *p);
+    int CharType(unsigned char ch);
+    bool MatchType(int &amp;type, unsigned char ch);
+
+  protected:
+    int         nToken;
+    vector&lt;LexValue&gt; Value;
+    int         Count;
+} ;
+
+// inline成员函数
+inline const char *Lexer::GetString(int index)
+{
+    if (index &gt;= 0)
+        Count = index;
+    if (Count &gt;= nToken)
+        return NULL;
+    return Value[Count++].value.c_str();
+}
+
+inline int  Lexer::GetType(int index)
+{
+    if (index &gt;= 0)
+        Count = index;
+    if (Count &gt;= nToken)
+        return -1;
+    return Value[Count].type;
+}
+
+#endif</code></pre>
+<p>词法分析(Lexer.cpp)</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include &lt;mbctype.h&gt;
+#include "Lexer.h"
+
+//
+// 忽略空白字符
+//
+const char *Lexer::SkipSpace(const char *p)
+{
+    while (*p &amp;&amp; isspace(*p))
+        p++;
+    return p;
+}
+
+//
+// 判断字符种类
+//
+int Lexer::CharType(unsigned char ch)
+{
+    if (ch == '\0' || ch == '\n')
+        return IsTerminater;
+    if (isdigit(ch))
+        return IsNumber;
+    if (isalpha(ch) || _ismbblead(ch) || ch == '_')
+        return IsString;
+    if (isspace(ch))
+        return IsSpace;
+    if (ch == '"')
+        return IsQuotation;
+    if (ch == '-')
+        return IsMinus;
+    return IsDelimitter;
+}
+
+//
+// 字符种类是否相同？
+//
+bool Lexer::MatchType(int &amp;type, unsigned char ch)
+{
+    int t = CharType(ch);
+    switch (type) {
+      case IsLabel:
+        if (ch == '*')
+            return true;
+        // no break
+
+      case IsNumber:
+        if (t == IsString)
+            type = IsString;
+        // no break
+
+      case IsString:
+        return (t == IsString || t == IsNumber);
+    }
+    return type == t;
+}
+//
+// 记号切割
+//
+Lexer::Lexer(const char *str)
+{
+    for (nToken = 0; ; nToken++) {
+        str = SkipSpace(str);
+        if (*str == '\0' || *str == ';')
+            break;
+        int type = CharType(*str);
+
+        if (type == IsTerminater &amp;&amp; type == IsSpace)
+            break;
+
+        LexValue    value;
+
+        if (type == IsQuotation) {
+            value.type = IsString;
+            str++;
+            while (*str &amp;&amp; CharType(*str) != IsQuotation) {
+                if (_ismbblead(*str))
+                    value.value += *str++;
+                value.value += *str++;
+            }
+            if (*str)
+                str++;
+        }
+        else {
+            if (*str == '-' &amp;&amp; CharType(str[1]) == IsNumber) {
+                value.value += '-';
+                value.type = IsMinus;
+                str++;
+            }
+            else {
+                if (*str == '*' &amp;&amp; nToken == 0)
+                    type = IsLabel;
+
+                value.type = type;
+                while (*str &amp;&amp; MatchType(type, *str)) {
+                    if (_ismbblead(*str))
+                        value.value += *str++;
+                    value.value += *str++;
+                }
+                if (value.type == IsNumber)
+                    value.type = type;
+            }
+        }
+        Value.push_back(value);
+    }
+    Count = 0;
+}
+//
+// 读入数值
+//
+bool Lexer::GetValue(int *value, int index)
+{
+    bool    minus = false;
+    int type = GetType(index);
+    if (type == IsMinus) {
+        minus = true;
+        NextToken();
+        type = GetType();
+    }
+    if (type != IsNumber)
+        return false;
+    const char *p = GetString();
+    if (p == 0)
+        return false;
+
+    char *q;
+    int v = strtol(p, &amp;q, 10);
+    *value = minus? -v: v;
+
+    return true;
+}</code></pre>
+<p>字符串分割的准则有“每次读出时只分割1个单字”或“先分割好再一个个读出”两种方法,这里采用后者,把所有处理工作都交给构造函数。</p>
+<p>在这个实例中,可以先检查有多少个单字。把检查结果存储在nToken,就可以利用NumToken函数读出。</p>
+<p>Lexer类的参数则如下所示。</p>
+<pre><code class="C++">Lexer::Lexer(const char *str);</code></pre>
+<p>构造函数。str是分析的字符串。</p>
+<pre><code class="C++">int Lexer::NumToken() const;</code></pre>
+<p>返回已分割的记号数。</p>
+<pre><code class="C++">void Lexer::NextToken();</code></pre>
+<p>记号的读出位置移到下一个记号。</p>
+<pre><code class="C++">const char Lexer:GetString(int index=-1);</code></pre>
+<p>读出设定位置的记号。若设定-1,则从目前位置读出。</p>
+<pre><code class="C++">boolLexer::GetValue(int*value,intindex=-1);</code></pre>
+<p>将设定位置的记号读出成数值。若设定-1,则从目前位置读出。若记号非数字类型,则返回false。</p>
+<pre><code class="C++">int Lexer:GetType(intindex=-1);</code></pre>
+<p>返回设定位置的记号种类。若设定-1,则从目前位置读出。以下则为保护(protect)成员函数的参数。</p>
+<pre><code class="C++">const char *Lexer::SkipSpace(const char *p);</code></pre>
+<p>忽略空白字符。</p>
+<pre><code class="C++">int Lexer:CharType(unsigned char ch);</code></pre>
+<p>取得该字符的字符种类。</p>
+<pre><code class="C++">bool Lexer::MatchType(int &amp;type,unsigned char ch);</code></pre>
+<p>判断该字符是否为同一字符种类。</p>
+<h4 id="%E6%88%90%E5%8D%87%E7%B1%BB%E5%8A%A0%E5%85%A5%E8%AF%BB%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%9F" name="%E6%88%90%E5%8D%87%E7%B1%BB%E5%8A%A0%E5%85%A5%E8%AF%BB%E5%85%A5%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%9F">成升类加入读入配置文件的功</h4>
+<p>能这样就能先把文本文件分割成单字(记号)后再读入。我们再应用它修改战斗类的初始化部分,就可以从配置文件读入地图数据。</p>
+<p>战斗类(Battle.cpp)</p>
+<pre><code class="C++">//
+// 读入战斗地图的资料
+//
+bool CBattleAction::Load(const char *name)
+{
+    // 若仍残留之前的状态，则为error
+    // 应该不会有这个状态，故设为ASSERT
+    ASSERT(map_data == 0);
+    ASSERT(_map_data == 0);
+
+    // 读入地图资料
+    if (!LoadMap(name))
+        return false;
+
+    // 读入CG资料
+    if (!Cursor.LoadImage("cursor")
+     || !Command.LoadImage("command")
+     || !TurnEnd.LoadImage("turnend")
+     || !StatusBase.LoadImage("status")
+     || !PopupImageBase.LoadImage("popup")
+     || !PopupParts.LoadImage("popup_parts")
+     || !FireBallImage.LoadImage("fireball")
+     || !HealImage.LoadImage("heal")
+     || !Explosion.LoadImage("explosion"))
+        return false;
+    // 产生图像
+    CClientDC   dc(Parent);
+    if (!PopupImage.Create(dc, PopupImageBase.Width(), PopupImageBase.Height()))
+        return false;
+
+    // 设定sprite
+    CursorSprite.Set(&amp;Cursor, CPoint(0, 0), CSize(MAPGRID_WIDTH, MAPGRID_HEIGHT), CMapSprite::DEPTH_CURSOR);
+
+    {
+        for (int i=0; i&lt;MAX_COMMAND; i++) {
+            CommandSprite[i].Set(&amp;Command, CPoint(0, 0), CPoint(0, i * 22), CSize(70, 22), 0);
+            CommandSprite[i].Show(false);
+        }
+    }
+    TurnEndSprite.Set(&amp;TurnEnd, CPoint(0, 0), CPoint(0, 0), CSize(70, 22), 0);
+    PopupSprite.Set(&amp;PopupImage, CPoint(0, 0), CPoint(0, 0), PopupImage.Size(), 0);
+
+    // 人物的状态
+    int total_width = StatusBase.Width() * MAX_CHARACTER + 3 * (MAX_CHARACTER - 1);
+    int x = (WindowWidth - total_width) / 2;
+    int y = WindowHeight - StatusBase.Height() - 10;
+    {
+        for (int i=0; i&lt;MAX_CHARACTER; i++) {
+            if (!Status[i].Create(dc, StatusBase.Width(), StatusBase.Height()))
+                return false;
+            StatusSprite[i].Set(Status + i, CPoint(x, y), CPoint(0, 0), StatusBase.Size(), 0);
+            x += StatusBase.Width() + 3;
+            SetPlayerStatus(i);
+        }
+    }
+
+    CursorPos.x = -1;
+    CursorPos.y = -1;
+    SelPos.x = -1;
+    SelPos.y = -1;
+    SelChar = 0;
+    status = STATUS_NONE;
+    turn = PLAYER_TURN;
+    NumberView = 0;
+
+    StatusChar = 0;
+
+    DrawMap(ViewImage);
+
+    Parent-&gt;InvalidateRect(NULL);
+
+    return true;
+}</code></pre>
+<p>以上为初始化的函数。跟前面的初始化动作比起来,增加了攻击用的CG数据和sprite,不过基本上都是Init的扩充或修改后的产物。</p>
+<p>读入真正地图配置文件的是下面这个函数。</p>
+<p>读入配置文件的函数(Battle.cpp)</p>
+<pre><code class="C++">//
+// 读入地图定义档
+//
+bool CBattleAction::LoadMap(const char *name)
+{
+    typedef bool (CBattleAction::*cmd_t)(TextReader &amp;, Lexer &amp;);
+    typedef pair&lt;const char *, cmd_t&gt;   CmdTab;
+    typedef map&lt;const char *, cmd_t, ic_less&gt;   cmdmap;
+    cmdmap  cmd_table;
+
+    cmd_table.insert(CmdTab("player",   &amp;CBattleAction::PlayerCmd));
+    cmd_table.insert(CmdTab("enemy",    &amp;CBattleAction::EnemyCmd));
+    cmd_table.insert(CmdTab("object",   &amp;CBattleAction::ObjectCmd));
+    cmd_table.insert(CmdTab("mapsize",  &amp;CBattleAction::MapSizeCmd));
+    cmd_table.insert(CmdTab("mapimage", &amp;CBattleAction::MapImageCmd));
+    cmd_table.insert(CmdTab("map",      &amp;CBattleAction::MapCmd));
+
+    char    path[_MAX_PATH];
+    sprintf(path, MAPPATH "%s.txt", name);
+
+    TextReader  reader(path);
+    if (!reader) {
+        Parent-&gt;MessageBox("无法读取地图档案。");
+        return false;
+    }
+
+    const char *str;
+    while ((str = reader.GetString()) != 0) {
+        Lexer   lexer(str);
+
+        if (lexer.NumToken()) {
+            const char *cmd = lexer.GetString(0);
+            if (stricmp(cmd, "end") == 0)   // 结束
+                break;
+
+            cmdmap::iterator p = cmd_table.find(cmd);
+            if (p != cmd_table.end()) {
+                if (!(this-&gt;*p-&gt;second)(reader, lexer))
+                    return false;
+            }
+            else {
+                Error(reader, "语法错误");
+                return false;
+            }
+        }
+    }
+    return true;
+}</code></pre>
+<p>以下依次说明读入配置文件的函数。首先,为了简化程序的叙述内容,先用typedef定义“类型”。</p>
+<pre><code class="C++">typedef bool(CBattleAction:*cmd_t(TextReader &amp;,lexer &amp;);</code></pre>
+<p>这个是指到成员函数的函数指针。函数指针不仅叙述过长,而且又难懂,所以另外再给一个别名。</p>
+<p>说明一下,别名是用“cmd_t”的“bool(CBattleAction:*)(TextReaderLexer &amp;)类型”,也就是把“(TextReader &amp;,Lexer&amp;)”)放到引用变量,然后返回bool的CbattleAction的成员函数指针类型。</p>
+<pre><code class="C++">typedef pair&lt;const char *,cmd_t&gt;CmdTab:</code></pre>
+<p>命令表格(commandtable)的元素之一。第1个“constchar*”是命令名称,第二个“cmd_t”则是对应的“命令处理函数”。</p>
+<pre><code class="C++">typedef map&lt;const char *,cmd_t,ic_less&gt; cmdmap;</code></pre>
+<p>STL的map内容的别名。第1个、第2个和CmdTab是同一元素。第3个则是进行比较的函数对象。</p>
+<p>函数对象则定义在less.h里。</p>
+<p>比较字符串(less.h)</p>
+<pre><code class="C++">#ifndef __less_h__
+#define __less_h__
+
+class ic_less: public binary_function&lt;const char *, const char *, bool&gt; {
+  public:
+    result_type operator()(first_argument_type x, second_argument_type y) const
+    {
+        return stricmp(x, y) &lt; 0;
+    }
+} ;
+
+class ics_less: public binary_function&lt;const string &amp;, const string &amp;, bool&gt; {
+  public:
+    result_type operator()(first_argument_type x, second_argument_type y) const
+    {
+        return stricmp(x.c_str(), y.c_str()) &lt; 0;
+    }
+} ;
+#endif</code></pre>
+<p>比较设定为不分大小写,两者一视同仁。主要是因为Windows不会去区分命令、文件名的大小写(早年的MS-DOS也是如此),或者是很多人根本就懒得去分辨(这是笔者自己的经验谈,如果你坚持要分大小写也没什么不妥)。</p>
+<p>如果比较字符串要区分大小写,(一般来说)多半使用“strcmp”,但这里使用的是“stricmp”。其引用变量和返回值的意义均同strcmp。</p>
+<pre><code class="C++">    cmdmap  cmd_table;
+
+    cmd_table.insert(CmdTab("player",   &amp;CBattleAction::PlayerCmd));
+    cmd_table.insert(CmdTab("enemy",    &amp;CBattleAction::EnemyCmd));
+    cmd_table.insert(CmdTab("object",   &amp;CBattleAction::ObjectCmd));
+    cmd_table.insert(CmdTab("mapsize",  &amp;CBattleAction::MapSizeCmd));
+    cmd_table.insert(CmdTab("mapimage", &amp;CBattleAction::MapImageCmd));
+    cmd_table.insert(CmdTab("map",      &amp;CBattleAction::MapCmd));</code></pre>
+<p>把“所有命令”登录到cmd_table。命令就是前面说明的配置文件命令,顺便也把处理该命令的函数登录进去。
+命令处理的分派</p>
+<pre><code class="C++">const char *str;
+while ((str = reader.GetString()) != 0) {
+    Lexer   lexer(str);
+
+    if (lexer.NumToken()) {
+        const char *cmd = lexer.GetString(0);
+        if (stricmp(cmd, "end") == 0)   // 结束
+            break;
+
+        cmdmap::iterator p = cmd_table.find(cmd);
+        if (p != cmd_table.end()) {
+            if (!(this-&gt;*p-&gt;second)(reader, lexer))
+                return false;
+        }
+        else {
+            Error(reader, "语法错误");
+            return false;
+        }
+    }
+}</code></pre>
+<p>读出1行后,就在Lexer类别分解成单字。若单字数目为“0”即为空行(或该行只有注解),故不做任何动作。</p>
+<p>若第1个单字为“end”即结束,否则到cmdtable进行搜寻,找到后再调用有登录在表格内的函数。</p>
+<pre><code class="C++">cmdmap::iterator p = cmd_table.Find(cmd);</code></pre>
+<p>如果找不到map::find,则返回end(),故若非end()则表示有找到。</p>
+<pre><code class="C++">if(!(this-&gt;p-&gt;secoud)(reader,lexar))
+    return false;</code></pre>
+<p>调用成员函数。p-&gt;second会返回第2个元素(函数指针)。</p>
+<p>调用成员函数的指针时的调用方法是“(this-&gt;<em>函数指针)(引数)”,所以加起来就是“(this-&gt;</em>p-&gt;second)(引数)”。</p>
+<p>由于这里的命令种类不多,也许有人会认为应该可以写成:</p>
+<pre><code class="C">bool result;
+if(stricmp("player",cmd) == 0){
+    result = PlayerCmd(reader,lexar);
+}
+else if(stricmp("enemy",cmd) == 0){
+    result = EnemyCmd(reader,lexar);
+}</code></pre>
+<p>也不是说不可以,但是考虑到将来想要新增或修改命令的话,这种“利用表格的方法”就有很大的优点,到时候只要直接增减表格就能同时修改命令的处理部分。</p>
+<p>所有命令的处理都要做成函数。因为这个结构有使用到表格,故命令处理函数的引数和返回值必须设为同一类型。</p>
+<p>游戏玩家CG的登录命令(Battle.cpp)</p>
+<pre><code class="C">bool CBattleAction::PlayerCmd(TextReader &amp;reader, Lexer &amp;lexer)
+{
+    int number;
+    bool b = lexer.GetValue(&amp;number);
+    const char *name = lexer.GetString();
+    const char *file = lexer.GetString();
+
+    if (name == 0 || file == 0 || !b || lexer.GetString() != 0) {
+        Error(reader, "语法错误");
+        return false;
+    }
+    CChip chip(name, file);
+    if (chip.image == 0) {
+        Error(reader, "无法读取CG数据");
+        return false;
+    }
+    chip_list.insert(pair&lt;int, CChip&gt;(PlayerNumber(number - 1), chip));
+
+    return true;
+}</code></pre>
+<p>这是登录游戏玩家CG的命令。读出CG后,先登录到chip_list。</p>
+<p>敌人CG的登录命令(Battle.cpp)</p>
+<pre><code class="C++">bool CBattleAction::EnemyCmd(TextReader &amp;reader, Lexer &amp;lexer)
+{
+    int number;
+    bool b = lexer.GetValue(&amp;number);
+    const char *name = lexer.GetString();
+    const char *file = lexer.GetString();
+
+    if (name == 0 || file == 0 || !b || lexer.GetString() != 0) {
+        Error(reader, "语法错误");
+        return false;
+    }
+    CChip chip(name, file);
+    if (chip.image == 0) {
+        Error(reader, "无法读取CG数据");
+        return false;
+    }
+    chip_list.insert(pair&lt;int, CChip&gt;(EnemyNumber(number - 1), chip));
+
+    return true;
+}</code></pre>
+<p>障碍物CG的登录命令(Battle.cpp)</p>
+<pre><code class="C++">bool CBattleAction::ObjectCmd(TextReader &amp;reader, Lexer &amp;lexer)
+{
+    int number;
+    bool b = lexer.GetValue(&amp;number);
+    const char *name = lexer.GetString();
+    const char *file = lexer.GetString();
+
+    if (name == 0 || file == 0 || !b || lexer.GetString() != 0) {
+        Error(reader, "语法错误");
+        return false;
+    }
+    CChip chip(name, file);
+    if (chip.image == 0) {
+        Error(reader, "无法读取CG数据");
+        return false;
+    }
+    chip_list.insert(pair&lt;int, CChip&gt;(ObjectNumber(number - 1), chip));
+
+    return true;
+}</code></pre>
+<p>这是登录敌人和障碍物CG的命令。这里的处理跟登录游戏玩家CG时一样,只是登录在chip_list的号码不一样而已。</p>
+<p>设定地图大小的命令(Battle.cpp)</p>
+<pre><code class="C++">bool CBattleAction::MapSizeCmd(TextReader &amp;reader, Lexer &amp;lexer)
+{
+    int width, height;
+    if (!lexer.GetValue(&amp;width)
+     || !lexer.GetValue(&amp;height)
+     || lexer.GetString() != 0) {
+        Error(reader, "语法错误");
+        return false;
+    }
+    MapSize.cx = width;
+    MapSize.cy = height;
+
+    MapRect.SetRect(0, 0, width, height);
+
+    // 保留map_data的空间
+    _map_data = new MapData[width * height];
+    map_data = new MapData *[height];
+
+    for (int i=0; i&lt;height; i++) {
+        map_data[i] = _map_data + i * width;
+    }
+
+    return true;
+}
+</code></pre>
+<p>上为设定地图尺寸大小的命令。一开始要先保留地图的可用空间。保留内存空间的方法则如前章Init所示,利用(类似)二维数组的方式保留可用空间。</p>
+<p>读入地图背景CG(Battle.cpp)</p>
+<pre><code class="C++">bool CBattleAction::MapImageCmd(TextReader &amp;reader, Lexer &amp;lexer)
+{
+    const char *name = lexer.GetString();
+
+    if (name == 0 || lexer.GetString() != 0) {
+        Error(reader, "语法错误");
+        return false;
+    }
+    if (!MapImage.LoadImage(name)) {
+        Error(reader, "无法读取CG数据");
+        return false;
+    }
+    return true;
+}</code></pre>
+<p>以上程序为读入地图背景的CG。</p>
+<p>地图的初始位置排列(Battle.cpp)</p>
+<pre><code class="C++">//
+// 把map上的文字改成状态
+//
+int CBattleAction::FindMapStatus(const char *find)
+{
+    struct {
+        char str[4];
+        unsigned type;
+    } table[] = {
+        { "□", NONE },
+        { "■", RESTRICTED_AREA },
+        { "一", PLAYER | (0 &lt;&lt; 8) },
+        { "二", PLAYER | (1 &lt;&lt; 8) },
+        { "三", PLAYER | (2 &lt;&lt; 8) },
+        { "四", PLAYER | (3 &lt;&lt; 8) },
+        { "五", PLAYER | (4 &lt;&lt; 8) },
+        { "六", PLAYER | (5 &lt;&lt; 8) },
+        { "七", PLAYER | (6 &lt;&lt; 8) },
+        { "八", PLAYER | (7 &lt;&lt; 8) },
+        { "九", PLAYER | (8 &lt;&lt; 8) },
+        { "１", ENEMY | (0 &lt;&lt; 8) },
+        { "２", ENEMY | (1 &lt;&lt; 8) },
+        { "３", ENEMY | (2 &lt;&lt; 8) },
+        { "４", ENEMY | (3 &lt;&lt; 8) },
+        { "５", ENEMY | (4 &lt;&lt; 8) },
+        { "６", ENEMY | (5 &lt;&lt; 8) },
+        { "７", ENEMY | (6 &lt;&lt; 8) },
+        { "８", ENEMY | (7 &lt;&lt; 8) },
+        { "９", ENEMY | (8 &lt;&lt; 8) },
+        { "Ⅰ", OBJECT | (0 &lt;&lt; 8) },
+        { "Ⅱ", OBJECT | (1 &lt;&lt; 8) },
+        { "Ⅲ", OBJECT | (2 &lt;&lt; 8) },
+        { "Ⅳ", OBJECT | (3 &lt;&lt; 8) },
+        { "Ⅴ", OBJECT | (4 &lt;&lt; 8) },
+        { "Ⅵ", OBJECT | (5 &lt;&lt; 8) },
+        { "Ⅶ", OBJECT | (6 &lt;&lt; 8) },
+        { "Ⅷ", OBJECT | (7 &lt;&lt; 8) },
+        { "Ⅸ", OBJECT | (8 &lt;&lt; 8) },
+    } ;
+    for (int i=0; i&lt;(sizeof(table) / sizeof(table[0])); i++) {
+        if (strcmp(find, table[i].str) == 0)
+            return table[i].type;
+    }
+    return -1;
+}
+
+bool CBattleAction::MapCmd(TextReader &amp;reader, Lexer &amp;lexer)
+{
+    if (map_data == 0) {    // 此时，已经要决定地图的大小
+        Error(reader, "请先设定mapsize");
+        return false;
+    }
+
+    for (int y=0; y&lt;MapSize.cy; y++) {
+        const char *str = reader.GetString();
+        if (str == 0) {
+            Error(reader, "语法错误");
+            return false;
+        }
+        for (int x=0; x&lt;MapSize.cx; x++) {
+            char chip[3];
+            chip[0] = str[x * 2 + 0];
+            chip[1] = str[x * 2 + 1];
+            chip[2] = 0;
+
+            int idx = FindMapStatus(chip);
+            if (idx &lt; 0) {
+                Error(reader, "语法错误");
+                return false;
+            }
+            map_data[y][x].type = (unsigned char)idx;
+            if (idx != RESTRICTED_AREA &amp;&amp; idx != NONE) {
+                map&lt;int, CChip&gt;::iterator p = chip_list.find(idx);
+                if (p == chip_list.end()) {     // 尚未登录
+                    Error(reader, "人物角色尚未登录");
+                    return false;
+                }
+                else {
+                    TRACE("[%s] = %d, %d\n", p-&gt;second.name.c_str(), x, y);
+                    if ((idx &amp; PLAYER) != 0) {
+                        player_list.push_back(CCharacter(p-&gt;second.image, x, y, CCharacter::DEPTH_CHAR));
+                        CCharacter &amp;s = player_list.back();
+
+                        // 根据人物姓名读入状态
+                        CStatus *status = Parent-&gt;GetParam().GetStatus(p-&gt;second.name.c_str());
+                        if (status == 0) {  // 无的状态
+                            Error(reader, "找不到人物%s的状态信息");
+                            return false;
+                        }
+                        s.status = *status;
+
+                        sprite.insert(&amp;s);
+                        s.SetDirection(CCharacter::RIGHT);
+                        map_data[y][x].sprite = &amp;s;
+
+                        StatusCharacter[idx &gt;&gt; 8] = &amp;s; // 显示用人物相关信息
+                    }
+                    else if ((idx &amp; ENEMY) != 0) {
+                        enemy_list.push_back(CCharacter(p-&gt;second.image, x, y, CCharacter::DEPTH_CHAR));
+                        CCharacter &amp;s = enemy_list.back();
+
+                        // 根据人物姓名读入状态
+                        CStatus *status = Parent-&gt;GetParam().GetStatus(p-&gt;second.name.c_str());
+                        if (status == 0) {  // 无的状态
+                            Error(reader, "找不到人物%s的状态信息");
+                            return false;
+                        }
+                        s.status = *status;
+
+                        sprite.insert(&amp;s);
+                        s.SetDirection(CCharacter::LEFT);
+                        map_data[y][x].sprite = &amp;s;
+                    }
+                    else if ((idx &amp; OBJECT) != 0) {
+                        object_list.push_back(CMapSprite(p-&gt;second.image, x, y, CMapSprite::DEPTH_OBJECT));
+                        CMapSprite &amp;s = object_list.back();
+                        sprite.insert(&amp;s);
+                        map_data[y][x].sprite = &amp;s;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}</code></pre>
+<p>把人物等放到地图上。配置文件的地图数据是“1个字符=1方格”,所以是一次处理1个字符。</p>
+<pre><code class="C++">char chip[3];
+chip[0] = str[x * 2 + 0];
+chip[1] = str[x * 2 + 1];
+chip[2] = 0;
+
+int idx = FindMapStatus(chip);
+if (idx &lt; 0) {
+    Error(reader, "语法错误");
+    return false;
+}</code></pre>
+<p>1个中文字符也是双字节组(2bytes),所以先读出2bytes,把它从“字符”转换成“方格信息”(利用FindMapStatus)。</p>
+<pre><code class="C++">map_data[y][x].type = (unsigned char)idx;</code></pre>
+<p>这个数据的最后1byte会直接写入到地图里。</p>
+<p>当地图上有人物或障碍物时(也就是非“什么都没有(NONE)”或“禁止非障碍物出入(RESTRICTED_AREA)”时),则登录到人物清单。</p>
+<pre><code class="C++">map&lt;int, CChip&gt;::iterator p = chip_list.find(idx);
+if (p == chip_list.end()) {     // 尚未登录
+    Error(reader, "人物角色尚未登录");
+    return false;
+}</code></pre>
+<p>chiplist是己用player或enemy命令完成登录的CG清单(小人物)。如果没有登录在里面,就表示player或enemy等的命令叙述有误。</p>
+<pre><code class="C++">if ((idx &amp; PLAYER) != 0) {
+    player_list.push_back(CCharacter(p-&gt;second.image, x, y, CCharacter::DEPTH_CHAR));</code></pre>
+<p>如果在方格上的是游戏玩家,则登录到play_list。</p>
+<pre><code class="C++">CCharacter &amp;s = player_list.back();
+
+// 根据人物姓名读入状态
+CStatus *status = Parent-&gt;GetParam().GetStatus(p-&gt;second.name.c_str());
+if (status == 0) {  // 无的状态
+    Error(reader, "找不到人物%s的状态信息");
+    return false;
+}
+s.status = *status;</code></pre>
+<p>读入人物的状态。状态是指人物的移动步数、HP等相关数据资料。这些状态会存储在CMainWin类里,即使战斗完毕,这个类别仍然会保留下来。</p>
+<pre><code class="C++">sprite.insert(&amp;s);
+s.SetDirection(CCharacter::RIGHT);
+map_data[y][x].sprite = &amp;s;</code></pre>
+<p>登录sprite。</p>
+<pre><code class="C++">StatusCharacter[idx &gt;&gt; 8] = &amp;s; // 显示用人物相关信息</code></pre>
+<p>如果是游戏玩家所选的人物,因为状态要显示在画面上,所以必须登录到状态显示用的变量里。敌人和障碍物的处理亦同。</p>
+<p>当发生程序错误时,应有个会显示错误消息(含文件名和行号)的消息对话框函数,程序要调用这个函数。</p>
+<p>误处理(Battle.cpp)</p>
+<pre><code class="C++">//
+// 输出错误事件
+//
+void __cdecl CBattleAction::Error(TextReader &amp;reader, const char *fmt, ...)
+{
+    va_list args;
+
+    char    str[256];
+    int len = sprintf(str, "%s:%d ", reader.GetFileName(), reader.GetLineNo());
+    va_start(args, fmt);
+    _vsnprintf(str + len, sizeof(str) - len, fmt, args);
+    va_end(args);
+
+    Parent-&gt;MessageBox(str);
+}</code></pre>
+<p>"_vsnprintf"是"vsnprintf"另一个“有字符数限制的版本”。字符数超过上限时会破坏堆栈(stack),造成程序操作错误,所以用_vsnprintf会比较保险一点。</p>
+<p>只不过就算消息被半路腰斩,字符数超过上限的bug还是不变的事实。换个角度想,错误消息本来就是游戏开发人员才会看到的东西,所以不算是什么大问题(通常游戏玩家不会有机会看到这种错误消息)。</p>
+<p>把前面这些处理整合起来,就可以从配置文件读入地图数据,显示战斗地图的初始状态。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html" class="navigation navigation-prev " aria-label="移动的程序实例">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html" class="navigation navigation-next " aria-label="战斗规则">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "读入地图数据",
+            "next": {
+                "title": "战斗规则"
+            },
+            "previous": {
+                "title": "移动的程序实例"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

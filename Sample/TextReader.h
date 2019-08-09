@@ -31,10 +31,7 @@ class TextReader {
 	// 取得已储存档案的档名
 	const char *GetFileName() const { return filename.c_str(); }
 	// 读入1行
-	const char *GetString() { 
-		int size = data.size();
-		return size > read_index ? data[read_index++].string: 0; 
-	}
+	const char *GetString() { return data.size() > read_index? data[read_index++].string: 0; }
 	// 取得最后读入该行的行号
 	int GetLineNo() const { return data[read_index-1].lineno; }
 	// 档案是否已读取完毕

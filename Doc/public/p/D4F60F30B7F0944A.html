@@ -1,0 +1,1012 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>显示的程序实例 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="讲了这么多,也该把前面的内容整合到程序里了。如果你是采取先全部设计完了再开始写程序的话,回头修改的机率就不大,不过对于还不太习惯写程序的人而言,逐一确认每个动作并同时进行作业的做法可能会比较容易理解。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter  active " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E6%98%BE%E7%A4%BA%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B" name="%E6%98%BE%E7%A4%BA%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B">显示的程序实例</h3>
+<p>讲了这么多,也该把前面的内容整合到程序里了。如果你是采取先全部设计完了再开始写程序的话,回头修改的机率就不大,不过对于还不太习惯写程序的人而言,逐一确认每个动作并同时进行作业的做法可能会比较容易理解。</p>
+<p>下面的程序实例不再是“指确认动作的实例”,而是写到一半想去运行看完成版的程序。因此各位可能会觉得有些地方是“多余的处理动作”或“小题大作”,碰到这些地方时会另有说明,有时候干脆跳过不看还比较不会被搞混。</p>
+<h4 id="%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9E%84%28config%29" name="%E8%AE%BE%E7%BD%AE%E7%BB%93%E6%9E%84%28config%29">设置结构(config)</h4>
+<p>CG等等的数据一多起来,文件管理也是个棘手的问题。源文件跟数据类文件混在一起又太杂乱无章,而且游戏正式公布出来以后,如果执行文件和数据文件都放在同一个文件夹底下,想去找个图文件都不知该从何找起。第一步要先决定文件夹的结构。</p>
+<p>至于存储CG数据的文件夹,可如List4-1先写好一个设置文件,再从这里指定。</p>
+<p>设置文件(config.h)</p>
+<pre><code class="C++">#ifndef __config_h__
+#define __config_h__
+
+#define CompanyName     "HyperWorks"
+#define ApplicationName     "RPGSYSTEM"
+#define ApplicationTitle    "RPGSAMPLE"
+
+#define WindowWidth     640
+#define WindowHeight    480
+
+#define CGPATH          "cgdata/"
+
+#endif</code></pre>
+<p>先把子文件夹的名称和窗口大小等部分整合在一个设置文件的话,以后想修改时就不需要改好几个地方。当然也可以设定公司名称、应用软件名称等相关信息。</p>
+<p>存储CG数据的文件夹命名为“cgdata”,在源程序代码中则使用CGPATH这个定义。</p>
+<h4 id="%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2" name="%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2">坐标转换</h4>
+<p>记得吗,要把坐标转换写成函数!因为修改地图的显示位置时,计算公式也要跟着改,所以把它们拉在一起会比较方便。</p>
+<p>坐标转换(coordinate.h)</p>
+<pre><code class="C++">#ifndef __coordinate_h__
+#define __coordinate_h__
+
+enum    {
+    MAPGRID_WIDTH = 64,
+    MAPGRID_HEIGHT = 32,
+} ;
+
+inline CPoint PointToIndex(int x, int y)
+{
+    y = (y - MAPGRID_HEIGHT * 13 / 2) * 2;
+#ifdef  notdef      // 当使用Shift时
+    return CPoint((x - y) &gt;&gt; 6, (x + y) &gt;&gt; 6);
+#else
+    return CPoint((x - y + MAPGRID_WIDTH * 10) / MAPGRID_WIDTH - 10,
+        (x + y + MAPGRID_WIDTH * 10) / MAPGRID_WIDTH - 10);
+#endif
+}
+
+inline CPoint PointToIndex(CPoint point)
+{
+    return PointToIndex(point.x, point.y);
+}
+
+inline CPoint IndexToPoint(int x, int y)
+{
+    return CPoint((x + y) * (MAPGRID_WIDTH / 2),
+        (12 - x + y) * (MAPGRID_HEIGHT / 2));
+}
+
+inline CPoint IndexToPoint(CPoint point)
+{
+    return IndexToPoint(point.x, point.y);
+}
+
+#endif</code></pre>
+<p>由于这个计算公式不太复杂,所以把它写成内嵌函数。
+如需计算公式的相关说明,可回头参考前面的章节。参数则准备了“CPoint”和“int”两种。</p>
+<h4 id="%E6%89%A9%E5%85%85Sprite%E7%B1%BB" name="%E6%89%A9%E5%85%85Sprite%E7%B1%BB">扩充Sprite类</h4>
+<p>把决定刚才说明的“显示顺序”的变量“depth”设为sprite用类(CSprite)的成员变量。</p>
+<pre><code class="C++">class CSprite {
+
+    bool operator&lt;(const CSprite &amp;x) const;
+
+    int     depth;
+};</code></pre>
+<p>决定显示顺序时需比较坐标的“大小关系”,所以还需要一个比较函数。</p>
+<pre><code class="C++">inline bool CSprite::operator&lt;(const CSprite &amp;x) const
+{
+    int y1 = draw_pos.y + size.cy;
+    int y2 = x.draw_pos.y + x.size.cy;
+    if (y1 == y2) {
+        int x1 = draw_pos.x + (size.cx + 1) / 2;
+        int x2 = x.draw_pos.x + (x.size.cx + 1) / 2;
+        if (x1 == x2) {
+            return depth &lt; x.depth;
+        }
+        return x1 &lt; x2;
+    }
+    return y1 &lt; y2;
+}</code></pre>
+<p>比较X坐标的动作有两个用处,“确定”坐标的比较结果、以及若X、Y坐标均相等时则比较depth。</p>
+<p>比较的坐标选择用下面中心点而非draw.pos(左上角)则是因为决定显示位置的指针位于下面的中心点,如图4-10所示。</p>
+<p>由于人物sprite的大小没有固定,因此才以下面的中心点为准点位置。没错,因为即使sprite大小改了,地面位置也不会更动。</p>
+<p>Sprite先加入地图坐标后,再来写CMapSprite类。还有,前面说明过的“显示顺序”符号也要设定。</p>
+<p>CMapSprite类(Character.h)</p>
+<pre><code class="C++">class CMapSprite: public CSprite {
+  public:
+    enum    {
+        DEPTH_AREA,
+        DEPTH_CURSOR,
+        DEPTH_CHAR,
+        DEPTH_OBJECT,
+    } ;
+
+  public:
+    CMapSprite();
+    CMapSprite(CImage *dib, int x, int y, CSize size, int d);
+    CMapSprite(CImage *dib, int x, int y, int d);
+
+    void SetMapPoint(CPoint point);
+    CPoint GetMapPoint() const { return map_point; }
+
+  protected:
+    CPoint map_point;   // 地图上的位置
+} ;</code></pre>
+<p>接着,再写一个人物类(CCharacter)来存储人物的方向。</p>
+<p>人物类(Character.h)</p>
+<pre><code class="C++">class CCharacter: public CMapSprite {
+  public:
+    enum    {
+        NIMAGES     = 3,
+        MOVE_OFS    = 0,
+        MOVE_STEP   = 3,
+    } ;
+    enum    {
+        LEFT,
+        DOWN,
+        RIGHT,
+        UP,
+    } ;
+
+  public:
+    CCharacter(CImage *dib, int x, int y, int d);
+
+    void SetDirection(int dir); // 设定方向
+    void NormalStatus();
+
+    bool operator==(const CCharacter &amp;x);
+
+  public:
+    int direction;          // 人物的方向
+} ;</code></pre>
+<h4 id="%E8%BE%93%E5%85%A5%E6%93%8D%E4%BD%9C" name="%E8%BE%93%E5%85%A5%E6%93%8D%E4%BD%9C">输入操作</h4>
+<p>战斗时要处理从鼠标等装置来的输入。在事件部分也有用到输入,不过战斗部分跟事件部分对鼠标的处理不太一样,所以要设成可以切换使用。</p>
+<p>输入操作(Action.h)</p>
+<pre><code class="C++">#ifndef __action_h__
+#define __action_h__
+
+class CMainWin;
+
+//
+//  动作类
+//
+//  把处理（如不定期发生的事件等），
+//  从根据状况所写的类别CMainWin调用出来
+//
+class CAction {
+  public:
+    CAction(CMainWin *win, CAction *oldAction=0): Parent(win), OldAction(oldAction) {}
+    virtual ~CAction();
+
+    virtual void LButtonDown(UINT modKeys, CPoint point);
+    virtual void LButtonUp(UINT modKeys, CPoint point);
+    virtual void RButtonDown(UINT modKeys, CPoint point);
+    virtual void RButtonUp(UINT modKeys, CPoint point);
+    virtual void MouseMove(UINT modKeys, CPoint point);
+    virtual void KeyDown(UINT key);
+    virtual bool TimedOut(int timerId);
+
+    CAction *GetOldAction() const { return OldAction; }
+
+  protected:
+    CMainWin   *Parent;
+    CAction    *OldAction;
+} ;
+
+#endif</code></pre>
+<p>输入操作(Action.cpp)</p>
+<pre><code class="C++">#include "stdafx.h"
+#include "Action.h"
+#include "MainWin.h"
+
+//
+// 析构函数(Destructor)
+//
+CAction::~CAction()
+{
+}
+
+//
+// 鼠标左键按下时的处理
+//
+void CAction::LButtonDown(UINT, CPoint)
+{
+}
+
+//
+// 鼠标左键放开时的处理
+//
+void CAction::LButtonUp(UINT, CPoint)
+{
+}
+
+//
+// 鼠标右键按下时的处理
+//
+void CAction::RButtonDown(UINT, CPoint)
+{
+}
+
+//
+// 鼠标右键放开时的处理
+//
+void CAction::RButtonUp(UINT, CPoint)
+{
+}
+
+//
+// 鼠标值标移动时的处理
+//
+void CAction::MouseMove(UINT, CPoint)
+{
+}
+
+//
+// 键盘按下时的处理
+//
+void CAction::KeyDown(UINT)
+{
+}
+
+//
+// 计时器（timer）的处理
+//
+bool CAction::TimedOut(int timerId)
+{
+    return true;
+}</code></pre>
+<p>先写一个基本类(Action)。这个类只是雏形,在此则没做任何处理动作。处理的内容是写在继承这个基本类的类里。</p>
+<p>因为主要是为了让切换顺利,所以大部分的成员函数都要设为“虚拟函数”。</p>
+<h4 id="%E7%AA%97%E5%8F%A3%E6%93%8D%E4%BD%9C" name="%E7%AA%97%E5%8F%A3%E6%93%8D%E4%BD%9C">窗口操作</h4>
+<p>跟前章的程序实例一样,窗口操作都写在<code>MainWin.cpp/MainWin.h</code>里面,不过出于事件部分和战斗部分的窗口都相同,所以不操作窗口的处理就不要写在MainWin。</p>
+<p>窗口操作(MainWin.cpp)</p>
+<pre><code class="C++">//
+// 构造函数
+//
+//  变量的初始化
+//  当window由OnCreate初始化时，不会带出任何东西
+//
+CMainWin::CMainWin()
+{
+    Action = new CAction(this); // 虚拟动作（dummy action）
+}
+
+//
+// 析构函数
+//
+CMainWin::~CMainWin()
+{
+    DeleteAllAction();
+}</code></pre>
+<p>虚拟(dummy)动作要先登录到变量Action,CAtion类则如前说明,是个不作处理的类。</p>
+<p>窗口操作(MainWin.cpp)</p>
+<pre><code class="C++">//
+// 消息处理
+//
+LRESULT CMainWin::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg) {
+      case WM_FIRSTACTION:      // 最初传送的事件
+        OnFirstAction();
+        break;
+
+      case WM_CLOSE:        // 关闭窗口
+        OnClose();
+        break;
+
+      case WM_ERASEBKGND:       // 删除背景
+        return FALSE;       // 无动作
+
+      case WM_LBUTTONDOWN:      // 按下鼠标左键
+        Action-&gt;LButtonDown(wParam, CPoint(lParam));
+        break;
+
+      case WM_LBUTTONUP:        // 放开鼠标左键
+        Action-&gt;LButtonUp(wParam, CPoint(lParam));
+        break;
+
+      case WM_RBUTTONDOWN:      // 按下鼠标右键
+        Action-&gt;RButtonDown(wParam, CPoint(lParam));
+        break;
+
+      case WM_RBUTTONUP:        // 放开鼠标右键
+        Action-&gt;RButtonUp(wParam, CPoint(lParam));
+        break;
+
+      case WM_MOUSEMOVE:        // 鼠标指标移动
+        Action-&gt;MouseMove(wParam, CPoint(lParam));
+        break;
+
+      case WM_KEYDOWN:      // 按下键盘
+        Action-&gt;KeyDown(wParam);
+        break;
+
+      case WM_TIMER:        // 计时器到期
+        OnTimer(wParam);
+        break;
+
+      default:
+        return CWindow::WindowProc(uMsg, wParam, lParam);
+    }
+    return 0L;
+}</code></pre>
+<p>消息处理里面有鼠标事件的处理。</p>
+<p>处理本身是先继承CAction类、然后再写进去,所以会调用CAction类的成员函数。</p>
+<p>为了让在没有鼠标操作的处理时也能不受限制自由参照变量Action,要预先登录无动作的虚拟,而不是用构造函数把Action初始化成“0”。如果初始化成“0”,就得像下面这样一步步做判断,很麻烦吧?</p>
+<pre><code class="C++">if(Action)
+    Action-&gt;LButtonDown(wParam, CPoint(lParam));</code></pre>
+<p>消息处理(MainWin.cpp)</p>
+<pre><code class="C++">//
+// WM_CREATE的处理
+//
+BOOL CMainWin::OnCreate(CREATESTRUCT *cs)
+{
+    LoadAccelTable(IDC_APPACCEL);
+
+    CClientDC   dc(this);
+
+    // 确认图像空间
+    if (!ViewImage.Create(dc, WindowWidth, WindowHeight)) {
+        MessageBox("没有足够的内存空间。/n"
+            "请先结束其他使用中的应用程序后，再重新启动。");
+        return FALSE;
+    }
+
+    // 清除显示用图像
+    ViewImage.Clear();
+
+    // 发送触发的第一个事件
+    while (!PostMessage(WM_FIRSTACTION)) {
+        // 若队列已满，则PostMessage会发生error，故反复传送
+#ifdef  _DEBUG
+        TRACE("PostMessage Error code = %d\n", GetLastError());
+#endif
+        ::Sleep(110);   // 重送事件的动作再稍等一下
+    }
+
+    return TRUE;
+}
+
+//
+// 游戏的“第一个”动作
+//
+void CMainWin::OnFirstAction()
+{
+    Battle();       // 战斗
+}</code></pre>
+<p>产生窗口时是把WM_FIRSTACTION消息传送给“自己”。这个消息用到PostMessage,所以要登录到消息队列内,在消息循环内处理。</p>
+<p>在游戏中,动作的触发不是“计时器”,也不是“使用者的操作”,而是“程序启动”,所以先给这个触发之后,就能依照Windows的做法去进行后面的处理了。</p>
+<p>此处最初的触发就是调用Battle函数。</p>
+<p>调用战斗画面(MainWin.cpp)</p>
+<pre><code class="C++">//
+// 删除动作
+//
+void CMainWin::DeleteAllAction()
+{
+    while (Action) {
+        CAction *action = Action-&gt;GetOldAction();
+        delete Action;
+        Action = action;
+    }
+}
+
+//
+// 战斗
+//
+BOOL CMainWin::Battle()
+{
+    CBattleAction *action = new CBattleAction(this, Action);
+    if (!action-&gt;Init()) {
+        delete action;
+        return false;
+    }
+    Action = action;
+    PostMessage(WM_KICKIDLE);   // 为了安全起见，传送空事件
+    return true;
+}</code></pre>
+<p>动作切换事先存储前面的动作,再把新的动作登录到变量Action。</p>
+<p>这里的程序实例因为除了Battle之外没有其他动作,所以不需要回到原来的动作,不过如果这里先写成会回到原来调用的位置,就能应用到“从事件到战斗”或“战斗中的事件”等。</p>
+<p>其他消息(MainWin.cpp)</p>
+<pre><code class="C++">//
+// WM_CLOSE的处理
+//
+void CMainWin::OnClose()
+{
+    if (MessageBox("确定要结束程序吗?", ApplicationTitle,
+        MB_ICONQUESTION|MB_OKCANCEL) == IDOK) {
+        ::DestroyWindow(hWnd);
+    }
+}
+//
+// WM_PAINT的处理（重新绘制）
+//
+void CMainWin::OnPaint()
+{
+    CPaintDC    dc(this);
+    ViewImage.Draw(dc, dc.ps.rcPaint);
+}
+//
+// WM_COMMAND的处理（菜单处理）
+//
+void CMainWin::OnCommand(UINT notifyCode, UINT id, HWND ctrl)
+{
+    switch (id) {
+      case ID_APP_EXIT:         // 结束
+        SendMessage(WM_CLOSE);
+        break;
+
+      case ID_APP_ABOUT:            // 版本信息
+        CAboutDlg().DoModal(IDD_ABOUT, hWnd);
+        break;
+
+      default:
+        break;
+    }
+}</code></pre>
+<p>其他的消息处理部分。OnClose是欲关闭窗口时的处理,让用户确认是否要关闭。用户必须有回应,才会关闭窗口。</p>
+<p>OnPaint是重新绘制的处理,OnCommand则是菜单的处理。</p>
+<h4 id="%E6%88%98%E6%96%97%E7%B1%BB" name="%E6%88%98%E6%96%97%E7%B1%BB">战斗类</h4>
+<p>接下米,进入战斗部分(这里只有显示而已)的处理。前面有写了一个CAction类给鼠标等的输入操作,写战斗部分也继承这个类。</p>
+<p>战斗类(Battle.h)</p>
+<pre><code class="C++">#ifndef __battle_h__
+#define __battle_h__
+
+#include "Action.h"
+#include "Misc.h"
+#include "Character.h"
+
+class CMainWin;
+
+//
+// 战斗类
+//
+class CBattleAction: public CAction {
+  protected:
+    // 状态
+    enum    {
+        STATUS_NONE,
+        STATUS_MOVE,
+        STATUS_ANIME,
+    } ;
+    enum    {
+        NONE            = 0,        // 一般地点
+        RESTRICTED_AREA = 1 &lt;&lt; 0,   // 禁区
+        PLAYER          = 1 &lt;&lt; 1,   // 有其他游戏者
+        ENEMY           = 1 &lt;&lt; 2,   // 有敌人
+        OBJECT          = 1 &lt;&lt; 3,   // 有东西在
+        MOVEDIST        = 1 &lt;&lt; 4,   // 有移动范围的光标
+        ATTACKDIST      = 1 &lt;&lt; 5,   // 有攻击范围的光标
+    } ;
+
+    class MapData {
+      public:
+        MapData()
+        {
+            sprite = 0;
+            type = 0;
+            dist = 0;
+        }
+
+        bool ChkMove(int _dist)
+        {
+            return type == CBattleAction::NONE
+                || ((type &amp; CBattleAction::MOVEDIST) != 0 &amp;&amp; dist &lt; _dist);
+        }
+
+      public:
+        CMapSprite *sprite;     // 地图上的sprite
+        unsigned char type;     // 地图上好像有什么东西?
+        char dist;              // 移动、攻击的距离（作业用）
+    } ;
+    friend class MapData;
+
+  public:
+    CBattleAction(CMainWin *win, CAction *oldAction);
+    ~CBattleAction();
+
+    virtual void MouseMove(UINT modKeys, CPoint point);
+
+    bool Init();
+
+  protected:
+    void DrawMap(CImage *image, const CRect &amp;rect);
+    void DrawMap(CImage *image);
+
+    void SetCursor(CPoint point);
+    void ClearCursor();
+    void DrawCursor();
+    void AddSprite(CSprite *s);
+    void RemoveSprite(CSprite *s);
+    void RedrawSprite(CSprite *s);
+
+    void UpdateRect(const CRect &amp;rect);
+
+  protected:
+    CDrawImage *ViewImage;
+    CImage      MapImage;
+    CImage      Cursor;
+    CImage      Player;
+    CImage      Enemy;
+    MapData    *_map_data;
+    MapData   **map_data;
+    CSize       MapSize;
+    CRect       MapRect;
+
+    // 地图光标的显示位置
+    CPoint      CursorPos;
+
+    // 选择行动的人物信息
+    CPoint      SelPos;
+    CCharacter *SelChar;
+
+    list&lt;CCharacter&gt; player_list;   // 游戏玩家
+    list&lt;CCharacter&gt; enemy_list;    // 敌人
+    list&lt;CMapSprite&gt; cursor_list;
+    CMapSprite CursorSprite;
+
+    class mapcomp: public binary_function&lt;const CSprite *, const CSprite *, bool&gt; {
+      public:
+        result_type operator()(first_argument_type x, second_argument_type y) const
+        {
+            return *x &lt; *y;
+        }
+    } ;
+    typedef set&lt;CSprite *, mapcomp&gt; mapset;
+
+    mapset sprite;              // 所有sprite的清单
+} ;
+
+inline void CBattleAction::UpdateRect(const CRect &amp;rect)
+{
+    DrawMap(ViewImage, rect);
+    Parent-&gt;InvalidateRect(&amp;rect);
+}
+
+#endif</code></pre>
+<p>MapData类是地图上“1个方格”的信息。地图信息是1个方格信息的数组。</p>
+<pre><code class="C++">    class MapData {
+
+      public:
+        CMapSprite *sprite;     // 地图上的sprite
+        unsigned char type;     // 地图上好像有什么东西?
+        char dist;              // 移动、攻击的距离（操作用）
+    } ;</code></pre>
+<p>这个就是记录着地图上有哪些东西的表格。会出现在地图上的只有人物或障碍物,所以需要有这些信息(这是准备产生地图用的,但现阶段还不会用到)。</p>
+<p>战斗类(Battle.cpp)</p>
+<pre><code class="C++">#include "stdafx.h"
+#include &lt;stdlib.h&gt;
+#include "MainWin.h"
+#include "File.h"
+#include "Misc.h"
+#include "Battle.h"
+
+//
+// 构造函数
+//
+CBattleAction::CBattleAction(CMainWin *win, CAction *oldAction):
+    CAction(win, oldAction), _map_data(0), map_data(0),
+    ViewImage(win-&gt;GetViewImage())
+{
+}
+
+//
+// 析构函数
+//
+CBattleAction::~CBattleAction()
+{
+    delete _map_data;
+    delete map_data;
+}
+
+//
+// 鼠标指标移动时的处理
+//
+void CBattleAction::MouseMove(UINT modKeys, CPoint point)
+{
+    SetCursor(PointToIndex(point));
+}
+
+//
+// 初始化
+//
+bool CBattleAction::Init()
+{
+    // 读入CG数据
+    if (!Cursor.LoadImage("cursor")
+     || !MapImage.LoadImage("map1")
+     || !Player.LoadImage("fighter")
+     || !Enemy.LoadImage("puyo"))
+        return false;
+
+    // 设定sprite
+    CursorSprite.Set(&amp;Cursor, CPoint(0, 0),
+            CSize(MAPGRID_WIDTH, MAPGRID_HEIGHT), CMapSprite::DEPTH_CURSOR);
+
+    CursorPos.x = -1;
+    CursorPos.y = -1;
+    SelPos.x = -1;
+    SelPos.y = -1;
+    SelChar = 0;
+
+    MapSize.cx = MapSize.cy = 10;       // 地图的尺寸大小
+    MapRect.SetRect(0, 0, MapSize.cx, MapSize.cy);
+
+    // 确认map-data的可用空间
+    _map_data = new MapData[MapSize.cx * MapSize.cy];
+    map_data = new MapData *[MapSize.cy];
+
+    for (int i=0; i&lt;MapSize.cy; i++) {
+        map_data[i] = _map_data + i * MapSize.cx;
+    }
+
+    // 把游戏者的人物新增到座标5, 5
+    {
+        map_data[5][5].type = PLAYER;
+        player_list.push_back(CCharacter(&amp;Player, 5, 5, CCharacter::DEPTH_CHAR));
+        CCharacter &amp;s = player_list.back();
+        sprite.insert(&amp;s);
+        s.SetDirection(CCharacter::RIGHT);
+        map_data[5][5].sprite = &amp;s;
+    }
+    // 把敌人的人物新增到座标6, 3
+    {
+        map_data[3][6].type = ENEMY;
+        enemy_list.push_back(CCharacter(&amp;Enemy, 6, 3, CCharacter::DEPTH_CHAR));
+        CCharacter &amp;s = enemy_list.back();
+        sprite.insert(&amp;s);
+        s.SetDirection(CCharacter::RIGHT);
+        map_data[3][6].sprite = &amp;s;
+    }
+    DrawMap(ViewImage);
+
+    Parent-&gt;InvalidateRect(NULL);
+
+    return true;
+}
+
+//
+// 产生地图画面
+//
+void CBattleAction::DrawMap(CImage *image, const CRect &amp;rect)
+{
+    // 若地图有背景，则显示之
+    if (MapImage.IsOK()) {
+        image-&gt;Copy(&amp;MapImage, rect);
+    }
+    // 显示sprite
+    for (mapset::iterator p = sprite.begin(); p != sprite.end(); p++) {
+        (*p)-&gt;Draw(image, rect);
+    }
+}
+
+//
+// 显示地图（整个地图）
+//
+void CBattleAction::DrawMap(CImage *image)
+{
+    DrawMap(image, CRect(0, 0, WindowWidth, WindowHeight));
+}
+
+//
+// 移动地图光标
+//
+void CBattleAction::SetCursor(CPoint point)
+{
+    if (CursorPos != point) {       // 若地图位置有更改
+        ClearCursor();          // 则删除目前显示的光标
+        CursorPos = point;      // 重新设定新的位置
+        DrawCursor();           // 显示新的光标
+    }
+}
+
+//
+// 删除地图光标
+//
+void CBattleAction::ClearCursor()
+{
+    if (MapRect.PtInRect(CursorPos)) {
+        RemoveSprite(&amp;CursorSprite);
+    }
+    CursorPos.x = CursorPos.y = -1;
+}
+
+//
+// 显示地图光标
+//
+void CBattleAction::DrawCursor()
+{
+    if (MapRect.PtInRect(CursorPos)) {
+        CursorSprite.SetMapPoint(CursorPos);
+        AddSprite(&amp;CursorSprite);
+    }
+}
+
+// 重新绘制sprite
+void CBattleAction::RedrawSprite(CSprite *s)
+{
+    CRect   rect;
+    s-&gt;GetRect(&amp;rect);
+    UpdateRect(rect);
+}
+
+// 新增sprite
+void CBattleAction::AddSprite(CSprite *s)
+{
+    sprite.insert(s);
+    RedrawSprite(s);
+}
+
+// 删除sprite
+void CBattleAction::RemoveSprite(CSprite *s)
+{
+    if (sprite.erase(s)) {
+        RedrawSprite(s);
+    }
+}</code></pre>
+<p>因为我们做了sprite管理,所以虽然只显示也大费周章。以下依次说明。</p>
+<p><strong>地图初始化-CBattleAction::Init</strong></p>
+<p>第一是地图的初始化。利用CBattleAction::Init函数进行初始化,这里要做的处理动作包括:</p>
+<ul>
+<li>读入CG数据</li>
+<li>设定sprite</li>
+<li>初始化变量</li>
+<li>产生地图表格</li>
+<li>人物的初始位置</li>
+</ul>
+<p>嗯,看起来还真不少。耐着性子一个个来吧!</p>
+<p>利用“CImage::LoadImage”读入CG数据。CG数据是利用设置文件(config.h)从文件夹“cgdata”读入,LoadImage则是再从该文件夹读入CG数据的函数。</p>
+<p>这里的sprite是光标的sprite。这里所称的光标是指跟着地图方格移动的粗体方格,跟鼠标光标是两回事。这些都准备好了之后,地图上的位置就更清楚可辨了。</p>
+<p>光标的sprite即如图4-11所示,它跟人物一样都要整合成1个CG。这里用到的是最上面的sprite,下面3个则分别用在显示移动范围或攻击范围(关于攻击范围的说明,可参见后面儿章)。</p>
+<p>地图表格是一个二维数组。这里使用了2个数组,一个是有表格实体的一维数组,另一个数组则是用来处理的二维数组。</p>
+<pre><code class="C++">_map_data = new MapData[MapSize.cx * MapSize.cy];
+map_data = new MapData *[MapSize.cy];
+
+for (int i=0; i&lt;MapSize.cy; i++) {
+map_data[i] = _map_data + i * MapSize.cx;
+}</code></pre>
+<p>这样就能当作像<code>map_data[y][x]</code>那样的二维一个二维数组。</p>
+<p>人物位置则是sprite管理同时登录到地图表格、sprite清单和游戏玩家清单三个位置。游戏玩家人物登录到游戏玩家清单的方式为:</p>
+<pre><code class="C++">player_list.push_back(CCharacter(&amp;Player, 5, 5, CCharacter::DEPTH_CHAR));</code></pre>
+<p>新增到sprite清单时,则为:</p>
+<pre><code class="C++">CCharacter &amp;s = player_list.back();
+sprite.insert(&amp;s);</code></pre>
+<p>新增到地图表格时,则为:</p>
+<pre><code class="C++">map_data[5][5].type = PLAYER;
+map_data[5][5].sprite = &amp;s;</code></pre>
+<p><strong>合成、显示CG-CBattleAction::DrawMap</strong></p>
+<p>以上的准备动作完成后,即可利用<code>CBattleAction:DrawMap</code>函数来合成并显示CG。</p>
+<pre><code class="C++">//
+// 产生地图画面
+//
+void CBattleAction::DrawMap(CImage *image, const CRect &amp;rect)
+{
+    // 若地图有背景，则显示之
+    if (MapImage.IsOK()) {
+        image-&gt;Copy(&amp;MapImage, rect);
+    }
+    // 显示sprite
+    for (mapset::iterator p = sprite.begin(); p != sprite.end(); p++) {
+        (*p)-&gt;Draw(image, rect);
+    }
+}</code></pre>
+<p>p合成步骤同前章的说明。</p>
+<p>Sprite的显示顺序是利用STL(StandardTemplateLibrary)的“set”内容去重新排列,看起来好像没有“重新排列”的处理动作,不过其实已经重新洗牌过了。</p>
+<p>从sprite.begin()开始依序合成就是正确的顺序。</p>
+<h5 id="%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6" name="%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6">鼠标事件</h5>
+<p>光只有显示又好像太平淡无奇,就让光标显示出来而且还可以移动吧!</p>
+<p>光标移动的触发在于鼠标移动,所以先要处理鼠标移动的消息。</p>
+<pre><code class="C++">//
+// 鼠标指标移动时的处理
+//
+void CBattleAction::MouseMove(UINT modKeys, CPoint point)
+{
+    SetCursor(PointToIndex(point));
+}</code></pre>
+<p>利用PointTolndex求出地图坐标后,再调用SetCursor。</p>
+<pre><code class="C++">//
+// 移动地图光标
+//
+void CBattleAction::SetCursor(CPoint point)
+{
+    if (CursorPos != point) {       // 若地图位置有更改
+        ClearCursor();          // 则删除目前显示的光标
+        CursorPos = point;      // 重新设定新的位置
+        DrawCursor();           // 显示新的光标
+    }
+}</code></pre>
+<p>SetCursor是个类似注释的处理,请继续看后面的处理。
+删除鼠标光标是利用RemoveSprite去删除光标。</p>
+<pre><code class="C++">//
+// 删除地图光标
+//
+void CBattleAction::ClearCursor()
+{
+    if (MapRect.PtInRect(CursorPos)) {
+        RemoveSprite(&amp;CursorSprite);
+    }
+    CursorPos.x = CursorPos.y = -1;
+}</code></pre>
+<p>显示地图光标则反过来,把sprite新增进去。</p>
+<pre><code class="C++">//
+// 显示地图光标
+//
+void CBattleAction::DrawCursor()
+{
+    if (MapRect.PtInRect(CursorPos)) {
+        CursorSprite.SetMapPoint(CursorPos);
+        AddSprite(&amp;CursorSprite);
+    }
+}</code></pre>
+<p>CleanCursor、DrawCursor都是只有在地图上有光标时才会进行新增或删除。为了让这个判断写起来不要太复杂,所以再做一个MapRect(Crect类),用PtlnRect做判断。</p>
+<p>删除或新增sprite则是先对sprite做新增或删除,再用RedrawSprite重新绘制。</p>
+<p>为什么要把函数分得这么细?主要是因为新增和删除sprite的频率相当频繁。如果只是光标操作,就算写在函数里面也没有那么难懂。</p>
+<h4 id="%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B" name="%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B">执行程序实例</h4>
+<p>OK,执行程序看看吧!程序实例放在随书附赠光盘的“chapter4”文件夹下,程序实例的执行画面如图4-12所示。</p>
+<p>各位可以一边移动鼠标,一边确认光标是否有跟着在动。</p>
+<h5 id="%E5%8A%A8%E4%BD%9C%E9%AA%8C%E8%AF%81" name="%E5%8A%A8%E4%BD%9C%E9%AA%8C%E8%AF%81">动作验证</h5>
+<p>在执行程序时也要做以下的动作验证(本书所提供的程序已做过验证,应该不会有问题)。</p>
+<ul>
+<li>显示的人物是否有在指定位置上?</li>
+<li>光标位置是否正确?</li>
+<li>光标和人物的重叠顺序是否正确?</li>
+</ul>
+<p>人物位置也会影响CG数据的大小和绘制位置,有时要配合修改的不是程序而是CG。
+光标位置在“交界线上”时最容易发生bug,所以可能需要鼠标光标每次移动一点(dot)去测试看看。</p>
+<h5 id="%E6%95%85%E6%84%8F%E7%9A%84bug%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95" name="%E6%95%85%E6%84%8F%E7%9A%84bug%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95">故意的bug也是一种方法</h5>
+<p>以这里的程序实例来说,故意设计一个bug让显示看起来不自然可能是不错的做法。</p>
+<p>举例来说,把CMapSprite的显示顺序中的“DEPTH_CURSOR”和“DEPTHCHAR”对调过来,就会出现光标和人物重叠不自然的问题(如图4-13所示)。</p>
+<p>多看几次不正常的动作示范,对从动作中找出bug原因会很有帮助。正所谓姜是老的辣,在这方面有经验的老手通常胜过空有知识的菜鸟。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html" class="navigation navigation-prev " aria-label="Sprite的显示">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html" class="navigation navigation-next " aria-label="移动的思维方式">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "显示的程序实例",
+            "next": {
+                "title": "移动的思维方式"
+            },
+            "previous": {
+                "title": "Sprite的显示"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

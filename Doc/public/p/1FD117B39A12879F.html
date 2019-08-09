@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>效果 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="事件场景会用到各式各样的特效(画面效果)。画面效果都是些比较花时间的处理,例如让CG逐渐消失。所谓的花时间不是指“处理速度太慢的花时间”,跟CPU处理速度无关,特效就是要做成动作“缓慢”的样子。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter  active " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E6%95%88%E6%9E%9C" name="%E6%95%88%E6%9E%9C">效果</h3>
+<p>事件场景会用到各式各样的特效(画面效果)。</p>
+<p>画面效果都是些比较花时间的处理,例如让CG逐渐消失。所谓的花时间不是指“处理速度太慢的花时间”,跟CPU处理速度无关,特效就是要做成动作“缓慢”的样子。</p>
+<h4 id="%E8%AE%A1%E6%97%B6%E5%99%A8%E5%A4%84%E7%90%86" name="%E8%AE%A1%E6%97%B6%E5%99%A8%E5%A4%84%E7%90%86">计时器处理</h4>
+<p>Windows系统有计时器专门用来执行这种要花时间的处理。不过,Windows计时器的解译能力太低,用起来总觉得碍手碍脚。线程(thread)和多媒体计时器的精度较高,但利用多线程(multi-thread)时,又没有“同步”等的概念,而且可能会出现一些意料之外的bug,所以本书采用较简单的方法。
+请看下面的程序代码说明,里面把非效果的部分都删掉了。</p>
+<p><strong>效果的计时器处理(MainWin.cpp/MainWin.h)</strong></p>
+<pre><code class="C++">class CMainWin: public CWindow {
+    ...
+    protected:
+    CViewEffect *ViewEffect;        // 效果
+    UINT        TimePeriod;         // 计时器的解译能力
+};
+//
+// 构造函数
+//
+CMainWin::CMainWin():
+{
+    //将多媒体计时器的解译能力设为”可设定的最小值”
+    //这会影响计算等待时间的timeGetTime()的解译能力
+
+    TIMECAPS    timeCaps;
+    timeGetDevCaps(&amp;timeCaps, sizeof(timeCaps));    //读出可设定范围
+    TimePeriod = max(timeCaps.wPeriodMin, 1U);
+    timeBeginPeriod(TimePeriod);                    //设定解译能力
+
+    ViewEffect = 0;
+}
+//
+// 析构函数
+//
+CMainWin::~CMainWin()
+{
+    //还原多媒体计时器的解译能力
+    //这是余略手册里注明的“规定”
+    timeEndPeriod(TimePeriod);
+}</code></pre>
+<p>ViewEffect已经初始化为“0”,所以通常不必经过话句就可以调用<code>CAction::IdleAction</code>。</p>
+<p>在有特效时,不会调用<code>CAction::IdleAction</code>。在效果结束前,script是停止执行的,因此不必调用IdleAction。只要效果还在持续进行,就会反复(return)。</p>
+<p>如果ViewEffect不是NULL,就是有特效的意思。就以效果之一的Shake(画面摇晃的效果)为例来解释。</p>
+<p>先建立EffectShake,设定到ViewEffect。这样就可以从下面的Onldle去执行效果。</p>
+<pre><code class="C++">inline void CMainWin::Shake()
+{
+    ViewEffect = new EffectShake(this, &amp;ViewImage);
+}</code></pre>
+<p>特效结束时调用了StopWipe米停止ViewEffect,然后把ViewEffect设为NULL。</p>
+<pre><code class="C++">inline void CMainWin::StopWipe()
+{
+    delete ViewEffect;
+    ViewEffect = 0;
+}</code></pre>
+<p>若ViewEffect为NULL,就没有特效。虽然这里还没说明特效是如何实现的,但光在Onldle里面就可以做特效处理。</p>
+<p>为了简化实现方法,所以有几个特殊限制。一个是当进行效果时,CPU的负荷会达到100%。不过因为效果所使用的时间最多也只有短短儿秒,所以本书把它列在允许范围之内。另一个是由于消息循环里面有效果,因此若消息处理较花时间,效果就可能会变慢。各位可以试着在有特效时使用窗口菜单看看,就可以看到这个现象。有人在使用菜单时,效果的动作就会停下来。</p>
+<h4 id="%E6%93%A6%E5%85%A5" name="%E6%93%A6%E5%85%A5">擦入</h4>
+<p>所谓眼见为凭,那就举一个擦入(WipeIn)来看看效果是什么样子。</p>
+<p>调用擦入(MainWin.h)</p>
+<pre><code class="C++">inline void CMainWin::WipeIn(const CRect &amp;rect)
+{
+    Update(false);
+    ViewEffect = new EffectWipeIn(this, &amp;ViewImage, &amp;MixedImage, rect);
+}</code></pre>
+<p>一开始,Wipeln的效果会使用EffectWipeln。
+把EffectWipeIn的物件个体(instance)设定到ViewEffect,就能定期调用<code>EffectWipeIn::Step</code>。</p>
+<p>擦入的动作(1个步骤)(Effect.cpp)</p>
+<pre><code class="C++">//
+// 特效动作的继承
+//
+// 一次处理一个步骤动作，在等待时可输入
+//
+// 擦入的分解动作
+//
+bool EffectWipeIn::Step()
+{
+    Dst-&gt;WipeIn(Src, EffectRect, EffectCnt);
+    Window-&gt;Repaint(EffectRect);
+
+    if (++EffectCnt &gt;= 8)
+        return false;
+    return true;
+}</code></pre>
+<p>因为Dst是CDrawImage类,所以Dst-&gt;Wipeln会变成CDrawlmage::Wipeln。
+当EffectCnt依序从“0”调用到“7”,CDrawlmage::Wipeln就结束。</p>
+<p>复制画面(Drawlmage.cpp)</p>
+<pre><code class="C++">//
+// 擦入处理的1个步骤
+//
+void CDrawImage::WipeIn(CImage *image, const CRect &amp;rect, int count)
+{
+    int     len = rect.Width() * 3;
+    for (int y=rect.top + count; y&lt;rect.bottom; y+=8) {
+        memcpy(GetBits(rect.left, y), image-&gt;GetBits(rect.left, y), len);
+    }
+}</code></pre>
+<p>擦入是把画面分割成“横帘(blind)”状,一次1/8个画面从Mixedlmage复制到Viewlmage。</p>
+<p>把图形分割成横帘状后再复制,插入的图面如图7-2所示。</p>
+<h4 id="%E6%B8%90%E6%B7%A1" name="%E6%B8%90%E6%B7%A1">渐淡</h4>
+<p>渐淡处理的是以1个像素为处理单位。</p>
+<h5 id="%E5%9B%BE%E5%83%8F%E8%B5%84%E6%96%99%E7%9A%84%E6%B8%90%E6%B7%A1%E5%A4%84%E7%90%86-CDrawlmage%3A%3AFadeCvt" name="%E5%9B%BE%E5%83%8F%E8%B5%84%E6%96%99%E7%9A%84%E6%B8%90%E6%B7%A1%E5%A4%84%E7%90%86-CDrawlmage%3A%3AFadeCvt">图像资料的渐淡处理-CDrawlmage::FadeCvt</h5>
+<p>渐淡是共用的处理,利用“表格”参数做转换。</p>
+<p>表格不是用来计算640×480像素(=307,200像素)的处理,而是先计算出256次的结果再减去计算时间。渐淡处理的计算跟“所有像素”一样,故可利用已经完成计算的表格。</p>
+<h5 id="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%85%A5-CDrawlmage%3A%3AFadeFromBlack" name="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%85%A5-CDrawlmage%3A%3AFadeFromBlack">图像数据的淡入-CDrawlmage::FadeFromBlack</h5>
+<p>像素(pixel)值在“0”时的亮度最低,已经变“黑”,而“255”时的亮度最高。RGB在最高亮度时也会变“白”。</p>
+<p>淡入是从全黑转成显示图像,所以中间过度的图形可以“合成全黑和显示图像”。中间点当然是“全黑50%+图像50%”,而全黑之值为“0”,故可知“0+图像50%=图像50%”。淡入处理的计算方式应为:</p>
+<p><strong>原像素值 × 渐淡数 / 渐淡分割数</strong></p>
+<p>“渐淡数/渐淡分割数”的范围是0~100%,不过“0”一定是“全黑”,可跳过。先计算再调用<code>CDrawlmage::FadeCvt</code>的动作则请参看前面说明。</p>
+<h5 id="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%87%BA%E5%A4%84%E7%90%86-CDrawlmage%3A%3AFadeToBlack" name="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%87%BA%E5%A4%84%E7%90%86-CDrawlmage%3A%3AFadeToBlack">图像数据的淡出处理-CDrawlmage::FadeToBlack</h5>
+<p>跟淡入处理相反,这是在0~100%的范围内变化“全黑”,原则上是“count-15-count”,除了渐淡计数的地方刚好反过来之外,其他计算均同淡入处理。</p>
+<h5 id="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%85%A5%E5%A4%84%E7%90%86%28%E7%99%BD%E2%86%90%29-CDrawlmage%3A%3AFadeFromWhite" name="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%85%A5%E5%A4%84%E7%90%86%28%E7%99%BD%E2%86%90%29-CDrawlmage%3A%3AFadeFromWhite">图像数据的淡入处理(白←)-CDrawlmage::FadeFromWhite</h5>
+<p>跟由全黑而图像的渐淡处理不太一样,由全白而图像的渐淡处理(Whiteln)要多一个“加白”的处理。全白之值为“255”,故公式为“255*(16-count)”,要计算加白的等级。</p>
+<h5 id="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%87%BA%E5%A4%84%E7%90%86%28%E2%86%90%E7%99%BD%29-CDrawlmage%3A%3AFadeToWhite" name="%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%B7%A1%E5%87%BA%E5%A4%84%E7%90%86%28%E2%86%90%E7%99%BD%29-CDrawlmage%3A%3AFadeToWhite">图像数据的淡出处理(←白)-CDrawlmage::FadeToWhite</h5>
+<p>由图像而全白的淡出处理(WhiteOut)同全黑的淡出处理,动作顺序跟淡入相反而已,如图7-3所示。</p>
+<h4 id="%E5%90%88%E6%88%90%E5%9B%BE%E5%BD%A2" name="%E5%90%88%E6%88%90%E5%9B%BE%E5%BD%A2">合成图形</h4>
+<p>前面的处理比较单纯,都是个别做“图形一全黑”或“全黑一图形”,但是应该也要有“原图形一新图形”的特效才对。画面切换的计算相当庞大繁项,做得太简单又嫌不实用。</p>
+<p>利用MMX、3DNow!等的CPU命令当然能发挥比较实用的处理速度,不过VisualC++6.0必须使用“行内汇编程序(in-lineassembler)”,所以这里不能使用CPU命令。</p>
+<p>故跟前面的擦出/入处理一样,利用复制来切换画面。</p>
+<h5 id="%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE-CMainWin%3A%3AMix" name="%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE-CMainWin%3A%3AMix">合成图像数据-CMainWin::Mix</h5>
+<p>把新的图形合成到目前显示的图形上。这是一种缩短计算时间,让它“像是混合在一起”的方法,利用瓷砖化图案进行合成(这是日本早期PC-9801的16色时代最常使用的方法,现在偶尔在256色合成时也会看到),如图7-4所示。</p>
+<p>请见图7-4,图中的O表示原像素、·则为新像素。</p>
+<p>像这样“以像素为单位、把新像素混合进去”,显示出来的画面看起来就很有合成的感觉。各位不妨把书拿远一点看、或是咪眼瞧一瞧就能了解了,合成图形如图7-5所示。</p>
+<p>如果你使用的屏幕较大、分辨率较高,锯齿状的排列可能会看得一清二楚,不过合成所用的时间并不长,就请各位稍微忍耐一下吧!</p>
+<p>BitMask把“4×4”像素的掩码放在同1个数据内,然后利用XMask和YMask取得该像素的掩码。</p>
+<p>掩码的字位位置和坐标关系如下:</p>
+<ul>
+<li>Y:0000111122223333</li>
+<li>X:0123012301230123</li>
+</ul>
+<p>若读到“X=1”、“Y=2”的掩码,则:</p>
+<ul>
+<li>Y:0000111122223333</li>
+<li>X:0123012301230123</li>
+<li>YMask[2]:0000000011110000</li>
+<li>XMask[1]:0100010001000100</li>
+<li>X&amp;Y:0000000001000000</li>
+</ul>
+<p>若该位元的“X&amp;Y”为“1”,即指“Y=2”、“X=1”的字位数据(符合X=1且Y=2的掩码)。</p>
+<p>以此类推,继续复制BitMask的位(X&amp;Y)为“1”的数据(等熟练了之后,就算看到的是16进位也能立即在脑海中做位运算,刚开始先用2进位会比较轻松)。</p>
+<p>这里是利用dot没那么明显的图样,如果想让它醒目一点的话,也可以改用8×8、16×16像素的大小,或者是找圆形、菱形的图样。做法当然都一样,有兴趣的读者不妨试试看。</p>
+<h4 id="%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B" name="%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E4%BE%8B">执行程序实例</h4>
+<p>附赠光盘的“chapter7”文件夹下有script动作说明的“故事大纲”和执行文件,请复制整个文件夹,试着执行看看,程序实例的执行画面如图7-6所示。</p>
+<p>因为是参考实例的关系,所以这里的故事大纲只有事件部分,没有战斗场面。照这样当作维形再加强script的功能,应该就能设计出很棒的冒险型游戏。</p>
+<p>光从事件部分来看,其实跟冒险型游戏没有太大的差别。由于目前还是把“事件”和“战斗”分两边做,因此像第6章只做战斗的部分,本章只执行故事大纲这样做的话也没发生什么问题。但是等到故事大纲跟战斗两者组合起来的时候,光应付问题就疲于奔命了(反正已经有battle命令,应该还是会有基本动作)。</p>
+<p>下一章将进一步把两大功能完整、紧密的结合起来,正式运行整个程序。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html" class="navigation navigation-prev " aria-label="命令的执行处理">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html" class="navigation navigation-next " aria-label="参数">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "效果",
+            "next": {
+                "title": "参数"
+            },
+            "previous": {
+                "title": "命令的执行处理"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

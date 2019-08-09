@@ -1,0 +1,647 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>播放音乐 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="播放音乐是利用Windows的功能(多媒体功能)。Windows除了简单好用的“MCI”之外,还有可直接控制多媒体装置的“低阶服务(lowlevelservice)”,另外DirectX也有播放音乐和音效的功能,这三种方法都可行。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter  active " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E6%92%AD%E6%94%BE%E9%9F%B3%E4%B9%90" name="%E6%92%AD%E6%94%BE%E9%9F%B3%E4%B9%90">播放音乐</h3>
+<p>播放音乐是利用Windows的功能(多媒体功能)。</p>
+<p>Windows除了简单好用的“MCI”之外,还有可直接控制多媒体装置的“低阶服务(low level service)”,另外DirectX也有播放音乐和音效的功能,这三种方法都可行。</p>
+<h4 id="MCI%E7%9A%84%E4%BD%BF%E7%94%A8" name="MCI%E7%9A%84%E4%BD%BF%E7%94%A8">MCI的使用</h4>
+<p>本书是利用最简单的MCI,MCI和CD-DA两者的处理程序相同。</p>
+<p>播放音乐(Mci.h)</p>
+<pre><code class="C++">#ifndef __MUSIC_H__
+#define __MUSIC_H__
+
+class CWindow;
+
+//
+//  MCI类别
+//
+class CMci  {
+  public:
+    CMci(const char *_device, const char *_errTitle);
+    ~CMci();
+
+    virtual bool Open(CWindow *win);
+    virtual bool Close();
+
+    virtual bool Play(int no);
+    virtual bool Play(const char *name);
+    virtual bool Replay();
+    virtual bool Stop();
+
+    DWORD GetId() const { return Id; }
+
+  protected:
+    void MciErrorMessageBox(DWORD err);
+    bool MciOpen(const char *command);
+    bool MciOpen();
+    bool MciOpen(const char *dev, const char *element);
+    bool MciClose();
+    bool MciPlay(const char *request);
+    bool MciStop();
+    bool MciSet(const char *request);
+    bool MciStatus(const char *request, char *result, int resultlen);
+
+  protected:
+    CWindow *Window;
+    const char *device;
+    const char *errTitle;
+    DWORD   Id;
+} ;
+
+// inline 成员函数
+
+inline CMci::CMci(const char *_device, const char *_errTitle)
+    : Id(0), device(_device), errTitle(_errTitle)
+{
+}
+
+inline CMci::~CMci()
+{
+    Close();
+}
+
+//
+//  CD音讯类别
+//
+class CDAudio: public CMci {
+  public:
+    CDAudio(): CMci("cdaudio", "CD音讯类别"), IsOpen(false), PlayTrack(0) {}
+
+    virtual bool Open(CWindow *win);
+    virtual bool Close();
+
+    virtual bool Play(const char *name);
+    virtual bool Play(int no);
+    virtual bool Replay();
+    virtual bool Stop();
+
+  protected:
+    int MediaChk();
+
+  protected:
+    int     PlayTrack;
+    bool    IsOpen;
+} ;
+
+//
+//  Wave类别
+//
+class WaveOut: public CMci {
+  public:
+    WaveOut(): CMci("sound", "Wave音讯error"), playing(false) {}
+
+    virtual bool Play(const char *name);
+    virtual bool Play(int no);
+    virtual bool Stop();
+
+  protected:
+    bool    playing;
+} ;
+
+#endif</code></pre>
+<p>播放音乐(Mci.cpp)</p>
+<pre><code class="C++">#include "stdafx.h"
+#include "Mci.h"
+#include "Window.h"
+#include "Misc.h"
+//
+// 开启
+//
+bool CMci::Open(CWindow *window)
+{
+    Window = window;
+
+    return true;
+}
+//
+// 关闭
+//
+bool CMci::Close()
+{
+    return true;
+}
+//
+// 播放（乐曲号码）
+//
+bool CMci::Play(int no)
+{
+    return false;
+}
+//
+// 播放（档名）
+//
+bool CMci::Play(const char *name)
+{
+    return false;
+}
+//
+// 重新播放
+//
+bool CMci::Replay()
+{
+    return false;
+}
+//
+// 停止
+//
+bool CMci::Stop()
+{
+    return false;
+}
+//
+// 显示错误事件
+//
+void CMci::MciErrorMessageBox(DWORD err)
+{
+    char    errstr[256];
+    mciGetErrorString(err, errstr, sizeof(errstr));
+    Window-&gt;MessageBox(errstr, errTitle);
+}
+//
+// 发行MCI的open命令
+//
+bool CMci::MciOpen(const char *command)
+{
+    DWORD err;
+    char    result[128];
+    if ((err = mciSendString(command, result, sizeof(result), 0)) != 0) {
+        MciErrorMessageBox(err);
+        return false;
+    }
+
+    char *p;
+    Id = strtol(result, &amp;p, 0);
+
+    return true;
+}
+//
+// 发行MCI的open命令
+//
+bool CMci::MciOpen()
+{
+    char    command[128];
+    sprintf(command, "open %s wait", device);
+    return MciOpen(command);
+}
+//
+// 发行MCI的open命令
+//
+bool CMci::MciOpen(const char *dev, const char *element)
+{
+    char    command[_MAX_PATH + 128];
+    sprintf(command, "open \"%s!%s\" alias %s wait", dev, element, device);
+    return MciOpen(command);
+}
+//
+// 发行MCI的close命令
+//
+bool CMci::MciClose()
+{
+    Id = 0;
+
+    char    command[128];
+    sprintf(command, "close %s wait", device);
+    if (mciSendString(command, NULL, 0, 0) != 0)
+        return false;
+    return true;
+}
+//
+// 发行MCI的play命令
+//
+bool CMci::MciPlay(const char *request)
+{
+    char    command[256];
+    sprintf(command, "play %s %s notify", device, request);
+
+    DWORD   err;
+    if ((err = mciSendString(command, NULL, 0, *Window)) != 0) {
+        MciErrorMessageBox(err);
+        return false;
+    }
+    return true;
+}
+//
+// 发行MCI的stop命令
+//
+bool CMci::MciStop()
+{
+    char    command[128];
+    sprintf(command, "stop %s wait", device);
+    if (mciSendString(command, NULL, 0, 0) != 0)
+        return false;
+    return true;
+}
+//
+// 发行MCI的set命令
+//
+bool CMci::MciSet(const char *request)
+{
+    char    command[128];
+    sprintf(command, "set %s %s wait", device, request);
+
+    DWORD   err;
+    if ((err = mciSendString(command, NULL, 0, 0)) != 0) {
+        MciErrorMessageBox(err);
+        return false;
+    }
+    return true;
+}
+//
+// 发行MCI的status命令
+//
+bool CMci::MciStatus(const char *request, char *result, int resultlen)
+{
+    char    command[128];
+    sprintf(command, "status %s %s wait", device, request);
+
+    DWORD err;
+    if ((err = mciSendString(command, result, resultlen, 0)) != 0) {
+        MciErrorMessageBox(err);
+        return false;
+    }
+    return true;
+}
+//
+// 光盘机里是否有媒体？
+//
+int CDAudio::MediaChk()
+{
+    char    result[128];
+    if (!MciStatus("media present", result, sizeof(result)))
+        return -1;
+    if (stricmp(result, "true") == 0)
+        return 0;
+    return 1;
+}
+//
+// 开启光盘机
+//
+bool CDAudio::Open(CWindow *win)
+{
+    CMci::Open(win);
+
+    if (!MciOpen())
+        return false;
+
+    if (!MciSet("time format tmsf")) {
+        MciClose();
+        return false;
+    }
+
+    bool chkOk = false;
+
+    do {
+        switch (MediaChk()) {
+          case -1:
+            MciClose();
+            return false;
+
+          case 0:
+            chkOk = true;
+            break;
+
+          default:
+#ifdef  notdef      //若光盘机中没有CD而出现错误时 #ifdef -&gt; #ifndef
+                    // 娫堘偄側偄偐丄僨乕僞僩?僢僋偵乽幆暿梡僼傽僀?乿傪擖傟偰偍偄偰
+                    // 偦傟傪僠僃僢僋偡傞偲椙偄偱偟傚偆
+            if (Window-&gt;MessageBox(ApplicationTitle "傪俠俢僪?僀僽偵擖傟偰偔偩偝偄丅",
+                ApplicationTitle, MB_RETRYCANCEL) == IDCANCEL) {
+                MciClose();
+                return false;
+            }
+            break;
+#else
+            MciClose();
+            return false;
+#endif
+        }
+    } while (!chkOk) ;
+
+    IsOpen = true;
+
+    return true;
+}
+//
+// 关闭光盘机
+//
+bool CDAudio::Close()
+{
+    if (IsOpen) {
+        Stop();
+        MciClose();
+    }
+    IsOpen = false;
+    return true;
+}
+//
+// 开始播放CD（只播放指定乐曲）
+//
+bool CDAudio::Play(int no)
+{
+    if (!IsOpen)
+        return false;
+
+    Stop();
+    PlayTrack = no;
+
+    no++;       // 这里是以MixedCD为基准，所以播放1首乐曲
+
+    // 检查乐曲长度
+    // 设定只播放此范围
+
+    char    request[64];
+    sprintf(request, "length track %d", no);
+
+    char    result[128];
+    if (!MciStatus(request, result, sizeof(result)))
+        return false;
+
+    sprintf(request, "from %d:00:00:00 to %d:%s", no, no, result);
+    if (!MciPlay(request))
+        return false;
+    return true;
+}
+//
+// 开始播放CD（若设定档名一定会error）
+//
+bool CDAudio::Play(const char *)
+{
+    return false;
+}
+//
+// 重新播放CD
+//
+bool CDAudio::Replay()
+{
+    return Play(PlayTrack);
+}
+//
+// 停止播放CD
+//
+bool CDAudio::Stop()
+{
+    if (!IsOpen)
+        return false;
+
+    if (PlayTrack &gt; 0) {
+        MciStop();
+        PlayTrack = 0;
+    }
+    return true;
+}
+//
+// 播放Wave
+//
+bool WaveOut::Play(const char *name)
+{
+    Stop();
+
+    char    fullpath[_MAX_PATH];
+    FullPath(fullpath, name);
+
+    if (!MciOpen("waveaudio", fullpath))
+        return false;
+
+    if (!MciPlay(""))
+        return false;
+
+    playing = true;
+
+    return true;
+}
+//
+// 播放Wave（非实作）
+//
+bool WaveOut::Play(int)
+{
+    return false;
+}
+//
+// 停止播放Wave
+//
+bool WaveOut::Stop()
+{
+    if (playing) {
+        playing = false;
+        MciStop();
+        MciClose();
+    }
+    return true;
+}</code></pre>
+<p>上面是跟播放音乐有关的类,当然还要说明这些成员函数的功能作用!</p>
+<p><strong>启动MCI装置-CMci::Open</strong></p>
+<p>启动MCI装置。播放结束时,MCI就会传送消息给窗口,接收该窗口并存储到参数。</p>
+<p><strong>关闭MCI装置-CMci::Close</strong></p>
+<p>关闭启动中的MCI装置。</p>
+<p><strong>开始播放-CMci::Play</strong></p>
+<p>开始播放指定的乐曲(或文件)</p>
+<p><strong>重新开始播放-CMci::Replay</strong></p>
+<p>如欲不停播放乐曲时,可使用此功能。重新播放以Play播放的乐曲。</p>
+<p><strong>停止播放-CMci::Stop</strong></p>
+<p>停止以Play或Replay播放中的乐曲。</p>
+<p><strong>在消息方块显示MCIerror-CMci::MciErrorMessageBox</strong></p>
+<p>若操作MCI时发生error,则以字符串表示error。发生MCIerror时,可使用mciGetErrorString取得错误消息。</p>
+<p><strong>发送MCI的open命令-CMci::MciOpen</strong></p>
+<p><strong>发送MCI的close命令-CMci::MciClose</strong></p>
+<p><strong>发送MCI的play命令-CMci::MciPlay</strong></p>
+<p><strong>发送MCI的stop命令-CMci::MciStop</strong></p>
+<p><strong>发送MCI的set命令-CMci::MciSet</strong></p>
+<p><strong>发送MCI的status命令-CMci::MciStatus</strong></p>
+<p>组合mciSendString需要的命令,再调用mciSendString。</p>
+<p><strong>光驱里是否有媒体?-CDAudio::MediaChk</strong></p>
+<p>使用MCI的status命令,检查光驱里是否有媒体。</p>
+<p><strong>打开光驱-CDAudio::Open</strong></p>
+<p>打开光驱。若无可用媒体,则error。</p>
+<p><strong>关闭光驱-CDAudio::Close</strong></p>
+<p>关闭光驱。</p>
+<p><strong>播放CD1首乐曲-CDAudio::Play</strong></p>
+<p>取得指定乐曲的“长度”后,播放指定范围。</p>
+<p><strong>重新播放CD-CDAudio::Replay</strong></p>
+<p>重新播放“play”命令中所设定的乐曲。</p>
+<p><strong>停止播放CD-CDAudio::Stop</strong></p>
+<p>停止播放。</p>
+<p><strong>播放Wave-WaveOut::Play</strong></p>
+<p>播放指定的Wave文件。</p>
+<p><strong>停止播放Wave-WaveOut::Stop</strong></p>
+<p>停止播放Wave文件。</p>
+<p>MCI利用把数值存储在结构体后再调用mciSendCommand、或者以命令字符串调用mciSendString的方式,就能进行各种操作。命令字符串是人一看就懂的字符串,如“play”、“stop”等,不过组合字符串有点麻烦,再加上还要多费工夫去检查字符串,所以预先把这些汇总、隐藏起来在某个地方可能比较好。</p>
+<h4 id="%E8%BF%BD%E5%8A%A0%E6%A0%87%E5%A4%B4%E5%92%8C%E5%87%BD%E6%95%B0%E5%BA%93" name="%E8%BF%BD%E5%8A%A0%E6%A0%87%E5%A4%B4%E5%92%8C%E5%87%BD%E6%95%B0%E5%BA%93">追加标头和函数库</h4>
+<p>Windows.h里面并没有多媒体相关功能,故需另外追加标头部分。还有,标准的操作环境也没有连结到函数库,这部分也不能忘记。VisualC十十可以直接在程序源代码设定“欲连结的函数库”,故在StdAfx.h加入指定读入标头和函数库两部分。</p>
+<pre><code class="C++">#include &lt;MMSystem.h&gt;
+#pragma comment(lib, "winmm.lib")</code></pre>
+<p>这边是利用CD-DA播放音乐,Wave要用来做音效,所以BGM就不能使用(如果想让BGM也能使用Wave,可利用DirectX)。</p>
+<p>MCI也可以用MIDI(此时,Wave会比CD-DA更近)。Windows的标准操作环境就有MID1软件,因此利用MID1的门槛并不高,但若利用MID1软件,硬件配置不够高的计算机可能会运行得更慢。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html" class="navigation navigation-prev " aria-label="结合战斗部分和故事大纳">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html" class="navigation navigation-next " aria-label="存储/装入">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "播放音乐",
+            "next": {
+                "title": "存储/装入"
+            },
+            "previous": {
+                "title": "结合战斗部分和故事大纳"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>CPU端人物的攻击 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="CPU端人物在做攻击前,必须先决定移动位置。当然要先做判断可移动范围之类的处理,才能决定移动位置。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter  active " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="CPU%E7%AB%AF%E4%BA%BA%E7%89%A9%E7%9A%84%E6%94%BB%E5%87%BB" name="CPU%E7%AB%AF%E4%BA%BA%E7%89%A9%E7%9A%84%E6%94%BB%E5%87%BB">CPU端人物的攻击</h3>
+<p>CPU端人物在做攻击前,必须先决定移动位置。当然要先做判断可移动范围之类的处理,才能决定移动位置。</p>
+<h4 id="%E6%90%9C%E5%AF%BB%E5%80%99%E9%80%89%E7%9A%84%E7%A7%BB%E5%8A%A8%E4%BD%8D%E7%BD%AE" name="%E6%90%9C%E5%AF%BB%E5%80%99%E9%80%89%E7%9A%84%E7%A7%BB%E5%8A%A8%E4%BD%8D%E7%BD%AE">搜寻候选的移动位置</h4>
+<p>在“可移动的范围内”、且“可攻击的位置”就能当作CPU端的移动位置。如果是先从所有可移动位置求出攻击范围,再搜寻在该范围内是否有目标的话,似乎要花很多时间。</p>
+<p>如图6-8所示,可先从游戏玩家(A)搜寻攻击范围、从CPU端(B)搜寻移动范围,只要找到移动范围和攻击范围两者重叠的方格,就是候选移动位置。</p>
+<h4 id="%E5%BF%AB%E5%AE%9A%E7%A7%BB%E5%8A%A8%E4%BD%8D%E7%BD%AE" name="%E5%BF%AB%E5%AE%9A%E7%A7%BB%E5%8A%A8%E4%BD%8D%E7%BD%AE">快定移动位置</h4>
+<p>如果候选的移动位置不只1个,就得做选择了。给所有候选位置一个“得分”,而以分数最高(或最低)的候选位置作为真正的移动位置。</p>
+<p>这里的评分标准如下:</p>
+<ul>
+<li>①移动距离越少越好</li>
+<li>②攻击距离越远越好</li>
+<li>③对方的HP越小越好</li>
+<li>④对方的攻击力越高越好</li>
+</ul>
+<p>不是标明优先顺序去做比较,而是分项“加权”计分,各项加总后之值才是总得分。</p>
+<p>如果在“加权”的部分动点手脚、弄个小随机数,动作就会出现“刚慎自用”或“判断错误”的影响因素。但是若游戏程序才刚开始动工就急着放有随机数的处理,程序测试会比较难做,所以随机数处理应该等到最后面再加进去。毕竟如果程序是因为随机数而发生不正常动作行为的话,就更难抓出那些人为的不正常动作了。</p>
+<p>由于这里暂时不使用随机数,因此CPU端的动作会千篇一律。程序除错时想产生“从头到尾完全同样的动作”时,只要忍住不使用随机数,而且游戏玩家的动作也固定不变,CPU端的动作当然就会完全一样。</p>
+<p>以上述方式求出的最高得分就是最佳动作。别忘了,这里的先决条件是“假设计算值为最佳”。</p>
+<p>如果没有任何候选的移动位置,当然就不会有得分,遇到这种特殊情形时要用其他方法决定移动位置。此时,由于人物的可移动位置都是无法发动攻击,因此只需考虑移动的部分。除了城堡等的特殊情形之外,只要往最近的敌人位置移动即可。</p>
+<h4 id="%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F%E7%BB%9F%E5%AE%B6%E6%89%80%E9%80%89%E7%9A%84%E4%BA%BA%E7%89%A9" name="%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F%E7%BB%9F%E5%AE%B6%E6%89%80%E9%80%89%E7%9A%84%E4%BA%BA%E7%89%A9">攻击游戏统家所选的人物</h4>
+<p>决定移动位置时就已经决定攻击对象,因此直接攻击该目标即可。</p>
+<p>先用FindAttack函数显示出“攻击范围”。虽然CPU已经很清楚攻击范围和攻击对象,这个处理其实是要让游戏玩家知道电脑会采取什么行动。</p>
+<p>攻击处理同游戏玩家攻击时的处理。如果有把Attack函数写成游戏玩家或CPU均可使用,直接调用就可以了。</p>
+<p>OK,我们把CPU端的攻击全部整理起来。</p>
+<p>CPU端人物的攻击(Battle.cpp)</p>
+<pre><code class="C++">// 敌军人物的移动
+void CBattleAction::MoveEnemy()
+{
+    TRACE("[%s]的移动\n", enemy_ptr-&gt;status.name);
+    enemy_ptr-&gt;move_done = true;            // 已移动
+    attack_target = 0;                      // 清除攻击对象
+
+    CPoint mp = enemy_ptr-&gt;GetMapPoint();
+    FindDist(mp.x, mp.y, enemy_ptr-&gt;status.move_dist);
+    Parent-&gt;UpdateWindow();
+
+    // 为了让后面的处理好做，让目前位置也包含到移动范围之内
+    map_data[mp.y][mp.x].type |= MOVEDIST;
+
+    int eval_point = INT_MIN;           // 评分点数
+    CPoint move = mp;                   // 移动位置
+
+    for (list&lt;CCharacter&gt;::iterator p = player_list.begin(); p != player_list.end(); p++) {
+        CPoint pos = p-&gt;GetMapPoint();
+        FindAttackCalc(pos.x, pos.y, enemy_ptr-&gt;status.attack_dist);
+        map_data[pos.y][pos.x].type &amp;= ~ATTACKDIST;
+
+        CRect rect(pos.x, pos.y, pos.x + 1, pos.y + 1);
+        rect.InflateRect(enemy_ptr-&gt;status.attack_dist, enemy_ptr-&gt;status.attack_dist);
+        rect &amp;= MapRect;
+
+        for (int y=rect.top; y&lt;rect.bottom; y++) {
+            for (int x=rect.left; x&lt;rect.right; x++) {
+                // 判断是否有可移动、可攻击的位置
+                if (map_data[y][x].ChkType(ATTACKDIST | MOVEDIST)) {
+                    // 评分标准为：
+                    // 1. 移动距离越少越好
+                    // 2. 攻击距离越远越好
+                    // 3. 对方的HP越小越好
+                    // 4. 对方的攻击力越高越好
+                    // 依此原则计分
+                    int point = (enemy_ptr-&gt;status.attack_dist
+                                            - map_data[y][x].attack_dist) * 20
+                                            + map_data[y][x].move_dist * 50
+                                            - p-&gt;status.hit_point * 5
+                                            + p-&gt;status.attack_power;
+
+                    // 若得分较高，则更新
+                    if (eval_point &lt; point) {
+                        eval_point = point; // 新的得分
+                        attack_target = &amp;*p;    // 设定攻击目标
+                        move.x = x;     // 新的移动位置
+                        move.y = y;
+                    }
+                }
+                // 清除作业区域
+                map_data[y][x].attack_dist = 0;
+                map_data[y][x].type &amp;= ~ATTACKDIST;
+            }
+        }
+    }
+
+    if (attack_target == 0) {       // 无法移动到可攻击的位置
+        CRect rect(mp.x, mp.y, mp.x + 1, mp.y + 1);
+        rect.InflateRect(enemy_ptr-&gt;status.move_dist, enemy_ptr-&gt;status.move_dist);
+        rect &amp;= MapRect;
+
+        eval_point = INT_MAX;       // 清除得分
+
+        for (list&lt;CCharacter&gt;::iterator p = player_list.begin();
+                        p != player_list.end(); p++) {
+            CPoint pos = p-&gt;GetMapPoint();
+            for (int y=rect.top; y&lt;rect.bottom; y++) {
+                for (int x=rect.left; x&lt;rect.right; x++) {
+                    if (map_data[y][x].ChkType(MOVEDIST)) {
+                        int dist = abs(x - pos.x) + abs(y - pos.y);
+                        if (eval_point &gt; dist) {
+                            eval_point = dist;
+                            move.x = x;
+                            move.y = y;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // 清除目前位置中的移动范围旗标
+    map_data[mp.y][mp.x].type &amp;= ~MOVEDIST;
+
+    ::Sleep(70);                // 等待直到出现移动范围的显示
+
+    if (mp == move) {           // 不移动
+        ClearDistCursor();
+    }
+    else {
+        MovePlayer(&amp;*enemy_ptr, move);
+    }
+}
+
+// 敌军人物的攻击
+void CBattleAction::AttackEnemy()
+{
+    TRACE("[%s]的攻击\n", enemy_ptr-&gt;status.name);
+    enemy_ptr-&gt;attack_done = true;  // 已攻击
+
+    if (attack_target) {
+        CPoint mp = enemy_ptr-&gt;GetMapPoint();
+        FindAttack(mp.x, mp.y, enemy_ptr-&gt;status.attack_dist);
+        Parent-&gt;UpdateWindow();
+        Sleep(100);
+        Attack(&amp;*enemy_ptr, attack_target, false);
+    }
+}</code></pre>
+<p>源代码的内容就是前面说明过的所有步骤,但有些部分可能看起来比较陌生。其实没有说明的部分只是为了方便程序处理而加入的,跟主要的处理没有关系。可是这些仍然属于必要的程序代码部分,因此特别如下略做说明:</p>
+<h5 id="%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A" name="%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A">程序代码解释</h5>
+<p>先调用出<code>CBattleAction::MoveEnemy</code>的<code>FindDist</code>之后,继续:</p>
+<pre><code class="C++">map_data[mp.y][mp.x].type |= MOVEDIST;</code></pre>
+<p>接着,在调用<code>ClearDistCursor</code>之前,先如下清除标记。</p>
+<pre><code class="C++">map_data[mp.y][mp.x].type &amp;= ~MOVEDIST;</code></pre>
+<p>这个部分是跟目前位置有关的处理。FindDist先求出“移动范围”,但目前位置并不包括在内。不过,由于“不移动”也包含在候补的移动位置之内,所以目前位置也要设定标记做为“移动范围”。</p>
+<p><code>ClearDistCursor</code>跟FindDist配成一对,而此标记并没有被ClearDistCursor清除掉,因此必须动手清除。</p>
+<p>另外,评分的计算公式如下:</p>
+<pre><code class="C++">int point = (enemy_ptr-&gt;status.attack_dist
+    - map_data[y][x].attack_dist) * 20
+    + map_data[y][x].move_dist * 50
+    - p-&gt;status.hit_point * 5
+    + p-&gt;status.attack_power;</code></pre>
+<p>这个公式是直接把常数抓进来用,一般这样的编码方式会被批评为“差劲”或“不入流”,但是游戏设计究竟有没有设计得恰到好处,有时“不试看看也很难下定论”,而且不只是数值,有些计算公式还得配合运算法则做修改。即使程序写得再不入流,只要以后容易修改的话,不也算是一大优点吗?</p>
+<h4 id="%E9%A9%B1%E5%8A%A8CPU%E7%AB%AF" name="%E9%A9%B1%E5%8A%A8CPU%E7%AB%AF">驱动CPU端</h4>
+<p>游戏玩家端的动作是靠用户输入驱动,但CPU端的动作必须能自行驱动。</p>
+<p>Windows系统属于消息驱动,所以只要给它一个消息就能动。你也可以利用计时器让它固定产生消息,不过这里并不是因为等了一段时间才要进行处理,因此采用非计时器的做法。</p>
+<h5 id="%E7%AD%89%E5%BE%85%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86" name="%E7%AD%89%E5%BE%85%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86">等待消息的处理</h5>
+<p>为什么系统必须要有消息才能驱动?理由是没有消息时,消息循环所使用的GetMessagc函数会进入“等待”状态。只要解除这个等待并返回“无消息”,即使没有消息也能继续进行处理。</p>
+<p>原本“等待”状态是为了怕没有动作时会让CPU负担过重,而影响到其他流程,因此程序不能写成无条件不等待。这个部分就写在<code>CWinApp:Run</code>函数里。</p>
+<p>等待消息的处理</p>
+<pre><code class="C++">for (;;) {
+    if (::PeekMessage(&amp;msgCur, NULL, 0, 0, PM_NOREMOVE)) {
+        if (!::GetMessage(&amp;msgCur, NULL, 0, 0))
+            return msgCur.wParam;
+
+        if (!PreTranslateMessage(&amp;msgCur)) {
+            ::TranslateMessage(&amp;msgCur);
+            ::DispatchMessage(&amp;msgCur);
+        }
+        idle = true;
+        count = 0;
+    }
+    else if (idle) {
+        if (!OnIdle(count++))
+            idle = false;
+    }
+    else {
+        ::WaitMessage();
+    }
+}</code></pre>
+<p>当有消息过来时,idle会变成true;没有消息时,则调用Onldle。若Onldle返回false,则idle会变成false,没有消息时则以WaitMessage等候直到有消息过来。如此一来,就算没有消息时也可以进行处理,而没有处理时则等待消息的动作可以降低CPU的负担。</p>
+<p>从这里所调用的OnIdle函数,利用以下路径再调用CBattleAction::IdleAction。</p>
+<pre><code class="folw">CwinApp::Onldle --&gt; CMainWin::Onldle --&gt; CBattleAction::IdleAction</code></pre>
+<p>在<code>CWinApp:Onldle</code>当中,先调用<code>CMainWin;:Onldle</code>,再调用<code>CMainWin::Onldle</code>的<code>CBattleAction:IdleAction</code>。而<code>CBattleAction:IdleAction</code>则是调用CPU端人物的移动(CBattleAction::MoveEnemy)和攻击(CBattleAction::AttackEnemy)之后,再执行移动或攻击。</p>
+<p>调用ldleAction函数(1)(Application.cpp)</p>
+<pre><code class="C++">//
+// IDLE处理
+//
+BOOL CWinApp::OnIdle(long count)
+{
+    return MainWnd &amp;&amp; MainWnd-&gt;OnIdle(count);
+}</code></pre>
+<p>调用ldleAction函数(2)(MainWin.cpp)</p>
+<pre><code class="C++">//
+// IDLE的处理
+//
+BOOL CMainWin::OnIdle(long count)
+{
+    return Action-&gt;IdleAction();
+}</code></pre>
+<p>CPU端人物的动作(Battle.cpp)</p>
+<pre><code class="C++">//
+// IDLE处理
+//
+BOOL CBattleAction::IdleAction()
+{
+    if (turn == ENEMY_TURN) {
+        if (status != STATUS_ANIME) {
+            if (!enemy_ptr-&gt;move_done) {        // 若尚未移动，则移动
+                MoveEnemy();
+            }
+            else if (!enemy_ptr-&gt;attack_done) { // 若尚未攻击，则攻击
+                AttackEnemy();
+            }
+            else {
+                if (status == STATUS_BATTLE_END) {  // 结束
+                    return FALSE;
+                }
+                else if (++enemy_ptr == enemy_list.end()) {
+                    ChangeTurn(PLAYER_TURN);
+                }
+            }
+        }
+        return TRUE;
+    }
+    return FALSE;
+}</code></pre>
+<p>当移动结束时,movedone变为true,当攻击结束时,attackdone变为true,因此若两者为false,则表示尚未开始行动。</p>
+<p>根据此值,即可采取“若尚未移动,则移动”、“若尚未攻击,则攻击”的动作。而当enemy_ptr前进1个位置,已经到达enemy_list.end()(即enemy_list已经全部搜寻完毕),则敌方顺序(yourturn)已经轮完,切换为游戏玩家。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html" class="navigation navigation-prev " aria-label="CPU端的思维模式">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html" class="navigation navigation-next " aria-label="执行程序实例">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "CPU端人物的攻击",
+            "next": {
+                "title": "执行程序实例"
+            },
+            "previous": {
+                "title": "CPU端的思维模式"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

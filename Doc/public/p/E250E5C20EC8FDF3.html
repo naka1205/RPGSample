@@ -1,0 +1,988 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>开启窗口 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="绝大多数游戏都雷同的处理是“读入CG,重叠放在适当的位置并显示到画面上”。我们就先从这里开始讲起。设计一个启动显示CG的窗口后,读入并显示CG的功能。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter  active " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E5%BC%80%E5%90%AF%E7%AA%97%E5%8F%A3" name="%E5%BC%80%E5%90%AF%E7%AA%97%E5%8F%A3">开启窗口</h3>
+<p>绝大多数游戏都雷同的处理是“读入CG,重叠放在适当的位置并显示到画面上”。我们就先从这里开始讲起。</p>
+<p>设计一个启动显示CG的窗口后,读入并显示CG的功能。</p>
+<h4 id="%E7%BB%93%E5%90%88%E4%B8%A4%E7%AB%AF%E7%9A%84%E6%A1%A5%E6%A2%81%E9%83%A8%E5%88%86" name="%E7%BB%93%E5%90%88%E4%B8%A4%E7%AB%AF%E7%9A%84%E6%A1%A5%E6%A2%81%E9%83%A8%E5%88%86">结合两端的桥梁部分</h4>
+<p>Windows程序设计的相关入门书籍通常偏重于商用软件或实用软件设计的客户端,所以介绍也以字符串显示、输入、对话窗口显示等为主。而游戏(尤其是2D)的程序设计则着重在CG显示。更何况基本上,Windows标准控件(如按钮、下拉式列表框(combobox)等)又是跟游戏画面设计不同的3D设计,因此即使要设计一样的功能,通常还是得自己动手“自力更生”。</p>
+<p>C++跟Win32AP1两边的特质个性不是很“麻烦”,所以需要有“类函数库(classlibrary)”居间协调。VisualC++有个“MFC(MicrosoftFoundationClass)”的类函数库,不过它本身规模很大,主要供前述的商用软件或实用软件使用,所以有些地方不太适合应用在游戏设计方面。因此,我们干脆设计个结合C++和Win32API两边的桥梁,反而会比较好用。</p>
+<p>对了,本书所使用的程序设计环境是Visual C++。</p>
+<h4 id="Windows%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%B5%81%E7%A8%8B" name="Windows%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%B5%81%E7%A8%8B">Windows程序的流程</h4>
+<p>请先思考一下Windows程序的基本流程。不管你是要用C语言写、还是用C++的类来写,程序流程都一样。</p>
+<p>Windows程序的基本流程如下:</p>
+<ul>
+<li>从WinMain开始</li>
+<li>登录注册窗口类(RegisterClass)</li>
+<li>建立窗口(CreateWindow)</li>
+<li>运行消息循环(GetMessage~DispatchMessage)</li>
+</ul>
+<p>到这里为止是Windows程序的“固定规则”。应用软件间的差异就在建立的窗口标题、数量和动作等,所以无论是哪一种游戏(应用软件)到这个阶段为止的程序都大致相同。</p>
+<p>上面的基本部分一开始就要先写好,然后再适当加入游戏本身特有的处理动作。</p>
+<h4 id="%E5%9F%BA%E6%9C%AC%E7%B1%BB" name="%E5%9F%BA%E6%9C%AC%E7%B1%BB">基本类</h4>
+<p>第一个处理动作就是设计Application类,这是在对上述处理做程序coding时,写在“WinMain”里面的内容,相当于MFC的“CWinApp”类(跟MFC的CWinApp比起来,它比较小一些)。</p>
+<h5 id="%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6" name="%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6">应用软件</h5>
+<p><strong>
+Main.cpp/Application.h/Application.cpp
+</strong></p>
+<p>Application类会初始化应用软件,如果初始化成功则执行该应用软件。</p>
+<p>Main.cpp</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include "Application.h"
+#include "Misc.h"
+
+//
+// WinMain
+//
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR CmdLine, int CmdShow)
+{
+    #if defined(_MSC_VER) &amp;&amp; defined(_DEBUG)
+    //检查 Memory Leak
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    #endif
+
+    if (Application == 0) {
+        TRACE("CWinApp 还没登录注册\n");
+        return -1;
+    }
+
+    Application-&gt;SetWinMainArgs(hInstance, CmdLine, CmdShow);
+
+    if (!Application-&gt;InitInstance())
+        return -1;
+
+    return Application-&gt;Run();
+}</code></pre>
+<p>Application类(Application.h)</p>
+<pre><code class="C++">#ifndef __Application_h__
+#define __Application_h__
+
+#define WM_KICKIDLE     0x036A
+
+#include "Window.h"
+
+//
+//  Application
+//
+class CWinApp {
+  public:
+    CWinApp();
+    ~CWinApp();
+
+    void SetWinMainArgs(HINSTANCE hInstance, LPSTR lpszCmdLine, int nCmdShow);
+
+    BOOL RegisterWndClass(const char *name, UINT classStyle, HCURSOR hCursor=0,
+        HBRUSH hbrBackground=(HBRUSH)(COLOR_WINDOW+1), HICON hIcon=0);
+
+    virtual BOOL InitInstance();
+    virtual BOOL OnIdle(long count);
+    virtual BOOL PreTranslateMessage(MSG *msg);
+
+    int Run();
+
+    HRSRC FindResource(const char *name, const char *type);
+    HGLOBAL LoadResource(HRSRC hres);
+    HACCEL LoadAccelerators(const char *name);
+    HMENU LoadMenu(const char *name);
+    HMENU LoadMenu(int resId);
+    HICON LoadIcon(const char *name);
+    HICON LoadIcon(int resId);
+
+    HINSTANCE GetInstance() const { return Instance; }
+    operator HINSTANCE() const { return Instance; }
+
+    CWindow *GetMainWnd() { return MainWnd; }
+
+  protected:
+    HINSTANCE Instance;
+    LPSTR CmdLine;
+    int CmdShow;
+
+    MSG msgCur;
+
+    CWindow *MainWnd;
+} ;
+
+// inline 成员函数
+
+inline void CWinApp::SetWinMainArgs(HINSTANCE hInstance, LPSTR lpszCmdLine, int nCmdShow)
+{
+    Instance = hInstance;
+    CmdLine = lpszCmdLine;
+    CmdShow = nCmdShow;
+}
+
+inline HRSRC CWinApp::FindResource(const char *name, const char *type)
+{
+    return ::FindResource(Instance, name, type);
+}
+
+inline HGLOBAL CWinApp::LoadResource(HRSRC hres)
+{
+    return ::LoadResource(Instance, hres);
+}
+
+inline HACCEL CWinApp::LoadAccelerators(const char *name)
+{
+    return ::LoadAccelerators(Instance, name);
+}
+
+inline HMENU CWinApp::LoadMenu(const char *name)
+{
+    return ::LoadMenu(Instance, name);
+}
+
+inline HMENU CWinApp::LoadMenu(int resId)
+{
+    return ::LoadMenu(Instance, MAKEINTRESOURCE(resId));
+}
+
+inline HICON CWinApp::LoadIcon(const char *name)
+{
+    return ::LoadIcon(Instance, name);
+}
+
+inline HICON CWinApp::LoadIcon(int resId)
+{
+    return ::LoadIcon(Instance, MAKEINTRESOURCE(resId));
+}
+
+extern CWinApp *Application;
+
+#endif</code></pre>
+<p>Application类(Application.cpp)</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include &lt;locale.h&gt;
+#include "Application.h"
+#include "Misc.h"
+
+#ifdef __BORLANDC__
+static int WINAPI (*WinMainPtr)(HINSTANCE, HINSTANCE, LPSTR, int);
+#endif
+
+CWinApp *Application;
+
+//
+// 构造函数
+//
+CWinApp::CWinApp()
+{
+#ifdef  _DEBUG
+    if (Application != 0) {
+        TRACE("CWinApp 已经登录注册完毕。\n");
+    }
+#endif
+    Instance = 0;
+    CmdLine = 0;
+    CmdShow = 0;
+
+    Application = this;
+    msgCur.message = WM_NULL;
+    MainWnd = 0;
+
+#ifdef __BORLANDC__
+    // WinMain参照的指定
+    // 这个动作并无意义
+    WinMainPtr = &amp;WinMain;
+#endif
+}
+
+//
+// 析构函数
+//
+CWinApp::~CWinApp()
+{
+    Application = 0;
+}
+
+//
+// Application 初始化
+//
+BOOL CWinApp::InitInstance()
+{
+    return TRUE;
+}
+
+//
+// IDLE处理
+//
+BOOL CWinApp::OnIdle(long count)
+{
+    return MainWnd &amp;&amp; MainWnd-&gt;OnIdle(count);
+}
+
+//
+// 事件回圈(Message Loop)
+//
+int CWinApp::Run()
+{
+    bool idle = true;
+    long count = 0;
+
+    if (MainWnd)
+        MainWnd-&gt;ShowWindow(CmdShow);
+
+    for (;;) {
+        if (::PeekMessage(&amp;msgCur, NULL, 0, 0, PM_NOREMOVE)) {
+            if (!::GetMessage(&amp;msgCur, NULL, 0, 0))
+                return msgCur.wParam;
+
+            if (!PreTranslateMessage(&amp;msgCur)) {
+                ::TranslateMessage(&amp;msgCur);
+                ::DispatchMessage(&amp;msgCur);
+            }
+            idle = true;
+            count = 0;
+        }
+        else if (idle) {
+            if (!OnIdle(count++))
+                idle = false;
+        }
+        else {
+            ::WaitMessage();
+        }
+    }
+}
+
+//
+// 事件前置处理
+//
+BOOL CWinApp::PreTranslateMessage(MSG *msg)
+{
+    return MainWnd-&gt;PreTranslateMessage(msg);
+}
+
+//
+// 窗口类别登录注册
+//
+//  同一名称不可重复登录注册
+//
+BOOL CWinApp::RegisterWndClass(const char *name, UINT classStyle, HCURSOR hCursor,
+    HBRUSH hbrBackground, HICON hIcon)
+{
+    WNDCLASS    wndclass;
+
+    // 是否已经登录注册？
+    if (!GetClassInfo(Instance, name, &amp;wndclass)) {
+        wndclass.style = classStyle;
+        wndclass.lpfnWndProc = CWindow::_WindowProc;
+        wndclass.cbClsExtra = 0;
+        wndclass.cbWndExtra = 0;
+        wndclass.hInstance = Instance;
+        wndclass.hIcon = hIcon;
+        wndclass.hCursor = hCursor;
+        wndclass.hbrBackground = hbrBackground;
+        wndclass.lpszMenuName = 0;
+        wndclass.lpszClassName = name;
+
+        if (!::RegisterClass(&amp;wndclass)) {
+            TRACE("Can't register window class [%s]\n", name);
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+</code></pre>
+<p>WinMain(Main.cpp)只做比较固定的处理,所以大部分的处理都写在CWinApp类里。</p>
+<p>Windows应用软件是先做产生窗口等的初始化后,再执行消息循环(message loop)。初始化是“Initlnstance”,消息循环则是“Run”。</p>
+<p><strong>
+初始化-CWinApp::lnitlnstance
+</strong></p>
+<p>程序实例的前提原则是先继承再重载(overload),所以这里没有包含处理的部分。当然也可以把初始化处理写在这里,不过不需改写基本类即可再利用会比较有“高度可重用性”,故等到要使用时再继承。</p>
+<p><strong>
+消息循环-CWinApp::Run
+</strong></p>
+<p>跟消息循环的标准程序代码比起来,它的复杂度稍微高了一点。一般标准消息循环的程序代码如下:</p>
+<pre><code class="C++">while(::GetMesage(&amp;msgCur,NULL,0,0)){
+    ::TranslateMessage(&amp;msgCur);
+    ::DispatchMessage(&amp;msgCur);
+}</code></pre>
+<p>这里是把没有消息时的处理也加到标准消息循环的程序代码内。</p>
+<p>考虑到后面再重用的需求,一些必要的功能还是预先写进去比较方便。不过要写的程序也就这么一次,而且事实上“如果有需要再扩充”就好,所以不必想得太多。</p>
+<p>基本操作都跟标准的消息循环一样。</p>
+<h4 id="%E4%BA%A7%E7%94%9F%E7%AA%97%E5%8F%A3%E4%B8%8E%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86" name="%E4%BA%A7%E7%94%9F%E7%AA%97%E5%8F%A3%E4%B8%8E%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86">产生窗口与消息处理</h4>
+<p>CWinApp类里没有产生窗口的处理,所以要另建一个产生窗口的类。
+窗口相关的处理则汇整于CWindows类(Window.h/Window.cpp)之内。</p>
+<h5 id="%E7%AA%97%E5%8F%A3" name="%E7%AA%97%E5%8F%A3">窗口</h5>
+<p><strong>
+Window.h/Window.cpp
+</strong>
+窗口类是进行产生窗口和消息处理的类。</p>
+<p>窗口类(Window.h)</p>
+<pre><code class="C++">#ifndef __Window_h__
+#define __Window_h__
+
+class CWinApp;
+
+//
+// Window
+//
+class CWindow {
+  public:
+    CWindow();
+    virtual ~CWindow();
+
+    BOOL Create(CWinApp *app, const char *name, HMENU hMenu, CWindow *parent=0);
+    BOOL Create(CWinApp *app, const char *name, CWindow *parent);
+    BOOL ShowWindow(int cmdShow);
+    BOOL LoadAccelTable(const char *name);
+    BOOL LoadAccelTable(int resId);
+
+    operator HWND() const { return hWnd; }
+
+    virtual BOOL PreTranslateMessage(MSG *msg);
+    virtual LRESULT WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
+    virtual void OnCommand(UINT notifyCode, UINT id, HWND ctrl);
+    virtual void OnInitSubMenu(HMENU hMenu, UINT id);
+
+    int MessageBox(const char *str, const char *title=0, unsigned sty=MB_OK|MB_ICONERROR);
+    LRESULT SendMessage(UINT uMsg, WPARAM wParam=0, LPARAM lParam=0);
+    BOOL PostMessage(UINT uMsg, WPARAM wParam=0, LPARAM lParam=0);
+    BOOL ScreenToClient(POINT *point);
+    BOOL SetMenu(HMENU hMenu);
+    HMENU GetMenu();
+    BOOL DrawMenuBar();
+    BOOL SetWindowPos(HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags);
+    BOOL GetClientRect(RECT *rc);
+    BOOL GetWindowRect(RECT *rc);
+    UINT SetTimer(UINT idTimer, UINT uTimeout);
+    BOOL KillTimer(UINT idTimer);
+    BOOL InvalidateRect(CONST RECT *lpRect, BOOL bErase=TRUE);
+    BOOL UpdateWindow();
+    HWND SetFocus();
+
+    virtual BOOL OnIdle(long count);
+
+    BOOL AddWindowList(HWND hWndNew);
+    HWND DeleteWindowList();
+
+  protected:
+    void SetLastParam(UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+    virtual BOOL PreCreateWindow(CREATESTRUCT &amp;cs);
+
+    virtual BOOL OnCreate(CREATESTRUCT *cs);
+    virtual void OnPaint();
+    virtual void OnDestroy();
+
+    virtual void OnInitMenuPopup(HMENU hMenu, UINT pos, BOOL sysMenu);
+
+    LRESULT Default();
+
+    static LRESULT CALLBACK _WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+  protected:
+    CWinApp *App;
+    HWND    hWnd;
+
+    UINT    LastMsg;
+    WPARAM  LastWParam;
+    LPARAM  LastLParam;
+
+    HACCEL  hAccelTable;
+
+  private:
+    CWindow *Next;
+
+  public:
+    static CWindow *GetWindow(HWND hwnd);
+
+  private:
+    static CWindow *WindowListTop;
+    static CWindow *WindowInitPtr;
+
+    friend class CWinApp;
+} ;
+
+// inline 成员函数
+
+inline void CWindow::SetLastParam(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    LastMsg = uMsg;
+    LastWParam = wParam;
+    LastLParam = lParam;
+}
+
+inline BOOL CWindow::Create(CWinApp *app, const char *name, CWindow *parent)
+{
+    return Create(app, name, 0, parent);
+}
+
+inline BOOL CWindow::LoadAccelTable(int resId)
+{
+    return LoadAccelTable(MAKEINTRESOURCE(resId));
+}
+
+inline LRESULT CWindow::Default()
+{
+    return ::DefWindowProc(hWnd, LastMsg, LastWParam, LastLParam);
+}
+
+inline LRESULT CWindow::SendMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    return ::SendMessage(hWnd, uMsg, wParam, lParam);
+}
+
+inline BOOL CWindow::PostMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    return ::PostMessage(hWnd, uMsg, wParam, lParam);
+}
+
+inline int CWindow::MessageBox(const char *text, const char *title, unsigned style)
+{
+    return ::MessageBox(hWnd, text, title, style);
+}
+
+inline BOOL CWindow::ShowWindow(int cmdShow)
+{
+    return ::ShowWindow(hWnd, cmdShow);
+}
+
+inline BOOL CWindow::ScreenToClient(POINT *point)
+{
+    return ::ScreenToClient(hWnd, point);
+}
+
+inline BOOL CWindow::SetMenu(HMENU hMenu)
+{
+    return ::SetMenu(hWnd, hMenu);
+}
+
+inline HMENU CWindow::GetMenu()
+{
+    return ::GetMenu(hWnd);
+}
+
+inline BOOL CWindow::DrawMenuBar()
+{
+    return ::DrawMenuBar(hWnd);
+}
+
+inline BOOL CWindow::SetWindowPos(HWND hWndIA, int X, int Y, int cx, int cy, UINT uFlags)
+{
+    return ::SetWindowPos(hWnd, hWndIA, X, Y, cx, cy, uFlags);
+}
+
+inline BOOL CWindow::GetClientRect(RECT *rc)
+{
+    return ::GetClientRect(hWnd, rc);
+}
+
+inline BOOL CWindow::GetWindowRect(RECT *rc)
+{
+    return ::GetWindowRect(hWnd, rc);
+}
+
+inline UINT CWindow::SetTimer(UINT idTimer, UINT uTimeout)
+{
+    return ::SetTimer(hWnd, idTimer, uTimeout, 0);
+}
+
+inline BOOL CWindow::KillTimer(UINT idTimer)
+{
+    return ::KillTimer(hWnd, idTimer);
+}
+
+inline BOOL CWindow::InvalidateRect(CONST RECT *lpRect, BOOL bErase)
+{
+    return ::InvalidateRect(hWnd, lpRect, bErase);
+}
+
+inline BOOL CWindow::UpdateWindow()
+{
+    return ::UpdateWindow(hWnd);
+}
+
+inline HWND CWindow::SetFocus()
+{
+    return ::SetFocus(hWnd);
+}
+
+#endif</code></pre>
+<p>窗口类(Window.cpp)</p>
+<pre><code class="C++">#include "StdAfx.h"
+#include "Application.h"
+#include "Window.h"
+#include "Misc.h"
+#include "dc.h"
+
+//
+// Window List 的路径
+//
+CWindow *CWindow::WindowListTop;
+
+//
+// 在建立时的暂时指标
+//
+CWindow *CWindow::WindowInitPtr;
+
+//
+// 构造函数
+//
+CWindow::CWindow()
+{
+    App = 0;
+    hWnd = 0;
+    LastMsg = WM_NULL;
+    LastWParam = 0;
+    LastLParam = 0;
+
+    hAccelTable = 0;
+
+    Next = 0;
+}
+
+//
+// 析构函数
+//
+CWindow::~CWindow()
+{
+}
+
+//
+// 从WindowList取得指定的CWindow对象
+//
+CWindow *CWindow::GetWindow(HWND hwnd)
+{
+    for (CWindow *p=WindowListTop; p; p=p-&gt;Next) {
+        if (p-&gt;hWnd == hwnd)
+            return p;
+    }
+    return 0;
+}
+
+//
+// 将Window登录注册到WindowList
+//
+BOOL CWindow::AddWindowList(HWND hWndNew)
+{
+    Next = WindowListTop;
+    WindowListTop = this;
+    hWnd = hWndNew;
+    return TRUE;
+}
+
+//
+// 从WindowList删除Window
+//
+HWND CWindow::DeleteWindowList()
+{
+    for (CWindow **p = &amp;WindowListTop; *p; p = &amp;((*p)-&gt;Next)) {
+        if (*p == this) {
+            *p = Next;
+            break;
+        }
+    }
+    return hWnd;
+}
+
+//
+// 事件处理函式（共用）
+//
+//调用事件处理函数(成员函数)
+//
+LRESULT CALLBACK CWindow::_WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    CWindow *win = GetWindow(hwnd);
+
+    if (win == 0 &amp;&amp; WindowInitPtr != 0) {
+        win = WindowInitPtr;
+        WindowInitPtr-&gt;AddWindowList(hwnd);
+        WindowInitPtr = 0;
+    }
+    if (win) {
+        win-&gt;SetLastParam(uMsg, wParam, lParam);
+        return win-&gt;WindowProc(uMsg, wParam, lParam);
+    }
+    return ::DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+//
+// 读入快速键对照表（Keyboard Acceleration Table）
+//
+BOOL CWindow::LoadAccelTable(const char *name)
+{
+    hAccelTable = Application-&gt;LoadAccelerators(name);
+    return (hAccelTable != NULL);
+}
+
+//
+// 事件的前置处理
+//
+BOOL CWindow::PreTranslateMessage(MSG *msg)
+{
+    if (msg-&gt;message &gt;= WM_KEYFIRST &amp;&amp; msg-&gt;message &lt;= WM_KEYLAST) {
+        return hAccelTable != NULL &amp;&amp; ::TranslateAccelerator(hWnd, hAccelTable, msg);
+    }
+    return FALSE;
+}
+
+//
+// 产生窗口
+//
+BOOL CWindow::Create(CWinApp *app, const char *name, HMENU hMenu, CWindow *parent)
+{
+    App = app;
+
+    CREATESTRUCT cs;
+    cs.dwExStyle = WS_EX_CLIENTEDGE;
+    cs.lpszClass = NULL;
+    cs.lpszName = name;
+    cs.style = WS_OVERLAPPEDWINDOW;
+    cs.x = CW_USEDEFAULT;
+    cs.y = CW_USEDEFAULT;
+    cs.cx = CW_USEDEFAULT;
+    cs.cy = CW_USEDEFAULT;
+    cs.hwndParent = parent? parent-&gt;hWnd: 0;
+    cs.hMenu = hMenu;
+    cs.hInstance = *app;
+    cs.lpCreateParams = 0;
+
+    if (!PreCreateWindow(cs))
+        return FALSE;
+
+    if (cs.lpszClass == 0) {
+        cs.lpszClass = "Window";
+        if (!Application-&gt;RegisterWndClass(cs.lpszClass, CS_VREDRAW | CS_HREDRAW))
+            return FALSE;
+    }
+
+    WindowInitPtr = this;
+    HWND hWnd = ::CreateWindowEx(cs.dwExStyle, cs.lpszClass,
+        cs.lpszName, cs.style, cs.x, cs.y, cs.cx, cs.cy,
+        cs.hwndParent, cs.hMenu, cs.hInstance, cs.lpCreateParams);
+
+    if (WindowInitPtr != NULL) {
+        WindowInitPtr = NULL;
+        return FALSE;
+    }
+    if (hWnd == NULL)
+        return FALSE;
+    return TRUE;
+}
+
+//
+// 产生窗口的前置处理
+//
+BOOL CWindow::PreCreateWindow(CREATESTRUCT &amp;cs)
+{
+    return TRUE;
+}
+
+//
+// 成员函数的事件处理
+//
+LRESULT CWindow::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg) {
+      case WM_CREATE:
+        if (!OnCreate((LPCREATESTRUCT)lParam))
+            return -1;
+        break;
+
+      case WM_PAINT:
+        OnPaint();
+        break;
+
+      case WM_DESTROY:
+        OnDestroy();
+        break;
+
+      case WM_COMMAND:
+        OnCommand(HIWORD(wParam), LOWORD(wParam), (HWND)lParam);
+        break;
+
+      case WM_INITMENUPOPUP:
+        OnInitMenuPopup((HMENU)wParam, LOWORD(lParam), HIWORD(lParam));
+        break;
+
+      case WM_NCDESTROY:
+        DeleteWindowList();
+        break;
+
+      default:
+        return Default();
+    }
+    return 0L;
+}
+
+//
+// IDLE处理
+//
+BOOL CWindow::OnIdle(long count)
+{
+    return FALSE;
+}
+
+//
+// WM_CREATE 的处理
+//
+BOOL CWindow::OnCreate(CREATESTRUCT *cs)
+{
+    return TRUE;
+}
+
+//
+// WM_PAINT 的处理
+//
+void CWindow::OnPaint()
+{
+    // 这是为了调用在 OnPaint 里产生 CPaintDC 的
+    // BeginPaint 与 EndPaint
+    CPaintDC    dc(this);
+}
+
+//
+// WM_DESTROY 的处理
+//
+void CWindow::OnDestroy()
+{
+    ::PostQuitMessage(0);
+}
+
+//
+// WM_COMMAND 的处理
+//
+void CWindow::OnCommand(UINT notifyCode, UINT id, HWND ctrl)
+{
+}
+
+//
+// WM_INITMENUPOPUP 的处理
+//
+//  每个菜单项目都要调用OnInitSubMenu
+//
+void CWindow::OnInitMenuPopup(HMENU hMenu, UINT, BOOL sysMenu)
+{
+    if (sysMenu)
+        return;
+
+    int indexMax = ::GetMenuItemCount(hMenu);
+    for (int index=0; index &lt; indexMax; index++) {
+        OnInitSubMenu(hMenu, ::GetMenuItemID(hMenu, index));
+    }
+}
+
+void CWindow::OnInitSubMenu(HMENU hMenu, UINT id)
+{
+}
+</code></pre>
+<p><strong>
+产生窗口-CWindow:Create
+</strong></p>
+<p>需设定窗口的大小和标题才能产生窗口。一般来说,设定值都有固定的样式,所以先设为标准值模式,如需修改时再另外设定该值,这样会比较轻松(这里所说的轻松还包括减少bug)。</p>
+<p>接着再设定一般常用的值,只有需修改的地方才调用出PreCreateWindow成员函数加以修改(这里的程序与MFC相同)。这个部分的处理内容即如List3-6所示。</p>
+<pre><code class="C++">    CREATESTRUCT cs;
+    cs.dwExStyle = WS_EX_CLIENTEDGE;
+    cs.lpszClass = NULL;
+    cs.lpszName = name;
+    cs.style = WS_OVERLAPPEDWINDOW;
+    cs.x = CW_USEDEFAULT;
+    cs.y = CW_USEDEFAULT;
+    cs.cx = CW_USEDEFAULT;
+    cs.cy = CW_USEDEFAULT;
+    cs.hwndParent = parent? parent-&gt;hWnd: 0;
+    cs.hMenu = hMenu;
+    cs.hInstance = *app;
+    cs.lpCreateParams = 0;
+    //产生前所调用的初始化函数
+    PreCreateWindow(cs)
+
+    //生产窗口
+    HWND hWnd = ::CreateWindowEx(cs.dwExStyle, cs.lpszClass,
+        cs.lpszName, cs.style, cs.x, cs.y, cs.cx, cs.cy,
+        cs.hwndParent, cs.hMenu, cs.hInstance, cs.lpCreateParams);</code></pre>
+<p>实际上产生窗口的是CreateWindowEx。</p>
+<p>PreCreateWindowEx成员函数被声明为虚拟函数,所以可以重载。如果初始值不好用的话,可修改为已重载过的PreCreateWindow所要求的值。</p>
+<h5 id="%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86" name="%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86">消息处理</h5>
+<p>MFC的消息处理的规模非常庞大,如果连这个处理也要自己动手重写,恐怕是不智之举。</p>
+<p>因此我们让消息处理变成在窗口类内,利用“switch-case”去做处理,就好像是直接使用Win32API(没有用到MFC)编辑程序一样。既然眼前就有相同功能的东西可用,与其花时间去写一个高阶的函数库,不如直接使用MFC、或修改MFC程序源代码新建一个函数库还比较容易点。</p>
+<p>被Windows调用(callback)的消息处理函数则如下示:</p>
+<pre><code class="C++">LRESULT CALLBACK
+WindowProc(
+HWND hwnd,  //窗口处理常式
+UINT uMsg,  //消息
+WPARAM wParam,  //消息参数
+LPARAM lParam)  //消息参数</code></pre>
+<p>不过,这里是因为调用窗口类的成员函数(CWindow:WindowProc)会比较方便,所以才设计成这样的结构。如此来,只需再从HWND取得对应的CWindow对象即可,因此要建立一个可以取得必要对象的对应表。
+对应表设计成“洁单结构”,分别建立“搜寻”、“新增”和“删除”的函数以供使用。</p>
+<ul>
+<li>搜寻 CWindow *CWindow:GetWindow(HWNDhwnd)</li>
+<li>新增 BOOL CWindow:AddWindowList(HWNDhWndNew)</li>
+<li>删除 HWND CWindow::DeleteWindowList()</li>
+</ul>
+<p>清单结构这种方式新增或删除既简单又快速,但搜寻就比较慢。不过,虽然说比较慢,只要搜寻目标不是有几十个或几百个窗口那么多,也慢不到哪里去,而且如果只有1~2个窗口的话,没有多余的处理反而能加快速度。基于以上几个理由,所以这里的写法才使用清单结构。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html" class="navigation navigation-prev " aria-label="游戏的必备功能">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html" class="navigation navigation-next " aria-label="显示CG">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "开启窗口",
+            "next": {
+                "title": "显示CG"
+            },
+            "previous": {
+                "title": "游戏的必备功能"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

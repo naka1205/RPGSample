@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>RPG系统 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="本章将介绍如何设计你所构思的RPG系统部分。前一章说明过,RPG的项目组合越多,分类也越细密。如果本书要一一介绍所有组合种类,反而会失去重点。因此先决定好本书程序实例的系统大纲,后面的说明才能有所依据。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter  active " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="RPG%E7%B3%BB%E7%BB%9F" name="RPG%E7%B3%BB%E7%BB%9F">RPG系统</h3>
+<p>本章将介绍如何设计你所构思的RPG系统部分。</p>
+<p>前一章说明过,RPG的项目组合越多,分类也越细密。如果本书要一一介绍所有组合种类,反而会失去重点。因此先决定好本书程序实例的系统大纲,后面的说明才能有所依据。</p>
+<h4 id="%E5%A4%96%E8%A7%82%28%E7%94%BB%E9%9D%A2%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95%29" name="%E5%A4%96%E8%A7%82%28%E7%94%BB%E9%9D%A2%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95%29">外观(画面显示方法)</h4>
+<p>RPG系统中最引人注目的当然是地图和战斗时的画面显示方法。</p>
+<p>若依游戏玩家的视角来分,画面显示方法大致上可分为两种。</p>
+<p>第一种是如图2-1的显示方法,也就是主角与游戏玩家的视角相同。牟看之下,这种画面显示似乎必须使用3D功能,不过只要把视角限制在每次只能转动90的话,不需要做太精密的3D计算也能达到目的。这是电脑和游戏机处理能力还不太高的时代常见的画面显示方法。</p>
+<p>第二种画面处理方式则是让主角居高临下俯视(有点像在玩象棋或国际象棋时的感觉),如图2-2所示,主要又分正上方往下看和角度略斜往下看(又称为45°全视角:quarterview)两种。以3D制作时可自由变化视角,应该只有在2D制作时才需要先决定视角。45°全视角的画面看起来比较美观,但缺点是当人物或障碍物重叠时会不太容易看。另外,山于画面本身就是“四边形”,从画面处理的角度来说,从正上方往下看的方形地图会比较容易处理。</p>
+<p>本书程序实例的画面显示是选择45°全视角。</p>
+<p>虽然45°全视角的处理动作比矩形地图复杂,但也只是画面显示的部分跟矩形地图不一样而已,更何况万一以后想要修改画面显示时,“由繁入简”会比“由简入繁”容易多了。</p>
+<h4 id="%E6%95%85%E4%BA%8B%E9%93%BA%E9%99%88" name="%E6%95%85%E4%BA%8B%E9%93%BA%E9%99%88">故事铺陈</h4>
+<p>故事创作也可以跟系统设计分开,不过故事编排和进行方式则跟游戏系统有密不可分的关系。</p>
+<p>主要是因为故事的发挥空间会对系统设计产生很大的影响。如果最后目标是“抓救被怪兽抓去的公主”或“阻止大魔头复活转生”,游戏玩家却只顾着找宝藏、跟路上遇到的女子建立良好关系,就显得不伦不类了(故事中稍微加一点这种脱线动作也很有趣,但不能玩到最后整个游戏都偏离了主题)。</p>
+<p>假设你选择这样的故事大纲,那么发挥空间最少的应该就是规规矩矩按照“单线发展”的脚本玩下去的“破关型”。即使故事题材稍有发挥空间,也只会用在获得必要“信息情报”或“道具”的时候,基本上,主角人物要得到道具和情报才能进行到下一关。</p>
+<p>反过来,如果选择发挥空间较大的故事题材,好像最后目的就没那么重要。举例来说,假设现在的设定条件是“在五年浪迹江湖的时间内要取得自己的道具”,这个假设条件的发挥空间非常大,因为如此一来人物的行动就不受限制,即使想大睡五年”也不犯规(当然,这是比较夸张一点的)!</p>
+<p>综合各家优缺点看来,最好的游戏设计应该不要把最后目的(整个游戏破关的条件)设计得太死板,要让游戏玩家有适当的发挥空间;但是话说回来,这个发挥空间越大,故事就越不容易整合,如何拿捏得当、兼顾鱼与熊掌确实相当困难。</p>
+<p>游戏的发挥空间越大,就看剧本作家如何发挥功力让故事引人入胜,但就程序的角度来说,标记(flag)%注2-1管理等方面会需要多费点功夫处理</p>
+<p>由于本书的程序实例主要是用来辅助说明,所以没有另外准备故事剧本(大纲),不过还是会发生一些事件来推动故事进行。</p>
+<h4 id="%E7%A7%BB%E5%8A%A8%28%E9%9D%9E%E6%88%98%E6%96%97%E7%8A%B6%E6%80%81%29" name="%E7%A7%BB%E5%8A%A8%28%E9%9D%9E%E6%88%98%E6%96%97%E7%8A%B6%E6%80%81%29">移动(非战斗状态)</h4>
+<p>移动对故事的发挥空间有很大的影响力。</p>
+<p>有些完全没有人物自由发挥空问可言的游戏,甚至就干脆没有移动的功能。有些则是限制只能在城镇内自山移动,必须有“工作上门”能离开城镇,也有些则根本不设限,人物可以自由出入。</p>
+<p>但是,如果是步行移动到比较远的地点当然会多花上一点时间,有些游戏会提供只要选择目的地就会直接转移过去的功能,不必在地图上一格一格走。</p>
+<p>程序实例是单线发展型的故事大纲,所以不包含非战斗状态下的移动。有关移动的方法,请详见后述。</p>
+<h4 id="%E6%88%98%E6%96%97" name="%E6%88%98%E6%96%97">战斗</h4>
+<p>在RPG的战斗中,大概的转折次数(turn)或社2或或每次转折的操作次数就是游戏规模的判断标准。</p>
+<p>假设你认为这个战斗应该要多做几次转折的话,稍微调整一下地图大小和敌军人数等条件就能把转折次数灌水成几十次。反过来说,如果战斗只想设计成2~3个转折就结束,一开始设计游戏时就要尽量精简不拖泥带水。有很多游戏就是省略了战斗中的移动,设计成要到固定位置才会互相攻击(参见P.9)。</p>
+<p>要再讲得深入一点的话,就要连人物专长能力的数量和效果,是否加入地形效果等部应该抓出来讲,不过这部分就要靠游戏程序设计师纹尽脑汁下工夫罗!</p>
+<p>程序实例的设计有点像国际象棋盘,只能直接在“棋盘”上移动“棋子”。</p>
+<p>这种设计会让游戏玩家和电脑CPU双方都有充裕的时间仔细思考,所以CPU要设一些思考例程(routine)。思考例程也是本书的说明重点之一。</p>
+<h4 id="%E5%8D%95%E6%AC%A1%E7%A7%BB%E5%8A%A8%E8%B7%9D%E7%A6%BB%28%E6%88%98%E6%96%97%E7%8A%B6%E6%80%81%E6%97%B6%29" name="%E5%8D%95%E6%AC%A1%E7%A7%BB%E5%8A%A8%E8%B7%9D%E7%A6%BB%28%E6%88%98%E6%96%97%E7%8A%B6%E6%80%81%E6%97%B6%29">单次移动距离(战斗状态时)</h4>
+<p>单次可移动的距离也要先定好,例如把游戏区域规划成棋盘式的方格或HEX的形式(六边形),移动地点限制只能在框格内、或者是可不受“框格”限制能自由移动。</p>
+<p>如果程序采取即时性(real-time)处理方式,建议不要有框格;而若是以转折次数为主,加上框格会比较一目了然。</p>
+<p>对版图游戏已经驾轻就熟的老经验玩家会比较偏好HEX式的框格形状,不过设计程序时会比较痛苦。而且使用HEX式地图又不能设计出十字路口,在制作地图时多少都会遇到类似这样问题的困扰。</p>
+<p>由于战斗系统已经决定采用“版图游戏形式”,所以设定让人物只能在框格内移动。</p>
+<p>至于应该选择方形或HEX,实在是见仁见智,不过如果不想花人多时间,倒是可以把军粮拉到“方形”的格线上(可设计成C/C++语离的“二维阵列”和地图格线互相对应)。</p>
+<h4 id="%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F" name="%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F">窗口大小</h4>
+<p>本书的RPG程序实例是Windows应用软件,所以还有一个项目必须决定。</p>
+<p>Windows系统允许用户任意拉大或缩小窗口,但基于CG大小和纵横比例的因素,大部分的游戏都把窗口设计成固定的大小。</p>
+<p>设计游戏时所使用的CG通常是“640×480”像素或“800×600”像素,这是绝大多数显卡所拥有的显示模式。</p>
+<p>记得当年Windows95刚发表上市时,因为计算机处理速度还不够快,所以多半是640×480像素搭配256色,不过现在800×600像素的屏幕显示模式已经很常见,色彩也提高到高彩(16位元)或真彩(24/32位元)。高分辨率且细腻的图像是电脑游戏机的最大优势,相信800×600跃升为主流地位的口子应该也不远了。</p>
+<p>设计的CG越大,就得花越多的时间去画,所以本书的CG色彩设置为640×480像素的真彩,显示窗口的大小是640×480像素(讲得精确一点,只有标题栏稍微大了一些)。</p>
+<h4 id="%E6%B8%B8%E6%88%8F%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AE%B9%E6%80%BB%E6%95%B4%E7%90%86" name="%E6%B8%B8%E6%88%8F%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AE%B9%E6%80%BB%E6%95%B4%E7%90%86">游戏系统内容总整理</h4>
+<p>前面所有决定下来的程序实例的系统内容可整理如下:</p>
+<ul>
+<li>地图的画面显示为45全视角</li>
+<li>故事设计是没有条件选择的单线发展型</li>
+<li>没有移动</li>
+<li>有转折的“版图游戏式”</li>
+<li>可移动的空间只限“方形”框格</li>
+<li>CG是640×480像素的真彩</li>
+<li>显示窗口的大小是640×480像素</li>
+</ul>
+<p>我们就根据上述设定条件来设计程序实例的系统功能。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html" class="navigation navigation-prev " aria-label="写RPG时的软硬件需求">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html" class="navigation navigation-next " aria-label="RPG的必备功能和设计">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "RPG系统",
+            "next": {
+                "title": "RPG的必备功能和设计"
+            },
+            "previous": {
+                "title": "写RPG时的软硬件需求"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

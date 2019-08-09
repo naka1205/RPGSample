@@ -1,0 +1,515 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>事件的执行方法 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="大部分的RPG是采取把CG或人物台词等文字叙述显示到画面上的方式来发展游戏故事。这些人物台词或说明状况的文字叙述会先整合成故事大纲。拟好的故事大纲转成能用程序解释的格式之后,执行故事大纲即可让故事发展下去或产生事件。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter  active " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95" name="%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95">事件的执行方法</h3>
+<p>大部分的RPG是采取把CG或人物台词等文字叙述显示到画面上的方式来发展游戏故事。</p>
+<p>这些人物台词或说明状况的文字叙述会先整合成故事大纲。拟好的故事大纲转成能用程序解释的格式之后,执行故事大纲即可让故事发展下去或产生事件。</p>
+<p>这个思考模式跟冒险型游戏等的故事大纲执行都一样。</p>
+<h4 id="%E8%AE%BE%E5%AE%9A%E6%95%85%E4%BA%8B%E5%A4%A7%E7%BA%B2" name="%E8%AE%BE%E5%AE%9A%E6%95%85%E4%BA%8B%E5%A4%A7%E7%BA%B2">设定故事大纲</h4>
+<p>能用程序解释的故事大纲在格式方面有严格的规定,而且还有标识变量、条件分支的语句,跟电视连续剧的脚本大纲当然有很大的差距。这么说吧,它比较接近“程序语言”的形式。</p>
+<p>如欲撰写电脑游戏专用的故事大纲,应该先产生一个“事件故事大纲叙述语言”。利用它来写出含有执行事件用命令等的“事件故事大纲”。把程序跟故事大纲结合起来的工具称为“script”,中文译为“脚本”,本书中所出现的事件故事大纲也是如此。</p>
+<p>下面是事件故事大纲的实例。</p>
+<p><strong>事件故事大纲的实例(部分)</strong></p>
+<pre><code>wipeout : 画面效果(擦出:wipe out)
+
+load bg bg001 : 设定背景CG
+load ov priest_01 : 设定人物CG
+fadein  : 画面效果(淡入:fade in)
+
+text : 显示文字叙述(人物台词)
+“这是我们的家务事,别管啦”
+
+text
+“喔...”
+text
+“来罗!”
+
+battle mapl : 战斗
+if battle == 0 goto lose : 打赢了吗?
+
+;
+;打藏了
+;
+load bg bg001
+wipein</code></pre>
+<p>就是用类似这样的故事大纲去执行事件。事件故事大纲是用“命令”的形式把必要的功能加到故事的发展过程,例如配合故事发展有时要显示CG或菜单、画面效果等。当事件故事大纲进行到该命令的部分时,就会执行该命令相关的处理。</p>
+<p>也许有人会认为,如果没有角色台词的话,看起来倒是蛮像“批处理文件冰注7-1”。批处理文件可以把多个命令的执行动作视为一个命令去处理。本书中事件故事大纲的格式在文法上很类似批处理文件,有兴趣的读者可以自行查阅。</p>
+<p>在安装VisualC++时,产生了一个文件“C:/ProgramFiles/MicrosoftVisualStudio/VC98/Bin/VCVARS32.BAT”,这就是批处理文件。</p>
+<h4 id="%E5%86%B3%E5%AE%9A%E5%91%BD%E4%BB%A4" name="%E5%86%B3%E5%AE%9A%E5%91%BD%E4%BB%A4">决定命令</h4>
+<p>先来决定命令的部分吧!决定命令其实是决定“功能”的意思,游戏的必要功能包括了CG读入和显示、文字内容显示等等,这里所设定的命令如表7-1所示。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>内容说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>注释</td>
+<td>故事大纲内的注释</td>
+</tr>
+<tr>
+<td>标签</td>
+<td>声明表示处理分支位置的标签</td>
+</tr>
+<tr>
+<td>指定变量</td>
+<td>声明变量或指定数值</td>
+</tr>
+<tr>
+<td>增减变量</td>
+<td>更改变量值</td>
+</tr>
+<tr>
+<td>比较</td>
+<td>比较2个数值</td>
+</tr>
+<tr>
+<td>GOTO</td>
+<td>分支处理到指定的标签</td>
+</tr>
+<tr>
+<td>显示文字叙述</td>
+<td>显示角色台词等的文字叙述</td>
+</tr>
+<tr>
+<td>菜单</td>
+<td>显示菜单</td>
+</tr>
+<tr>
+<td>装入CG</td>
+<td>把CG读入到内存</td>
+</tr>
+<tr>
+<td>清除CG</td>
+<td>清除内存上的CG</td>
+</tr>
+<tr>
+<td>清除文字叙述</td>
+<td>清除文字叙述及其显示外框</td>
+</tr>
+<tr>
+<td>更新显示内容</td>
+<td>将画面显示更新为内存所读入的内容</td>
+</tr>
+<tr>
+<td>转入:Cut in</td>
+<td>瞬间显示画面</td>
+</tr>
+<tr>
+<td>转出:Cut out</td>
+<td>画面瞬间变黑</td>
+</tr>
+<tr>
+<td>淡入:Fade in</td>
+<td>从全黑状态慢慢显示出画面</td>
+</tr>
+<tr>
+<td>淡入:Fade in(白)</td>
+<td>从全白状态慢慢显示出画面</td>
+</tr>
+<tr>
+<td>擦入:Wipe in</td>
+<td>以擦拭的方式显示画面</td>
+</tr>
+<tr>
+<td>擦出:Wipe out</td>
+<td>以擦拭的方式让画面变黑</td>
+</tr>
+<tr>
+<td>淡出:Fade out</td>
+<td>画面逐渐变黑</td>
+</tr>
+<tr>
+<td>淡出:Fade out(白)</td>
+<td>画面逐渐变白</td>
+</tr>
+<tr>
+<td>画面闪烁</td>
+<td>画面瞬间闪白光</td>
+</tr>
+<tr>
+<td>画面摇晃</td>
+<td>摇动画面上的图像</td>
+</tr>
+<tr>
+<td>控制转移到其他script</td>
+<td>从现在的script切换成其他script</td>
+</tr>
+<tr>
+<td>播放音乐</td>
+<td>播放背景音乐(BGM)</td>
+</tr>
+<tr>
+<td>停止音乐</td>
+<td>停止播放背景音乐</td>
+</tr>
+<tr>
+<td>暂停</td>
+<td>在设定的秒数之间停止执行动作</td>
+</tr>
+<tr>
+<td>产生音效</td>
+<td>播放音效(设定的Wave文件)</td>
+</tr>
+<tr>
+<td>战斗</td>
+<td>从事件模式切换成战斗模式</td>
+</tr>
+<tr>
+<td>结束</td>
+<td>结束script</td>
+</tr>
+<tr>
+<td>变更模式</td>
+<td>切换游戏模式</td>
+</tr>
+<tr>
+<td>系统</td>
+<td>提供系统功能(如[装入]、[存储]等)</td>
+</tr>
+</tbody>
+</table>
+<p>命令的基本格式如下所示。</p>
+<p><strong>命令[参数1[参数2[参数3...]]]</strong></p>
+<p>先写出命令,后面才是参数的部分。命令跟参数之间、或参数跟参数之间要有1个以上的空白或定位键。原则上是1行1个命令,不接受多命令的写法(multi-statement)。</p>
+<h4 id="%E5%91%BD%E4%BB%A4" name="%E5%91%BD%E4%BB%A4">命令</h4>
+<p><strong>命令</strong></p>
+<p>;命令语句
+“;”后面的部分均视为注释。
+<strong>例如 ;这是注释</strong></p>
+<p><strong>loadbgHEYA1  ; 主公的房间</strong></p>
+<p>注释也可以写在该行的中间,就像第2行的实例那样。但文字叙述、菜单项目的后面不可有注释。</p>
+<p><strong>标签</strong></p>
+<p><em>标签
+欲设定的标签名称放在”</em>”的后面。</p>
+<p>*<em>例如 </em>label1**</p>
+<p>声明“label1”。</p>
+<p><strong>指定变量</strong></p>
+<p>set变量名称=数值
+变量名称和数值要放在“set”的后面。也可以省略set,只写“变量名称=数值”。</p>
+<p><strong>例如 set value = 1</strong></p>
+<p>把“1”指定到变量value。</p>
+<p><strong>增减变量</strong></p>
+<p>calc 变量名称+|-数值
+把变量名称和欲增减的数值、算术运算子放在"calc”的后面。</p>
+<p><strong>例如 calc value + 1</strong></p>
+<p><strong>calc value - 1</strong></p>
+<p>变量“value”加“1”(第1行)。变量“value”减“1”(第2行)。</p>
+<p><strong>比较</strong></p>
+<p>if 比较式 goto 标签
+若比较式的结果为“真”,则处理跳到指定的标签。比较式的语句形式如下:</p>
+<ul>
+<li>X == Y : X等于Y</li>
+<li>X != Y : X不等于Y</li>
+<li>X &gt;= Y : X大于或等于Y</li>
+<li>X &gt; Y : X大于Y</li>
+<li>X &lt;= Y : X小于或等于Y</li>
+<li>X &lt; Y : X小于Y</li>
+</ul>
+<p>“X”和“Y”应为变量或常数,则比较常数时也不会error。</p>
+<p><strong>if value == 0 goto label1</strong></p>
+<p>若变量“value”之值为“0”,则跳到标签“label1”。</p>
+<p><strong>GOTO</strong></p>
+<p>goto标签
+下一个执行的处理跳到“goto”后面所写的标签。</p>
+<p><strong>例如 goto label2</strong></p>
+<p>下一个执行的处理跳到标签“label2”以下的部分。</p>
+<p><strong>显示文字叙述</strong></p>
+<p>text
+“文字叙述的部分”
+从“text”的下行开始直接叙述欲显示的文字部分。在出现该行只有”(英文句点)时,则结束文字叙述。</p>
+<p><strong>例如 text</strong></p>
+<p><strong>“你好”</strong></p>
+<p>文字显示区会显示“你好”,等待键盘输入(或鼠标点选)。</p>
+<p><strong>菜单</strong></p>
+<p>menu变量名称
+项目1
+项目2
+end
+显示菜单。项目的部分应输入显示菜单的文字叙述。以“end”结束菜单。点选的结果则指定到“menu”后面所声明的变量。选择结果依其项目排列顺序分配“1”,“2”
+<strong>例如</strong></p>
+<p><strong>menu result</strong></p>
+<p><strong>往右</strong></p>
+<p><strong>往左</strong></p>
+<p><strong>end</strong></p>
+<p>显示两个菜单项目“往右”和“往左”。若选择“往右”,则把“1”指定到变量“result”,若选择“往左”,则指定“2”。</p>
+<p><strong>装入CG</strong></p>
+<p>load位置文件名把CG读入到内存上。不更新画面的显示。显示位置和欲显示图形的文件名应写在”load”后面。位置的常数如下所示,重叠的部分可只写出第1个字母。
+backonly,bgo:只有背景
+back,bg:背景(清除重叠的部分)
+overlap:重叠、全部
+<strong>例如load bg HAIKEI1</strong></p>
+<p>读入的“HAIKEI1.bmp”文件当作为背景。</p>
+<p><strong>清除CG</strong></p>
+<p>clear 位置
+清除某个位置的图形。指清除内存上的CG,不更新画面的显示。位置的常数同load命令。
+<strong>例如 ;这是注释 clear overlap</strong></p>
+<p>从内存上清除重叠部分(全部)。</p>
+<p><strong>清除文字叙述</strong></p>
+<p>clear text
+清除文字叙述及其显示外框。</p>
+<p><strong>更新显示内容</strong></p>
+<p>update now|overlap|wipe
+将画面显示更新为读入到内存上的内容。更新时的效果要写在“update”的后面。效果须选择下列3种之一:</p>
+<ul>
+<li>now:没有效果,瞬间更新</li>
+<li>overlap:以磁砖化图案(tilepattern)的方式混合更新</li>
+<li>wipe:以擦拭的动作更新</li>
+</ul>
+<p><strong>例如 update now</strong></p>
+<p>根据读入到内存上的内容,瞬间更新画面显示。</p>
+<p><strong>转入(Cut in)</strong></p>
+<p>cutin
+瞬间显示画面。</p>
+<p><strong>转出(Cut out)</strong></p>
+<p>cutout
+画面瞬间变黑。</p>
+<p><strong>淡入(Fade in)</strong></p>
+<p>fadein
+从全黑状态慢慢显示出画面。</p>
+<p><strong>淡入(Fade in)(白←)</strong></p>
+<p>whitein
+从全白状态慢慢显示出画面。</p>
+<p><strong>擦入(Wipe in)</strong></p>
+<p>wipein
+以擦拭的方式显示画面。</p>
+<p><strong>擦出(Wipe out)</strong></p>
+<p>wipeout
+以擦拭的方式让画面变黑。</p>
+<p><strong>淡出(Fade out)</strong></p>
+<p>fadeout
+画面逐渐变黑。</p>
+<p><strong>淡出(Fade out)(白→)</strong></p>
+<p>whiteout
+画面逐渐变白。</p>
+<p><strong>画面闪烁</strong></p>
+<p>flash
+画面瞬间闪白光。</p>
+<p><strong>画面摇晃</strong></p>
+<p>shake
+摇动画面上的图像。</p>
+<p><strong>把控制转移到其他script</strong></p>
+<p>exec script 文件名
+在执行事件时,从现在的script切换成其他script。欲移到的新script名称要写在“exec”的后面。</p>
+<p><strong>例如 exec event01</strong></p>
+<p>从现在的script切换过去执行script“event01.scr”(event01.scr结束后,直接结束script执行动作,不再回到原始位置)。</p>
+<p><strong>播放音乐</strong></p>
+<p>music 音乐编号
+欲播放的音乐要写在“music”的后面。这里是直接播放CD,故设定曲目号码即可。</p>
+<p><strong>例如 music 1</strong></p>
+<p>播放CD的乐曲2(若为MIXED-CD,则音乐数据从乐曲2开始)。</p>
+<p><strong>停止音乐</strong></p>
+<p>stopm
+停止播放背景音乐。</p>
+<p><strong>暂停</strong></p>
+<p>wait 秒数
+在“wait”后面设定的秒数之间停止执行动作。在不等待游戏玩家的键盘输入时(如游戏开场、游戏结束时)使用。</p>
+<p><strong>例如 wait 2</strong></p>
+<p>停止执行动作2秒钟。</p>
+<p><strong>产生音效</strong></p>
+<p>sound 文件名
+播放写在"sound"后面的Wave文件。</p>
+<p><strong>例如 sound kouka</strong></p>
+<p>播放“kouka.way”文件。</p>
+<p><strong>战斗</strong></p>
+<p>battle 地图定义文件文件名
+从事件模式切换成战斗模式。地图定义文件文件名要写在“battle”的后面。</p>
+<p><strong>例如 battle map1</strong></p>
+<p>在“mapl.txt”所定义的地图上进行战斗。</p>
+<p><strong>结束</strong></p>
+<p>end
+结束script。</p>
+<h4 id="%E4%B8%BB%E8%8F%9C%E5%8D%95%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4" name="%E4%B8%BB%E8%8F%9C%E5%8D%95%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4">主菜单用的命令</h4>
+<p>改变游戏模式
+mode systemscenario
+切换游戏模式。“mode”的后面要设定”system”或“scenario”。若设为故事大纲模式,则可使用“存储”,“装入”等。</p>
+<p><strong>例如 mode system</strong></p>
+<p><strong>mode scenario</strong></p>
+<p>设为系统模式。用于系统相关script,如主菜单等(第1行)。
+设为故事大纲模式。用于一般故事大纲相关script(第2行)。</p>
+<p><strong>系统</strong></p>
+<p>system load|exit|clear
+提供系统功能(如[装入]、[存储]等)。“mode”的后面要设定系统功能为"load"、"exit"或"clear"。</p>
+<p><strong>例如 system load</strong></p>
+<p><strong>system exit</strong></p>
+<p><strong>system clear</strong></p>
+<p>开启装入菜单(第1行)。
+结束script游戏玩家(第2行)。
+所有变量均清除为“0”(第3行)。
+由于还有一些执行命令的功能要写,如果现在规格内容定得太多,到后面会越做越辛苦,因此这里只列出“最少一定要”的命令而已。虽然不多,但对于“小事件”也够用了。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html" class="navigation navigation-prev " aria-label="执行程序实例">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html" class="navigation navigation-next " aria-label="命令的执行处理">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "事件的执行方法",
+            "next": {
+                "title": "命令的执行处理"
+            },
+            "previous": {
+                "title": "执行程序实例"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

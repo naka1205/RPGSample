@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Login Page | Amaze UI Example</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="/i/favicon.png">
+  <link rel="stylesheet" href="/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body>
+<div class="header">
+  <div class="am-g">
+    <h1>Web ide</h1>
+    <p>Integrated Development Environment<br/>代码编辑，代码生成，界面设计，调试，编译</p>
+  </div>
+  <hr />
+</div>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <h3>登录</h3>
+    <hr>
+    <form class="am-form" id="login-form" >
+      <label for="email">邮箱:</label>
+      <input type="text" id="email" class="js-pattern-email" placeholder="输入邮箱" required>
+      <br>
+      <label for="password">密码:</label>
+      <input type="password" id="password" placeholder="输入密码" required>
+      <br>
+      <div class="am-cf">
+          <button class="am-btn am-btn-secondary" type="submit" data-am-modal="{target: '#loading-modal'}">提交</button>
+      </div>
+    </form>
+    <hr>
+    <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+  </div>
+</div>
+
+<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="loading-modal">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">正在载入...</div>
+    <div class="am-modal-bd">
+      <span class="am-icon-spinner am-icon-spin"></span>
+    </div>
+  </div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="/js/jquery.min.js"></script>
+  <!--<![endif]-->
+  <script src="/js/amazeui.min.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+<script>
+
+$(function() {
+  
+    var $form = $('#login-form');
+    var $modal = $('#loading-modal');
+
+    $form.validator({
+      submit: function() {
+        var formValidity = this.isFormValid();
+        if( formValidity == false ){
+            $modal.modal('close');
+            return false;
+        }
+        var email = $('#email').val();
+        var password = $('#password').val();
+
+        $.ajax({
+          type: "POST",
+          url: "/api/login",
+          dataType: "json",
+          data:{email:email,password:password},
+          beforeSend:function(){
+
+          },
+          success: function(res){
+              if ( res.code == 200 && res.data != '') {
+                  location.reload()
+              }else{
+                  $modal.modal('close');
+              }
+          }
+        });
+        
+        return false;
+      }
+    });
+});
+
+</script>
+</html>

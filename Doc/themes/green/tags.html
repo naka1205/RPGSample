@@ -1,0 +1,15 @@
+{layout name="green/layout" /}
+
+<div class="am-g am-g-fixed blog-fixed">
+    <div class="am-u-md-12 am-u-sm-12">
+      
+        <h1 class="blog-text-center">-- {$state.title} --</h1>
+        <p class="tags">
+            {volist name="state.tags" id="vo"  key="k" }
+            <a href="{$vo.link}" class="am-badge am-badge-primary am-round am-text-default">{$vo.title}</a>
+            {/volist}
+        </p>
+
+    </div>
+    
+</div>

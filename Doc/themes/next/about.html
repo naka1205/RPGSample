@@ -1,0 +1,30 @@
+<section class="site-overview sidebar-panel [active]">
+    <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        {if !empty($state['site']['avatar']) }
+            <img class="site-author-image" itemprop="image" src="{$state.site.avatar}" alt="{$state.site.author}" />
+        {/if}
+        <p class="site-author-name" itemprop="name">{$state.site.author}</p>
+        <p class="site-description motion-element" itemprop="description">{$state.site.description}</p>
+    </div>
+    <nav class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+            <a href="/index.html">
+                <span class="site-state-item-count">{$state.counts.posts}</span>
+                <span class="site-state-item-name">日志</span>
+            </a>
+        </div>
+        <div class="site-state-item site-state-categories">
+            <a href="/categories.html">
+                <span class="site-state-item-count">{$state.counts.categories}</span>
+                <span class="site-state-item-name">分类</span>
+            </a>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <a href="/tags.html">
+                <span class="site-state-item-count">{$state.counts.tags}</span>
+                <span class="site-state-item-name">标签</span>
+            </a>
+        </div>
+    </nav>
+    <div class="links-of-author motion-element"></div>
+</section>

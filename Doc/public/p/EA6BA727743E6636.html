@@ -1,0 +1,925 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>命令的执行处理 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="接下来就要决定命令如何执行,这部分比较类似程序语言,所以先从程序语言的做法想起。">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter  active " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E5%91%BD%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E5%A4%84%E7%90%86" name="%E5%91%BD%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E5%A4%84%E7%90%86">命令的执行处理</h3>
+<p>接下来就要决定命令如何执行,这部分比较类似程序语言,所以先从程序语言的做法想起。</p>
+<h4 id="%E8%A7%A3%E9%87%8A%E5%9E%8B%3F%E7%BC%96%E8%AF%91%E5%9E%8B%3F" name="%E8%A7%A3%E9%87%8A%E5%9E%8B%3F%E7%BC%96%E8%AF%91%E5%9E%8B%3F">解释型?编译型?</h4>
+<p>只要是程序语言,就要先决定到底要做解释型还是编译型。两种形式各有利弊,我们先来比较一下两边的特征。</p>
+<p>解释型的特征如下:</p>
+<ul>
+<li>可直接翻译程序源代码并同时执行</li>
+<li>翻译过程比较繁琐,故执行速度慢</li>
+<li>逐一翻译执行程序源代码里的命令,故可只执行已完成的部分</li>
+<li>执行时须有解释器</li>
+</ul>
+<p>相比之下,编译型的特征为:</p>
+<ul>
+<li>执行可从程序源代码翻译过来的二进位程序</li>
+<li>执行时,翻译过程已经结束,故执行速度快</li>
+<li>须等整个程序翻译完后才能开始执行</li>
+<li>翻译时须有编译器,但执行时则不需要</li>
+</ul>
+<p>程序源代码是供人阅读或编写的形式,如欲将人写成的程序源代码读入电脑(程序),则需经过相当复杂的处理(这就是处理较慢的理由)。</p>
+<p>但是在事件故事大纲的执行部分,“翻译过程”的执行时间应该不会是瓶颈问题,所以这里采用“解释型”。解释型所写成的程序也比较小。</p>
+<p>解释型程序语言还可细分成在读入程序源代码时就先转换成“中间码”,或者是直接编译成“中间语言”。</p>
+<p>一般程序通常会像“递归”那样同一行执行好几次,这种方法在此显然很能发挥优点,但如果是同一行反复几次后再执行的情形不多(如本书的事件故事大纲),那就不要做“事前处理”,直接在执行时分析。</p>
+<h4 id="%E2%80%9C%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%9D%E5%92%8C%E2%80%9C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E2%80%9D" name="%E2%80%9C%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E2%80%9D%E5%92%8C%E2%80%9C%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E2%80%9D">“语法分析”和“词法分析”</h4>
+<p>“语法分析”和“词法分析”是写程序语言的人决不会陌生的常见名词之。这里的词法分析则是直接沿用在“地图定义文件”的处理时的老面孔。</p>
+<p>这个“语法分析”所使用的结构比较单纯,所以不需要做得太伟大。</p>
+<p>不过,要是用来处理数学公式的话,就显得复杂多了。各位可以想像一下要怎么去处理“a=b+c*10”这个数学公式,就不难了解到底会有多复杂。</p>
+<p>乘法的优先顺位高于加法,因此不能直接由左往右处理。遇到这类的处理时,可以利用“yacc(bison)”、“lex(flex)”等工具,而且市面上又有那么多程序语言教学书籍,稍微参考一下就能写得出来。</p>
+<hr />
+<p>写一个专用的开发语言</p>
+<hr />
+<p>先写一个能初步完成到RPG战斗部分的荷易游戏程序语言,再利用它来写游戏程序,也不失为一种方法(事实上有些厂商就是采用这种做法)。</p>
+<p>这种做法的缺点是“要花比较多的工夫去做”,不过,因为它已经划分成系统(简化程序语言的执行部分)和游戏两部分,因此可容多人同时投入程序开发、以及游戏部分不再需要Windows的禁琐步骤反而成了它的优点。</p>
+<p>如果一个人写程序还想采用这种做法,就要懂得如何妥善管理系统和游戏这两个不同的程序,因此最好是时间非常充格允许慢工出细活的时候再这!么做。</p>
+<h4 id="%E8%AF%BB%E5%85%A5script%E5%8F%8A%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4" name="%E8%AF%BB%E5%85%A5script%E5%8F%8A%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4">读入script及执行命令</h4>
+<p>我们继续来看执行事件故事大纲的处理。解释型程序会不断重复下列的处理动作直到程序结束。</p>
+<ul>
+<li>读入1行</li>
+<li>解释所读入的命令</li>
+<li>执行已解释的命令
+准备好了吗?准备开始。</li>
+</ul>
+<h5 id="%E6%89%A7%E8%A1%8Cscript" name="%E6%89%A7%E8%A1%8Cscript">执行script</h5>
+<p><strong>Script.h/Script.cpp</strong></p>
+<p>Script的执行部分也会用到鼠标或键盘输入,所以先继承CAction类,另建一个CScriptAction类(Script.h/Script.cpp)。CScriptAction类的完整程序源代码收录在附赠光盘的“chapter7”文件夹内,请自行参阅。</p>
+<h6 id="%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-CScriptAction%3A%3ACScriptAction" name="%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-CScriptAction%3A%3ACScriptAction">构造函数-CScriptAction::CScriptAction</h6>
+<p>先初始化命令表格。这个处理的做法跟读入地图数据文件的方法相同,也就是用同样的方法解释命令。</p>
+<pre><code class="C++">    // 命令表格(command table)的初始化
+    cmd_table.insert(CmdTab("set",      &amp;CScriptAction::SetCmd));
+    cmd_table.insert(CmdTab("calc",     &amp;CScriptAction::SetCmd));
+    ...
+    cmd_table.insert(CmdTab("end",      &amp;CScriptAction::EndCmd));</code></pre>
+<p>建立命令的学符申和函数指针的表格。</p>
+<h6 id="IDLE%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86-CScriptAction%3A%3AIdleAction" name="IDLE%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86-CScriptAction%3A%3AIdleAction">IDLE事件处理-CScriptAction::IdleAction</h6>
+<p>IdleAction是没有从Windows传来的消息时的处理。在此执行故事大纲script。</p>
+<pre><code class="C++">do {
+    status = Step();                // 执行一步
+} while (status == Continue) ;      // 继续吗?</code></pre>
+<p>当status为Continue时,则调用Step。status应取以下各值。</p>
+<ul>
+<li>BreakGame : script结束</li>
+<li>Continue : 继续执行script</li>
+<li>WaitNextldle : 先确认有无消息,若有消息则处理之</li>
+<li>WaitKeyPressed : 等待键盘输入</li>
+<li>WaitTimeOut : 等待计时器</li>
+<li>WaitMenuDone : 继续等待直到有选择菜单</li>
+<li>WaitWipeDone : 继续等待直到画面效果结束</li>
+<li>WaitWaveDone : 继续等待直到音效结束若非</li>
+</ul>
+<p>Continue则指等待某个东西”,也即script不动作。一旦长时间不处理消息,则“窗口移动”、“窗口的菜单处理”等都被放着不处理,而且也无法关闭或移动窗口,所以在遇到较费时的处理时,就可利用WaitNextldle去检查消息。</p>
+<h6 id="%E8%AF%BB%E5%87%BAscript%E6%96%87%E4%BB%B6-CScriptAction%3A%3ALoad" name="%E8%AF%BB%E5%87%BAscript%E6%96%87%E4%BB%B6-CScriptAction%3A%3ALoad">读出script文件-CScriptAction::Load</h6>
+<p>清除标签表格后,读入文件。</p>
+<p>读入文件的动作是利用TextReader类,全部读入到内存上。这是因为想要产生循环或跳跃到其他位置时,更改内存上的位置会比更改文件读入位置更容易(在Windows系统下,因为有磁盘缓冲区的功能,所以内存处理和文件处理两者的速度并没有太大的差距)。</p>
+<h6 id="%E6%89%A7%E8%A1%8Cscript%E6%96%87%E4%BB%B6%281%E4%B8%AA%E6%AD%A5%E9%AA%A4%29-CScriptAction%3A%3AStep" name="%E6%89%A7%E8%A1%8Cscript%E6%96%87%E4%BB%B6%281%E4%B8%AA%E6%AD%A5%E9%AA%A4%29-CScriptAction%3A%3AStep">执行script文件(1个步骤)-CScriptAction::Step</h6>
+<p>解释并执行1行script。解释和执行的处理是由下面的ParserString去进行。</p>
+<h6 id="%E5%88%86%E6%9E%90%E3%80%81%E6%89%A7%E8%A1%8C1%E8%A1%8C-CScriptAction%3A%3AParserString" name="%E5%88%86%E6%9E%90%E3%80%81%E6%89%A7%E8%A1%8C1%E8%A1%8C-CScriptAction%3A%3AParserString">分析、执行1行-CScriptAction::ParserString</h6>
+<p>先用Lexer类分割成token。如果后面已经没有命令,则传回Continue。若为标签(goto跳过去的位置),则登录标签。若否,则调用ParseCommand,取得命令所对应的处理函数。(若非error,)再调用该取得的函数。</p>
+<pre><code class="C++">return (this-&gt;*cmd)(lexer);</code></pre>
+<p>这个函数调用是利用成员函数的指针,跟地图定义文件时的方法相同。</p>
+<h6 id="%E5%88%A4%E6%96%AD%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AParseCommand" name="%E5%88%A4%E6%96%AD%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AParseCommand">判断命令-CScriptAction::ParseCommand</h6>
+<p>从命令表格搜导命令,找到时则传回表格中所登录的函数指针。没找到时,则检查是否为set或calc命令的省略形式。省略形式是指将下面这个命令。</p>
+<pre><code class="C++">set value-10</code></pre>
+<p>写成另一个样子:</p>
+<pre><code class="C++">value=10</code></pre>
+<p>此时,因为第2个token是“三”,故根据它去做判断。同理可推,calc的省略形式不是“十”就是“一”,所以也可以做判断。其他情形则均为error。</p>
+<h6 id="%E6%A0%87%E7%AD%BE%E7%9A%84%E7%99%BB%E5%BD%95%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ASetLabel" name="%E6%A0%87%E7%AD%BE%E7%9A%84%E7%99%BB%E5%BD%95%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ASetLabel">标签的登录命令-CScriptAction::SetLabel</h6>
+<p>标签是goto命令跳过去的位置,故需将标签名称和script位置写在一起。有2个相同标签时会造成error,故应先检查error,若无error再进行登录。</p>
+<pre><code class="C++">label_table[label] = reader-&gt;GetPosition();</code></pre>
+<p>登录到map容器的语句可以用同指定到数组的语句。登录原文件的“当前位置”。这样看起来好像是指定到数组,不过“label_table”是map容器而非数组。</p>
+<h6 id="set%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ASetCmd" name="set%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ASetCmd">set命令-CScriptAction::SetCmd</h6>
+<p>把set最calc结合起来,也就是同一个动作有2个名称。处理会因第2个token而异,若“=”则为赋值、若“+”则为相加、若“则为相减。</p>
+<h6 id="goto%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AGotoCmd" name="goto%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AGotoCmd">goto命令-CScriptAction::GotoCmd</h6>
+<p>先做参数的error检查,再调用GotoCommand。</p>
+<h6 id="%E7%A7%BB%E5%8A%A8%E5%88%B0script%E7%9A%84%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE-CScriptAction%3A%3AGotoCommand" name="%E7%A7%BB%E5%8A%A8%E5%88%B0script%E7%9A%84%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE-CScriptAction%3A%3AGotoCommand">移动到script的指定位置-CScriptAction::GotoCommand</h6>
+<p>实际让它移动到script的指定位置的就是这个GotoCommand。</p>
+<p>移动又分移动到script“之前”或“之后”。若移动到script之前,只要依次执行,标签就应该会全部都登录进去,因此先搜寻label_table,有找到的话就把“读取位置”设到标签位置。如果没找到的话,则可能是移动到script之后或根本没有标签。故继续读取剩余的script并检查标签,若执行到文件尾端仍找不到标签时,则为error。</p>
+<p>在顺序安排上,“读入文件时就先登录所有标签”也是一种方法,不过就故事大纲script而言,标签数量比故事大纲少很多,因此在动作部分占不到什么便宜(反而可能会让读入处理变慢)。但是这种方法可以忽略标签位置究竟在前或在后,所以程序结构就比较干净好看。</p>
+<h6 id="if%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AIfCmd" name="if%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AIfCmd">if命令-CScriptAction::IfCmd</h6>
+<p>计语句的格式是“迁XopYgotoLABEL”,故比较“op”,若结果为“真”则同goto,调用GotoCommand。</p>
+<p>op写成类似C/C++的“=”或“1=”记号,其实如果改成“=”、“&lt;&gt;”之类的记号,或许会让有其他程序语言经验的人也能很快进入状况。</p>
+<p>诺如此类的修改动作可以直接跟写script的人讨论后再决定,如果负责script的人没有程序语言的经验,就算“霸王硬上弓”自己决定也没关系啦。</p>
+<h6 id="menu%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AMenuCmd" name="menu%E5%91%BD%E4%BB%A4-CScriptAction%3A%3AMenuCmd">menu命令-CScriptAction::MenuCmd</h6>
+<p>因为有菜单项目的关系,菜单命令变成多行,因此要做成循环去读出项目。第一步要先初始化菜单。</p>
+<pre><code class="C++">Parent-&gt;ClearMenuItemCount();</code></pre>
+<p>接着再读出并登录菜单项目。</p>
+<pre><code class="C++">str = reader-&gt;GetString();
+Parent-&gt;SetMenuItem(str, no + 1);</code></pre>
+<p>最后显示菜单,等待菜单输入。</p>
+<pre><code class="C++">Parent-&gt;OpenMenu();
+return WaitMenuDone;</code></pre>
+<p>菜单显示等动作是在窗口上,故需写成CMainWin类的函数。</p>
+<h6 id="text%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ATextCmd" name="text%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ATextCmd">text命令-CScriptAction::TextCmd</h6>
+<p>文字叙述也是多行的命令。这里是利用C++标准函数的string类,先把多行字符串结合成1个字符串,再传递给Parent-&gt;WriteMessage。</p>
+<h6 id="battle%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ABattleCmd" name="battle%E5%91%BD%E4%BB%A4-CScriptAction%3A%3ABattleCmd">battle命令-CScriptAction::BattleCmd</h6>
+<p>这个命令是把键盘或鼠标输入切换成CBattleAction类。直到战斗结束时,才停止执行故事大纲。</p>
+<h6 id="%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4" name="%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4">其他命令</h6>
+<p>以下的命令均系读出参数后执行命令。</p>
+<ul>
+<li>load命令-CScriptAction::LoadCmd</li>
+<li>update命令-CScriptAction::UpdateCmd</li>
+<li>clear命令-CScriptAction::ClearCmd</li>
+<li>music命令-CScriptAction::Musiccmd</li>
+<li>sound命令-CScriptAction::SoundCmd</li>
+<li>exec命令-CScriptAction::ExecCmd</li>
+<li>wait命令-CScriptAction::WaitCmd</li>
+<li>mode命令-CScriptAction::ModeCmd</li>
+<li>system命令-CScriptAction::SystemCmd</li>
+<li>fadein命令-CScriptAction::FadelnCmd</li>
+<li>fadeout命令-CScriptAction::FadeOutCmd</li>
+<li>wipein命令-CScriptAction::WipelnCmd</li>
+<li>wipeout命令-CScriptAction::WipeOutCmd</li>
+<li>cutin命令-CScriptAction::CutinCmd</li>
+<li>cutout命令-CScriptAction::CutOutCmd</li>
+<li>whitein命令-CScriptAction::WhitelnCmd</li>
+<li>whiteout命令-CScriptAction::WhiteOutCmd</li>
+<li>flash命令-CScriptAction::FlashCmd</li>
+<li>shake命令-CScriptAction::ShakeCmd</li>
+<li>stopm命令-CScriptAction::StopmCmd</li>
+<li>end命令-CScriptAction::EndCmd</li>
+</ul>
+<p>命令的“功能”是跟着图形显示出现,所以要写在CMainWin类里,再由CScriptAction类调用。</p>
+<h5 id="%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6%E6%97%B6%E7%9A%84%E8%BE%93%E5%85%A5%E5%A4%84%E7%90%86" name="%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6%E6%97%B6%E7%9A%84%E8%BE%93%E5%85%A5%E5%A4%84%E7%90%86">触发事件时的输入处理</h5>
+<p>就好像显示的相关处理在程序源代码上也要写成“Parent-&gt;XXXX()”,实际的处理是写在CMainWin类里,然后只要调用出来即可。但是输入是继承CxxAction类,所以要写在CScriptAction类里。</p>
+<p>只有“菜单”和“文字内容”命令才会需要在事件画面上进行输入。</p>
+<p>菜单的部分是用鼠标或键盘选择项目,而文字内容的部分则是用键盘操作代表文字内容“继续读下去”。</p>
+<p>既然谈到了文字内容显示中的处理,那就把“隐藏文字显示外框”的功能也加进去好了。这里是利用“Esc”键切换显示/隐藏文字内容。</p>
+<p>很多游戏都有用到这个功能,用来避免当整个画面都是CG时,若“文字内容显示位置”与CG相重叠,则文字内容会盖掉一部分的CG,也就是一种供观赏CG的功能。虽然说是观赏,但这并不是上要目的,臂如说:“手上好像有东西”这个字幕可能会把“有拿着东西的手”盖掉,遇到这种情形也可以应用前面的功能(当然罗,最好在绘制CG时就要注意版面编排不要发生这种问题)。</p>
+<h6 id="%E9%BC%A0%E6%A0%87%E5%B7%A6%E9%94%AE%E8%A2%AB%E6%8C%89%E4%B8%8B%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3ALButtonDown" name="%E9%BC%A0%E6%A0%87%E5%B7%A6%E9%94%AE%E8%A2%AB%E6%8C%89%E4%B8%8B%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3ALButtonDown">鼠标左键被按下时的处理-CScriptAction::LButtonDown</h6>
+<p>一般的Windows系统动作是在“放开鼠标键”时才执行功能,而不是“按下鼠标键”时,因此先把鼠标键被按下的部分记忆起来。</p>
+<h6 id="%E9%BC%A0%E6%A0%87%E5%B7%A6%E9%94%AE%E6%94%BE%E5%BC%80%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3ALButtonUp" name="%E9%BC%A0%E6%A0%87%E5%B7%A6%E9%94%AE%E6%94%BE%E5%BC%80%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3ALButtonUp">鼠标左键放开时的处理-CScriptAction::LButtonUp</h6>
+<p>放开鼠标键时的动作会因状态而异。
+如果是在等待读完文字内容(WaitKeyPressed),则清除“等待键盘输入”的记号后,status变为Continue。</p>
+<p>如果是在等待菜单操作(WaitMenuDone),则将所选项H号码设到变量后,再清除菜单显示。status变为Continue之后,继续执行程序。</p>
+<h6 id="%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E8%A2%AB%E6%8C%89%E4%B8%8B%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3ARButtonDown" name="%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E8%A2%AB%E6%8C%89%E4%B8%8B%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3ARButtonDown">鼠标右键被按下时的处理-CScriptAction::RButtonDown</h6>
+<p>若画面上有文字内容显示时,则隐藏该内容显示。若目前状态是文字内容显示已隐藏,则再将文字内容显示出来。</p>
+<h6 id="%E9%BC%A0%E6%A0%87%E6%8C%87%E9%92%88%E7%A7%BB%E5%8A%A8%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3AMouseMove" name="%E9%BC%A0%E6%A0%87%E6%8C%87%E9%92%88%E7%A7%BB%E5%8A%A8%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3AMouseMove">鼠标指针移动时的处理-CScriptAction::MouseMove</h6>
+<p>将菜单的“反白显示”移动到鼠标光标所在的位置。</p>
+<h6 id="%E6%8C%89%E4%B8%8B%E9%94%AE%E7%9B%98%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3AKeyDown" name="%E6%8C%89%E4%B8%8B%E9%94%AE%E7%9B%98%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86-CScriptAction%3A%3AKeyDown">按下键盘时的处理-CScriptAction::KeyDown</h6>
+<p>动作会因该按键的种类而异。</p>
+<p>如果按下“Enter”、“空白”键,若此时在文字内容显示,则前进到下文字内容,若此时是在菜单,则选择该菜单项目。</p>
+<p>如果按下“Esc”键,则为切换显示/隐藏文字内容(同鼠标右键功能)。</p>
+<p>如果按下“↑””↓”,则移动菜单中的反白项目(选择菜单项目)。</p>
+<p>在某些特殊情况下,设计成同时支接键盘和鼠标也不会太难做。最难两边同时支持的是需要有“字符”、或是要“拖曳”鼠标的情况。</p>
+<h4 id="%E5%A4%84%E7%90%86%E7%9A%84%E5%86%85%E5%AE%B9" name="%E5%A4%84%E7%90%86%E7%9A%84%E5%86%85%E5%AE%B9">处理的内容</h4>
+<p>命令的分类、解释已经OK,但处理的内容还没开始讲,请集中精神继续看下去。</p>
+<h5 id="%E5%91%BD%E4%BB%A4%E7%9A%84%E5%A4%84%E7%90%86" name="%E5%91%BD%E4%BB%A4%E7%9A%84%E5%A4%84%E7%90%86">命令的处理</h5>
+<p><strong>MainWin.h/MainWin.cpp</strong></p>
+<p>文字内容和菜单等的显示部分跟窗口大有关系,所以CMainWin这边要实现函数。当然也可以实现在CscriptAction,但这样可能会把执行故事大纲的“显示”和“语言处理”两部分分开,所以另外实现会比较有利。</p>
+<p>举例来说,如欲将画面(窗口)更改为“800×600”时,只有CMainWin会被影响到。反之,如果动到的是故事大纲的文法,就不需要去修改CMainWin。本来新增功能时应该是两边的文件都要修改,不过因为新增功能通常会影响多个文件,所以这部分要设为允许范围。</p>
+<p>还有,虽然战斗(CBattleAction)时的窗口部分几乎没有任何功能,不过因为战斗跟系统、显示之间有着密不可分的关系,因此整合在一起修改应该会比分开修改更容易。只要多写几次RPG,相信你会越来越懂得如何判断哪些是“不变”的程序代码、哪些是“每次必改”的程序代码,慢慢摸索也可能找到更好的划分统合方法,不过到时候也许又有Windows版本更新,“操作平台”也得跟着更换。</p>
+<p>主窗口MainWin.h</p>
+<pre><code class="C++">#ifndef __MainWin_h__
+#define __MainWin_h__
+
+#include "Window.h"
+#include "dc.h"
+#include "Action.h"
+#include "Image.h"
+#include "DrawImage.h"
+#include "Effect.h"
+#include "Mci.h"
+#include "Params.h"
+#include "less.h"
+//
+// 主窗口类别
+//
+class CMainWin: public CWindow {
+  public:
+    // 常数
+
+    // 音乐模式
+    enum    {
+        MusicCD,
+        MusicOff,
+    } ;
+
+    // 计时器ID
+    enum    {
+        TimerSleep,
+    } ;
+
+    // 待机中的事件旗标
+    enum    {
+        IS_TIMEDOUT = (1 &lt;&lt; 0),
+    } ;
+
+    // 项目最大数
+    enum    {
+        MAX_MENU_ITEM = 8,
+        MAX_MENU_TEXT = 60,
+        MAX_SAVE_TEXT = 62,
+    } ;
+
+  protected:
+    // 事件显示位置
+    enum    {
+        MSG_W = (MessageFont + 1) * MessageWidth / 2 + 16,
+        MSG_H = (MessageFont + 2) * MessageLine + 14,
+        MSG_X = (WindowWidth - MSG_W) / 2,
+        MSG_Y = WindowHeight - MSG_H - 8,
+        MSG_TEXTOFFSET_X = MSG_X + 8,
+        MSG_TEXTOFFSET_Y = MSG_Y + 7,
+        MSG_TEXTSPACE_Y = 2,
+        WAITMARK_X = MessageWidth - 2,
+        WAITMARK_Y = MessageLine - 1,
+    } ;
+
+    // 菜单显示位置
+    enum    {
+        MENU_X = 20,
+        MENU_Y = MSG_Y - 2,     // 不可重叠到事件区域
+        MENU_WIDTH = (MAX_MENU_TEXT + 2) * MessageFont / 2,
+        MENU_HEIGHT = (MAX_MENU_ITEM + 1) * MessageFont,
+        MENU_MIN_WIDTH = 50,
+        MENU_FRAME_WIDTH = 10,
+        MENU_FRAME_HEIGHT = 10,
+        MENU_ITEM_SPACE = 2,
+        MENU_ITEM_HEIGHT = MessageFont + MENU_ITEM_SPACE,
+    } ;
+
+    // 储存／载入菜单显示位置
+    enum    {
+        SAVE_ITEM_HEIGHT = 32,
+        SAVE_ITEM_SPACE = 4,
+        SAVE_ITEM_INTERVAL = SAVE_ITEM_HEIGHT + SAVE_ITEM_SPACE,
+        SAVE_W = 400,
+        SAVE_H = SAVE_ITEM_INTERVAL * PARAMS_MAX_SAVE + SAVE_ITEM_HEIGHT,
+        SAVE_X = (WindowWidth - SAVE_W) / 2,
+        SAVE_Y = (WindowHeight - SAVE_H) / 2,
+        SAVE_TEXT_OFFSET_X = SAVE_X + 10,
+        SAVE_TEXT_OFFSET_Y = SAVE_Y + 8,
+        SAVE_TITLE_WIDTH = 72,
+    } ;
+
+    // 菜单项目
+    struct CMenuItem {
+        char        text[MAX_MENU_TEXT];
+        int     anser;
+        int     length;
+        COLORREF    color;
+    } ;
+
+    // 画面合成项目
+    enum    {
+        TextMessage = 1 &lt;&lt; 0,
+        TextWaitMark = 1 &lt;&lt; 1,
+        MenuFrame = 1 &lt;&lt; 2,
+        SaveTitle = 1 &lt;&lt; 3,
+        MenuItemFirst = 4,
+        SaveItemFirst = 12,
+    } ;
+    static unsigned MenuItem(int n) { return 1 &lt;&lt; (MenuItemFirst + n); }
+    static unsigned SaveItem(int n) { return 1 &lt;&lt; (SaveItemFirst + n); }
+
+  public:
+    CMainWin();
+    ~CMainWin();
+
+    LRESULT WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+    virtual void OnInitSubMenu(HMENU hMenu, UINT id);
+    virtual BOOL OnIdle(long count);
+
+    void OnCommand(UINT notifyCode, UINT id, HWND ctrl);
+
+    void DeleteAllAction();
+    void ScriptDone();
+    void SetGameLoadAction();
+    void SetGameSaveAction();
+
+    bool StartScript(const char *name, int mode=0);
+    void StartMainMenu();
+
+    void WriteMessage(const char *msg);
+    void ClearMessage();
+    void HideWaitMark();
+    void ShowMessageWindow();
+    void HideMessageWindow(bool update=true);
+    void FlipMessageWindow();
+
+    void SetMenuItem(const char *lavel, int anser);
+    void OpenMenu();
+    void HideMenuWindow(bool update=true);
+    void ClearMenuItemCount() { MenuCount = 0; }
+    int GetMenuItemCount() const { return MenuCount; }
+    int GetMenuAnser(int index) const { return MenuBuffer[index].anser; }
+    int GetMenuSelect(CPoint point);
+    void SelectMenu(int index, bool select);
+
+    BOOL LoadImageBack(const char *name);
+    BOOL LoadImageOverlap(const char *name);
+    BOOL ClearBack();
+    BOOL ClearOverlap();
+
+    const CRect &amp;GetInvalidRect() const { return InvalidRect; }
+    void Invalidate(const CRect &amp;rect) { InvalidRect |= rect; }
+    void Invalidate() { InvalidRect.SetRect(0, 0, WindowWidth, WindowHeight); }
+
+    void Repaint(const CRect &amp;rect);
+    void CopyAndRepaint(const CRect &amp;rect);
+
+    BOOL StartMusic(int no);
+    BOOL RestartMusic();
+    BOOL StopMusic();
+    BOOL StartWave(const char *name);
+
+    void ShowLoadSaveMenu(BOOL isSave);
+    void CancelLoadSaveMenu(int flags);
+    int GetLoadSaveSelect(CPoint point);
+    int NextLoadSaveSelect(int index);
+    int PrevLoadSaveSelect(int index);
+    void SelectLoadSaveMenu(int index, bool select);
+
+    void WipeIn();
+    void WipeOut();
+    void FadeIn();
+    void FadeOut();
+    void CutIn();
+    void CutOut(BOOL white=FALSE);
+    void WhiteIn();
+    void WhiteOut();
+    void CutIn(const CRect &amp;rect);
+    void WipeIn(const CRect &amp;rect);
+    void MixFade(const CRect &amp;rect);
+    void Flash();
+    void Shake();
+
+    void LoadGame(int no);
+    void SaveGame(int no, int flags);
+    CParams &amp;GetParam() { return Param; }
+
+    // 战斗画面用
+    BOOL Battle(const char *name);
+
+    CDrawImage *GetViewImage() { return &amp;ViewImage; }
+    CDrawImage *GetMixedImage() { return &amp;MixedImage; }
+    CImage     *GetBackLayer() { return &amp;BackLayer; }
+    HFONT GetFont() const { return hFont; }
+
+  protected:
+    virtual BOOL PreCreateWindow(CREATESTRUCT &amp;cs);
+
+    BOOL OnCreate(CREATESTRUCT *cs);
+    void OnFirstAction();
+    void OnClose();
+    void OnPaint();
+    void OnDestroy();
+    void OnTimer(int id);
+
+    void OnMciNotify(unsigned flag, unsigned id);
+
+    void ChangeMusicMode(int mode);
+
+    BOOL IsLoadOK() const;
+    BOOL IsSaveOK() const;
+
+    BOOL Update(bool repaint=true);
+
+    void HideAllLayer(COLORREF pix);
+
+    int MsgX(int x) const { return x * (MessageFont + 1) / 2 + MSG_TEXTOFFSET_X; }
+    int MsgY(int y) const { return y * (MessageFont + MSG_TEXTSPACE_Y) + MSG_TEXTOFFSET_Y; }
+    BOOL Kinsoku(const char *p);
+
+    void Mixing(const CRect &amp;rect, unsigned flags = ~0);
+
+    int FormatMessage(const char *msg);
+
+    void ShowLoadSaveMenu(BOOL isSave, CRect *rect);
+    void HideLoadSaveMenu();
+
+    void StopWipe();
+
+  protected:
+    // 变量表格
+    typedef map&lt;string, int, ics_less&gt;  valuemap;
+    valuemap    value_table;
+
+  public:
+    int GetValue(string name) { return value_table[name]; }
+    void SetValue(string name, int value) { value_table[name] = value; }
+    void AddValue(string name, int value) { value_table[name] += value; }
+    void DelValue(string name, int value) { value_table[name] -= value; }
+    void ClearValue() { value_table.clear(); }
+
+  protected:
+    HFONT   hFont;                  // 文字内容、菜单的字型
+
+    int MusicMode;                  // BGM播放模式
+
+    CMci    *music;                 // 播放BGM的装置
+    CDAudio cdaudio;                // 播放CD-DA的类别
+    int MusicNo;                    // 播缝中的乐曲号码
+    WaveOut wave;                   // 播放Wave
+
+    CParams Param;                  // 参数
+    CAction *Action;                // 现在的Action
+
+    CDrawImage  ViewImage;          // 显示
+    CDrawImage  MixedImage;         // 合成结果
+    CImage      BackLayer;          // 背景
+    CImage      OverlapLayer;       // 重叠
+    BOOL        TextDisplay;        // 显示文字内容？
+    BOOL        WaitMarkShowing;    // 显示等待记号？
+
+    CRect       InvalidRect;        // 无效区域
+    CRect       TextRect;           // 文字内容区域
+    CRect       WaitMarkRect;       // 等待记号区域
+    CRect       MenuRect;           // 菜单区域
+    BOOL        BackShow;           // 显示背景？
+    BOOL        OverlapShow;        // 显示重叠？
+    BOOL        TextShow;           // 显示文字内容？
+    BOOL        MenuShow;           // 显示菜单？
+    BOOL        SaveShow;           // 显示储存／载入？
+    CRect       SaveRect;           // 储存／载入区域
+    COLORREF    BgColor;            // 无背景时的填满颜色
+
+    CViewEffect *ViewEffect;        // 效果
+    UINT        TimePeriod;         // 计时器的解译能力
+
+    char    MsgBuffer[MessageLine][MessageWidth + 1];
+    int     CurX;
+    int     CurY;
+
+    CMenuItem   MenuBuffer[MAX_MENU_ITEM];
+    int         MenuCount;
+
+    BOOL    IsSaveMenu;
+    struct  {
+        bool        activate;
+        char        title[MAX_SAVE_TEXT + 1];
+        COLORREF    color;
+    } DataTitle[PARAMS_MAX_SAVE];
+
+    static const CRect Position[];
+} ;
+
+// inline成员函式
+
+//
+// 显示在内存上的图像
+//
+inline void CMainWin::Repaint(const CRect &amp;rect)
+{
+    ViewImage.Draw(CClientDC(this), rect);
+}
+
+//
+// 从合成用的图像复制到显示用的图像
+//
+inline void CMainWin::CopyAndRepaint(const CRect &amp;rect)
+{
+    ViewImage.Copy(&amp;MixedImage, rect);
+    Repaint(rect);
+}
+
+//
+// 从鼠标键的位置取得菜单项目
+//
+inline int CMainWin::GetMenuSelect(CPoint point)
+{
+    if (point.x &lt; MenuRect.left + MENU_FRAME_WIDTH
+     || point.y &lt; MenuRect.top + MENU_FRAME_HEIGHT
+     || point.x &gt;= MenuRect.right - MENU_FRAME_WIDTH
+     || point.y &gt;= MenuRect.bottom - MENU_FRAME_HEIGHT)
+        return -1;
+    return (point.y - MenuRect.top - MENU_FRAME_WIDTH) / MENU_ITEM_HEIGHT;
+}
+
+//
+// Wipe in
+//
+inline void CMainWin::WipeIn(const CRect &amp;rect)
+{
+    Update(false);
+    ViewEffect = new EffectWipeIn(this, &amp;ViewImage, &amp;MixedImage, rect);
+}
+
+//
+// Wipe in
+//
+inline void CMainWin::WipeIn()
+{
+    WipeIn(CRect(0, 0, WindowWidth, WindowHeight));
+}
+
+//
+// Wipe out
+//
+inline void CMainWin::WipeOut()
+{
+    HideMessageWindow();
+    ViewEffect = new EffectWipeOut(this, &amp;ViewImage, &amp;MixedImage);
+    HideAllLayer(BlackPixel);
+}
+
+//
+// Fade in
+//
+inline void CMainWin::FadeIn()
+{
+    Update(false);
+    ViewEffect = new EffectFadeIn(this, &amp;ViewImage, &amp;MixedImage);
+}
+
+//
+// Fade out
+//
+inline void CMainWin::FadeOut()
+{
+    HideMessageWindow();
+    ViewEffect = new EffectFadeOut(this, &amp;ViewImage, &amp;MixedImage);
+    HideAllLayer(BlackPixel);
+}
+
+//
+// Cut in
+//
+inline void CMainWin::CutIn(const CRect &amp;rect)
+{
+    Update(false);
+    CopyAndRepaint(rect);
+}
+
+//
+// Cut in
+//
+inline void CMainWin::CutIn()
+{
+    CutIn(CRect(0, 0, WindowWidth, WindowHeight));
+}
+
+//
+// Cut out
+//
+inline void CMainWin::CutOut(BOOL white)
+{
+    HideMessageWindow();
+    HideAllLayer(white? WhitePixel: BlackPixel);
+    Invalidate();
+    Update();
+}
+
+//
+// White in
+//
+inline void CMainWin::WhiteIn()
+{
+    Update(false);
+    ViewEffect = new EffectWhiteIn(this, &amp;ViewImage, &amp;MixedImage);
+}
+
+//
+// White out
+//
+inline void CMainWin::WhiteOut()
+{
+    HideMessageWindow();
+    ViewEffect = new EffectWhiteOut(this, &amp;ViewImage, &amp;MixedImage);
+    HideAllLayer(WhitePixel);
+}
+
+//
+// Mix Fade
+//
+inline void CMainWin::MixFade(const CRect &amp;rect)
+{
+    Update(false);
+    ViewEffect = new EffectMixFade(this, &amp;ViewImage, &amp;MixedImage, rect);
+}
+
+//
+// Shake
+//
+inline void CMainWin::Shake()
+{
+    ViewEffect = new EffectShake(this, &amp;ViewImage);
+}
+
+//
+// Flash
+//
+inline void CMainWin::Flash()
+{
+    ViewEffect = new EffectFlash(this, &amp;ViewImage);
+}
+
+//
+// 特效停止
+//
+inline void CMainWin::StopWipe()
+{
+    delete ViewEffect;
+    ViewEffect = 0;
+}
+
+//
+// 可以载入吗?
+//
+inline BOOL CMainWin::IsLoadOK() const
+{
+    return Action-&gt;IsSaveLoadOK();
+}
+
+//
+// 可以储存吗?
+//
+inline BOOL CMainWin::IsSaveOK() const
+{
+    return Action-&gt;IsSaveLoadOK();
+}
+
+#endif</code></pre>
+<p>从标头文件就可以看出新增了很多成员函数,这些新增的成员函数是用来执行故事大纲。</p>
+<h6 id="WMCREATE%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86-CMainWin%3A%3AOnCreate" name="WMCREATE%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86-CMainWin%3A%3AOnCreate">WMCREATE消息的处理-CMainWin::OnCreate</h6>
+<p>还要做一些初始化时所产生的图形和字型。</p>
+<p>显示用的Viewlmage的用法不变。BackLayer和OverlapLayer是用来存储读入的CG,合成后再产生MixedImage。因为后面还有“画面效果”,所以合成结果没有直接写入到Viewlmage里。</p>
+<p>接着,换到字型的部分。CreateFontAPI是一种参数较多的API,每次用到它能让字型变得多采多姿。</p>
+<pre><code class="C++">HFONT CreateFont( 
+    int nHeight,           //字体的高度
+    int nWidth,            //字体的宽度
+    int nEscapement,       //字体显示的角度
+    int nOrientation,      //字体的角度
+    int nWeight,           //字体的磅数
+    BYTE bItalic,          //斜体字体
+    BYTE bUnderline,       //带下划线的字体
+    BYTE cStrikeOut,       //带删除线的字体
+    BYTE nCharSet,         //所需的字符集
+    BYTE nOutPrecision,    //输出的精度
+    BYTE nClipPrecision,   //裁减的精度
+    BYTE nQuality,         //逻辑字体与输出设备的实际
+                        //字体之间的精度
+    BYTE nPitchAndFamily,  //字体间距和字体集
+    LPCTSTR lpszFacename   //字体名称
+);</code></pre>
+<p>这样设出来的字型是“宋体”、字体大小点数为16点的粗体字。</p>
+<pre><code class="C++">hFont = CreateFont(-MessageFont, 0, 0, 0, MessageStyle, FALSE, FALSE, FALSE,GB2312_CHARSET, OUT_DEFAULT_PRECIS, CLIP_CHARACTER_PRECIS,DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, "宋体")</code></pre>
+<p>因为这里的字符要四平八稳,故字符角度设为“0”,而且也不要斜体或底线等特殊效果,所以设为FALSE。</p>
+<p>这个字型是给文字内容和菜单显示使用。</p>
+<h6 id="%E6%98%BE%E7%A4%BA%E4%B8%BB%E8%8F%9C%E5%8D%95-CMainWin%3A%3AStartMainMenu" name="%E6%98%BE%E7%A4%BA%E4%B8%BB%E8%8F%9C%E5%8D%95-CMainWin%3A%3AStartMainMenu">显示主菜单-CMainWin::StartMainMenu</h6>
+<p>在系统模式下执行main.txt。主菜单也是先写在script里,然后再执行script。</p>
+<p>如果利用script来写跟系统有关的菜单等部分,可以不必为主菜单又另外做一个程序,但script里要追加系统相关的功能。不过,script新增功能通常会比较好处理。由于script里已经有图形装入、播放音乐等功能,因此新增功能不会太庞大。非主菜单部分当然也可能会利用main.txt,所以这个函数名称可能不太恰当。</p>
+<h6 id="%E6%89%A7%E8%A1%8Cscript-CMainWin%3A%3AStartScript" name="%E6%89%A7%E8%A1%8Cscript-CMainWin%3A%3AStartScript">执行script-CMainWin::StartScript</h6>
+<p>执行script。CScriptAction里面已经有执行script的功能,因此先建立CScriptAction的物件个体(instance)。</p>
+<pre><code class="C++">CScriptAction *action = new CScriptAction(this, Action, mode);</code></pre>
+<p>接着,读入故事大纲文件,把CScriplAction的实例(instance)设定到Action。</p>
+<pre><code class="C++">if (!action-&gt;Load(name)) {          // 读入脚本
+    delete action;
+    return false;
+}
+Action = action;</code></pre>
+<p>这样就能让鼠标、健盘、Onldle的处理切换成ScriptAction,执行script。</p>
+<h4 id="%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA" name="%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA">文字内容显示</h4>
+<p>以下是跟文字内容显示有关的成员函数。</p>
+<h5 id="%E6%98%BE%E7%A4%BA%E6%B6%88%E6%81%AF%E7%AA%97%E5%8F%A3-CMainWin%3A%3AWriteMessage" name="%E6%98%BE%E7%A4%BA%E6%B6%88%E6%81%AF%E7%AA%97%E5%8F%A3-CMainWin%3A%3AWriteMessage">显示消息窗口-CMainWin::WriteMessage</h5>
+<p>调用FormatMessage。消息文字内容的格式完成后,让等待输入记号的显示标记为ON(WaitMarkShowing=TRUE),再调用ShowMessageWindow,然后显示消息窗口。</p>
+<p>这里虽然命名为Window,但实际上是指“显示区域”而非Windows的窗口。</p>
+<h5 id="%E6%B8%85%E9%99%A4%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9-CMainWin%3A%3AClearMessage" name="%E6%B8%85%E9%99%A4%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9-CMainWin%3A%3AClearMessage">清除文字内容-CMainWin::ClearMessage</h5>
+<p>清除文字内容。</p>
+<h5 id="%E6%B8%85%E9%99%A4%E7%AD%89%E5%BE%85%E8%BE%93%E5%85%A5%E7%9A%84%E8%AE%B0%E5%8F%B7-CMainWin%3A%3AHideWaitMark" name="%E6%B8%85%E9%99%A4%E7%AD%89%E5%BE%85%E8%BE%93%E5%85%A5%E7%9A%84%E8%AE%B0%E5%8F%B7-CMainWin%3A%3AHideWaitMark">清除等待输入的记号-CMainWin::HideWaitMark</h5>
+<p>显示文字内容,清除等待读完时的记号(V)。</p>
+<h5 id="%E6%8A%8A%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA%E5%88%B0%E7%94%BB%E9%9D%A2%E4%B8%8A-CMainWin%3A%3AShowMessageWindow" name="%E6%8A%8A%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA%E5%88%B0%E7%94%BB%E9%9D%A2%E4%B8%8A-CMainWin%3A%3AShowMessageWindow">把文字内容显示到画面上-CMainWin::ShowMessageWindow</h5>
+<p>把文字内容显示在消息窗口内。</p>
+<h5 id="%E9%9A%90%E8%97%8F%E7%94%BB%E9%9D%A2%E4%B8%8A%E7%9A%84%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9-CMainWin%3A%3AHideMessageWindow" name="%E9%9A%90%E8%97%8F%E7%94%BB%E9%9D%A2%E4%B8%8A%E7%9A%84%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9-CMainWin%3A%3AHideMessageWindow">隐藏画面上的文字内容-CMainWin::HideMessageWindow</h5>
+<p>隐藏显示的文字内容。</p>
+<h5 id="%E5%88%87%E6%8D%A2%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E7%9A%84%E6%98%BE%E7%A4%BA%E7%8A%B6%E6%80%81-CMainWin%3A%3AFlipMessageWindow" name="%E5%88%87%E6%8D%A2%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E7%9A%84%E6%98%BE%E7%A4%BA%E7%8A%B6%E6%80%81-CMainWin%3A%3AFlipMessageWindow">切换文字内容的显示状态-CMainWin::FlipMessageWindow</h5>
+<p>切换“显示/隐藏”文字内容。对应按鼠标右键或“Esc”键的动作。</p>
+<h5 id="%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E7%9A%84%E6%A0%BC%E5%BC%8F-CMainWin%3A%3AFormatMessage" name="%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9%E7%9A%84%E6%A0%BC%E5%BC%8F-CMainWin%3A%3AFormatMessage">文字内容的格式-CMainWin::FormatMessage</h5>
+<p>格式化文字内容并存储到消息缓冲区(MsgBuffer)。</p>
+<p>格式化是指当字符数超过上限时即换行,此时会有“避头尾处理”。避头尾处理是在行尾只剩F1个字符的空间时,若该字符不是避头尾字符,则维持在同一行,若为避头尾字符则换行,移动到下一行。</p>
+<h4 id="%E8%8F%9C%E5%8D%95%E6%98%BE%E7%A4%BA" name="%E8%8F%9C%E5%8D%95%E6%98%BE%E7%A4%BA">菜单显示</h4>
+<p>以下为跟菜单显示有关的函数。</p>
+<h5 id="%E5%B0%86%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE%E8%AE%BE%E5%AE%9A%E5%88%B0%E8%8F%9C%E5%8D%95%E7%BC%93%E5%86%B2%E5%8C%BA-CMainWin%3A%3ASetMenultem" name="%E5%B0%86%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE%E8%AE%BE%E5%AE%9A%E5%88%B0%E8%8F%9C%E5%8D%95%E7%BC%93%E5%86%B2%E5%8C%BA-CMainWin%3A%3ASetMenultem">将菜单项目设定到菜单缓冲区-CMainWin::SetMenultem</h5>
+<p>把菜单各项设定到MenuBuffer。在这个阶段还没有显示菜单。</p>
+<ul>
+<li>text[] : 菜单项目的字符串</li>
+<li>anser : 菜单项目之值</li>
+<li>length : 字符串长</li>
+<li>color : 显示色彩需
+设定的项目即如上所示。</li>
+</ul>
+<h5 id="%E6%98%BE%E7%A4%BA%E8%8F%9C%E5%8D%95-CMainWin%3A%3AOpenMenu" name="%E6%98%BE%E7%A4%BA%E8%8F%9C%E5%8D%95-CMainWin%3A%3AOpenMenu">显示菜单-CMainWin::OpenMenu</h5>
+<p>菜单“外框”会因项目数、字符串长而改变,故需计算外框大小(MenuRect)。</p>
+<p>同消息的方式,菜单也是先设定到缓冲区,再用Mixing进行绘制。然后调用Mixing,利用Repaint做显示。</p>
+<h5 id="%E6%B8%85%E9%99%A4%E8%8F%9C%E5%8D%95-CMainWin%3A%3AHideMenuWindow" name="%E6%B8%85%E9%99%A4%E8%8F%9C%E5%8D%95-CMainWin%3A%3AHideMenuWindow">清除菜单-CMainWin::HideMenuWindow</h5>
+<p>将菜单设为“隐藏”。</p>
+<h5 id="%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE%E6%95%B0%E4%B8%BA0-CMainWin%3A%3AClearMenultemCount" name="%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE%E6%95%B0%E4%B8%BA0-CMainWin%3A%3AClearMenultemCount">菜单项目数为0-CMainWin::ClearMenultemCount</h5>
+<p>将已登录的菜单项目数初始化为“0”。一开始登录菜单时就要调用。</p>
+<h5 id="%E5%8F%96%E5%BE%97%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE%E6%95%B0-CMainWin%3A%3AGetMenultemCount" name="%E5%8F%96%E5%BE%97%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE%E6%95%B0-CMainWin%3A%3AGetMenultemCount">取得菜单项目数-CMainWin::GetMenultemCount</h5>
+<p>取得已登录的菜单项目数。</p>
+<h5 id="%E5%8F%96%E5%BE%97%E6%89%80%E9%80%89%E7%9A%84%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE-CMainWin%3A%3AGetMenuAnser" name="%E5%8F%96%E5%BE%97%E6%89%80%E9%80%89%E7%9A%84%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE-CMainWin%3A%3AGetMenuAnser">取得所选的菜单项目-CMainWin::GetMenuAnser</h5>
+<p>取得最后所选的菜单项目“号码”。</p>
+<h5 id="%E4%BB%8E%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E5%8F%96%E5%BE%97%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE-CMainWin%3A%3AGetMenuSelect" name="%E4%BB%8E%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E5%8F%96%E5%BE%97%E8%8F%9C%E5%8D%95%E9%A1%B9%E7%9B%AE-CMainWin%3A%3AGetMenuSelect">从窗口坐标取得菜单项目-CMainWin::GetMenuSelect</h5>
+<p>用来取得鼠标所指的菜单项目。</p>
+<h5 id="%E5%88%87%E6%8D%A2%E5%B7%B2%E9%80%89%E6%8B%A9%2F%E4%B8%8D%E5%8F%AF%E9%80%89%E6%8B%A9%E6%98%BE%E7%A4%BA-CMainWin%3A%3ASelectMenu" name="%E5%88%87%E6%8D%A2%E5%B7%B2%E9%80%89%E6%8B%A9%2F%E4%B8%8D%E5%8F%AF%E9%80%89%E6%8B%A9%E6%98%BE%E7%A4%BA-CMainWin%3A%3ASelectMenu">切换已选择/不可选择显示-CMainWin::SelectMenu</h5>
+<p>用其他色彩重新绘制所选的项目。最后还要恢复原来色彩。设定欲绘制的色彩,计算菜单项目的面积范围,再用Mixing重新制作“显示用图像”。</p>
+<h4 id="%E7%BB%98%E5%88%B6" name="%E7%BB%98%E5%88%B6">绘制</h4>
+<p>以下为跟绘制有关的函数。</p>
+<h5 id="%E5%90%88%E6%88%90CG%E4%B8%8E%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9-CMainWin%3A%3AMixing" name="%E5%90%88%E6%88%90CG%E4%B8%8E%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9-CMainWin%3A%3AMixing">合成CG与文字内容-CMainWin::Mixing</h5>
+<p>画面显示都要先调用“合成”函数,利用它来产生图形。这是因为Win-dows不知道什么时候会做“重新绘制”,所以先存储目前的显示内容,以便随时都能做同样的显示。</p>
+<p>另一个理由是如果先把它做成内存图像,就能让绘制“看起来”跑得很快,而且也比较好做画面特效,如图7-1所示。</p>
+<p>如图7-1所示,若图形重叠时是直接绘制而非屏幕上看不见的方式,中间的过程会赤裸裸地暴露出来。不只是游戏设计,很多“不想让人看见绘制过程”的东西都会应用这类屏幕上看不见的手法。本书实例是利用双重的屏幕上看不见的手法,有合成用和显示用两种图像。先把合成用图像上所显示的图形组合起来,组合顺序则根据视觉上的前后关系,由后而前逐一绘制/合成。</p>
+<ul>
+<li>把背景复制到合成用图像</li>
+<li>把重叠CG合成到合成用图像</li>
+<li>绘制文字内容</li>
+</ul>
+<p>画面上的所有显示都是利用<code>CMainWin::Mixing</code>函数去处理,调用Mixing的是下面的Update函数。</p>
+<p>调用Mixing(MainWin.cpp)</p>
+<pre><code class="C++">//
+// 若画面有变化时则重新绘制
+//
+BOOL CMainWin::Update(bool repaint)
+{
+    if (!InvalidRect.IsRectEmpty()) {           // 有无效区域
+        Mixing(InvalidRect);                    // 合成
+        if (repaint)
+            CopyAndRepaint(InvalidRect);        // 重新绘制
+        InvalidRect.SetRectEmpty();             // 将无效区域设为“无”
+        return TRUE;                            // 已Update
+    }
+    return FALSE;                               // 什么都不做
+}</code></pre>
+<p>InvalidRect是CRect类,把“欲重新绘制区域”设定到这里后,再调用Mixing。Mixing是绘制到“合成用图像(MixedImage)”,因此若repaint为true,则用CopyAndRepaint函数复制到“绘制用图像(Viewlmage)”并重新绘制(CopyAndRepaint)。</p>
+<p>这里故意不直接把InvalidRect传递给Update做为参数,理由是为了预防发生像下列这样的情形。</p>
+<pre><code class="C++">InvalidRect !=RECT1;    //更新区域1
+Invalidrect !=RECT2;    //更新区域2
+Update();               //更新图像</code></pre>
+<p>此时,含有2个RECT的区域会被同时更新。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html" class="navigation navigation-prev " aria-label="事件的执行方法">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html" class="navigation navigation-next " aria-label="效果">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "命令的执行处理",
+            "next": {
+                "title": "效果"
+            },
+            "previous": {
+                "title": "事件的执行方法"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

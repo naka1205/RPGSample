@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html lang=""> 
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>提升等级 · C++实例教程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="这里的设计是当攻击的敌军倒地不起时,人物可以得到经验值,但是经验值却没有用途。通常在经验值累积到一定程度时,就该“提升等级”了。不能光说不练,赶快来加个提升等级的处理吧!">
+    <meta name="keywords" content="角色扮演 教程">
+    <meta name="generator" content="PKBook">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/style.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/search.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/ebook.css">
+    <link rel="stylesheet" href="https://naka1205.github.io/rpgsample/assets/css/website.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/github.min.css" rel="stylesheet">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://naka1205.github.io/rpgsample/assets/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="https://naka1205.github.io/rpgsample/assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="book">
+    <div class="book-summary">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="输入关键词搜索" />
+        </div>
+        <nav role="navigation">
+    <ul class="summary">
+        <li><a href="https://naka1205.github.io/rpgsample/index.html" target="blank" class="header">说明</a></li>
+        <li class="divider"></li>
+                <li class="header">写一个角色扮演游戏</li>
+                        <li class="chapter " data-level="1.1" data-path="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html"><a href="https://naka1205.github.io/rpgsample/p/FEEC8D8FB78C0C58.html">何谓角色扮演游戏（RPG）</a></li>
+                        <li class="chapter " data-level="1.2" data-path="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html"><a href="https://naka1205.github.io/rpgsample/p/BC79B4D3134C347C.html">RPG分类</a></li>
+                        <li class="chapter " data-level="1.3" data-path="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html"><a href="https://naka1205.github.io/rpgsample/p/F20DC96FA50A49C7.html">写RPG时的软硬件需求</a></li>
+                    <li class="divider"></li>
+                <li class="header">游戏系统的设计</li>
+                        <li class="chapter " data-level="2.1" data-path="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html"><a href="https://naka1205.github.io/rpgsample/p/057DE479BA15F0C2.html">RPG系统</a></li>
+                        <li class="chapter " data-level="2.2" data-path="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html"><a href="https://naka1205.github.io/rpgsample/p/98A9BEB4C06AB6F5.html">RPG的必备功能和设计</a></li>
+                    <li class="divider"></li>
+                <li class="header">Windows程序设计</li>
+                        <li class="chapter " data-level="3.1" data-path="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html"><a href="https://naka1205.github.io/rpgsample/p/29DEF3B121E67E34.html">游戏的必备功能</a></li>
+                        <li class="chapter " data-level="3.2" data-path="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html"><a href="https://naka1205.github.io/rpgsample/p/E250E5C20EC8FDF3.html">开启窗口</a></li>
+                        <li class="chapter " data-level="3.3" data-path="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html"><a href="https://naka1205.github.io/rpgsample/p/7FA5E0693CC56877.html">显示CG</a></li>
+                        <li class="chapter " data-level="3.4" data-path="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html"><a href="https://naka1205.github.io/rpgsample/p/FF11E655570F0335.html">显示CG的应用软件</a></li>
+                        <li class="chapter " data-level="3.5" data-path="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html"><a href="https://naka1205.github.io/rpgsample/p/FD772D011D420B30.html">CG/Sprite的重叠显示</a></li>
+                        <li class="chapter " data-level="3.6" data-path="https://naka1205.github.io/rpgsample/p/9505172717587147.html"><a href="https://naka1205.github.io/rpgsample/p/9505172717587147.html">贴图零件(sprite)显示</a></li>
+                    <li class="divider"></li>
+                <li class="header">显示地图和人物</li>
+                        <li class="chapter " data-level="4.1" data-path="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html"><a href="https://naka1205.github.io/rpgsample/p/D669497E6697FA89.html">地图坐标系</a></li>
+                        <li class="chapter " data-level="4.2" data-path="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html"><a href="https://naka1205.github.io/rpgsample/p/CB9C77BD644B1669.html">Sprite的显示</a></li>
+                        <li class="chapter " data-level="4.3" data-path="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html"><a href="https://naka1205.github.io/rpgsample/p/D4F60F30B7F0944A.html">显示的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">人物移动</li>
+                        <li class="chapter " data-level="5.1" data-path="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html"><a href="https://naka1205.github.io/rpgsample/p/9BDC29F23C108FCD.html">移动的思维方式</a></li>
+                        <li class="chapter " data-level="5.2" data-path="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html"><a href="https://naka1205.github.io/rpgsample/p/294F9E27361163C8.html">移动的动画</a></li>
+                        <li class="chapter " data-level="5.3" data-path="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html"><a href="https://naka1205.github.io/rpgsample/p/850A8F5D7D49913A.html">移动的程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">战斗</li>
+                        <li class="chapter " data-level="6.1" data-path="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html"><a href="https://naka1205.github.io/rpgsample/p/714FCCE62BEAE7EF.html">读入地图数据</a></li>
+                        <li class="chapter " data-level="6.2" data-path="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html"><a href="https://naka1205.github.io/rpgsample/p/DE18A13DD466BCF5.html">战斗规则</a></li>
+                        <li class="chapter " data-level="6.3" data-path="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html"><a href="https://naka1205.github.io/rpgsample/p/372F73F2A1CBD002.html">攻击时的动画</a></li>
+                        <li class="chapter " data-level="6.4" data-path="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html"><a href="https://naka1205.github.io/rpgsample/p/D6377D95C3DAE065.html">魔法攻击的处理</a></li>
+                        <li class="chapter " data-level="6.5" data-path="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html"><a href="https://naka1205.github.io/rpgsample/p/84AF096B75C4D0F4.html">CPU端的思维模式</a></li>
+                        <li class="chapter " data-level="6.6" data-path="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html"><a href="https://naka1205.github.io/rpgsample/p/ECD1A205E33A1347.html">CPU端人物的攻击</a></li>
+                        <li class="chapter " data-level="6.7" data-path="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html"><a href="https://naka1205.github.io/rpgsample/p/FAC327CB74DDD86D.html">执行程序实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">事件</li>
+                        <li class="chapter " data-level="7.1" data-path="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html"><a href="https://naka1205.github.io/rpgsample/p/9308712D0BA44B6C.html">事件的执行方法</a></li>
+                        <li class="chapter " data-level="7.2" data-path="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html"><a href="https://naka1205.github.io/rpgsample/p/EA6BA727743E6636.html">命令的执行处理</a></li>
+                        <li class="chapter " data-level="7.3" data-path="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html"><a href="https://naka1205.github.io/rpgsample/p/1FD117B39A12879F.html">效果</a></li>
+                    <li class="divider"></li>
+                <li class="header">编辑参数</li>
+                        <li class="chapter " data-level="8.1" data-path="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html"><a href="https://naka1205.github.io/rpgsample/p/BE63E223F2902F52.html">参数</a></li>
+                        <li class="chapter " data-level="8.2" data-path="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html"><a href="https://naka1205.github.io/rpgsample/p/FCD874DB5CE467EB.html">参数编辑器</a></li>
+                    <li class="divider"></li>
+                <li class="header">大功告成</li>
+                        <li class="chapter " data-level="9.1" data-path="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html"><a href="https://naka1205.github.io/rpgsample/p/1107A00384B06596.html">增补其他功能</a></li>
+                        <li class="chapter " data-level="9.2" data-path="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html"><a href="https://naka1205.github.io/rpgsample/p/4E29E074EC583114.html">从外部文件读入参数</a></li>
+                        <li class="chapter " data-level="9.3" data-path="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html"><a href="https://naka1205.github.io/rpgsample/p/466677A509CFE1D8.html">结合战斗部分和故事大纳</a></li>
+                        <li class="chapter " data-level="9.4" data-path="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html"><a href="https://naka1205.github.io/rpgsample/p/A7636FB800B97FD5.html">播放音乐</a></li>
+                        <li class="chapter " data-level="9.5" data-path="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html"><a href="https://naka1205.github.io/rpgsample/p/6CB6CA31DF912DC1.html">存储/装入</a></li>
+                        <li class="chapter " data-level="9.6" data-path="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html"><a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html">播放音效</a></li>
+                        <li class="chapter  active " data-level="9.7" data-path="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html"><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></li>
+                        <li class="chapter " data-level="9.8" data-path="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html"><a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html">直接跳跃</a></li>
+                        <li class="chapter " data-level="9.9" data-path="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html"><a href="https://naka1205.github.io/rpgsample/p/3F050F1718FBC3D8.html">故事大纲实例</a></li>
+                    <li class="divider"></li>
+                <li class="header">浅谈即时系统</li>
+                        <li class="chapter " data-level="10.1" data-path="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html"><a href="https://naka1205.github.io/rpgsample/p/3A99ECF04F2323C2.html">战略型即时系统的基本概念</a></li>
+                    <li class="divider"></li>
+                <li><a href="https://github.com/naka1205/pkbook" target="blank" class="gitbook-link">Published with PKBook</a></li>
+    </ul>
+</nav>
+    </div>
+    
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+                <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="https://naka1205.github.io/rpgsample/p/26C22A438848C588.html">提升等级</a></h1>
+            </div>
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                    <div id="book-search-results">
+                        <div class="search-noresults">
+                            <section class="normal markdown-section">
+                                <h3 id="%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7" name="%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7">提升等级</h3>
+<p>这里的设计是当攻击的敌军倒地不起时,人物可以得到经验值,但是经验值却没有用途。通常在经验值累积到一定程度时,就该“提升等级”了。不能光说不练,赶快来加个提升等级的处理吧!</p>
+<h4 id="%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7%E7%9A%84%E9%80%82%E5%BD%93%E6%97%B6%E6%9C%BA" name="%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7%E7%9A%84%E9%80%82%E5%BD%93%E6%97%B6%E6%9C%BA">提升等级的适当时机</h4>
+<p>如果按照游戏特色来分的话,提升等级的时机可以分成好几种类型,例如:</p>
+<ul>
+<li>若经验值为必要数值时,则提升等级</li>
+<li>若战斗结束时,经验值为必要数值,则提升等级</li>
+<li>若经验值为必要数值时,可依照游戏玩家的指示提升等级
+(不一定所有游戏都按照这样的规则,也有很多是自行发挥)</li>
+</ul>
+<h5 id="%E8%8B%A5%E7%BB%8F%E9%AA%8C%E5%80%BC%E4%B8%BA%E5%BF%85%E8%A6%81%E6%95%B0%E5%80%BC%E6%97%B6%2C%E5%88%99%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7" name="%E8%8B%A5%E7%BB%8F%E9%AA%8C%E5%80%BC%E4%B8%BA%E5%BF%85%E8%A6%81%E6%95%B0%E5%80%BC%E6%97%B6%2C%E5%88%99%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7">若经验值为必要数值时,则提升等级</h5>
+<p>这是在战斗中提高等级。因为还在战斗中,所以必须考虑“HP和MP增加出来的部分要怎么应用”。可以是“百分百恢复”HP和MP、只恢复跟最大HP/MP相同比例(或数量),或者是完全都不恢复。</p>
+<h5 id="%E8%8B%A5%E6%88%98%E6%96%97%E7%BB%93%E6%9D%9F%E6%97%B6%2C%E7%BB%8F%E9%AA%8C%E5%80%BC%E4%B8%BA%E5%BF%85%E8%A6%81%E6%95%B0%E5%80%BC%2C%E5%88%99%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7" name="%E8%8B%A5%E6%88%98%E6%96%97%E7%BB%93%E6%9D%9F%E6%97%B6%2C%E7%BB%8F%E9%AA%8C%E5%80%BC%E4%B8%BA%E5%BF%85%E8%A6%81%E6%95%B0%E5%80%BC%2C%E5%88%99%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7">若战斗结束时,经验值为必要数值,则提升等级</h5>
+<p>这是在战斗结束时或回到旅店的时间点提升等级的方法,也可能是提升等级的小事件。</p>
+<p>有时候,战斗中不更动参数的做法也有优点。</p>
+<h5 id="%E8%8B%A5%E7%BB%8F%E9%AA%8C%E5%80%BC%E4%B8%BA%E5%BF%85%E8%A6%81%E6%95%B0%E5%80%BC%E6%97%B6%2C%E5%8F%AF%E4%BE%9D%E7%85%A7%E6%B8%B8%E6%88%8F%E7%8E%A9%E5%AE%B6%E7%9A%84%E6%8C%87%E7%A4%BA%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7" name="%E8%8B%A5%E7%BB%8F%E9%AA%8C%E5%80%BC%E4%B8%BA%E5%BF%85%E8%A6%81%E6%95%B0%E5%80%BC%E6%97%B6%2C%E5%8F%AF%E4%BE%9D%E7%85%A7%E6%B8%B8%E6%88%8F%E7%8E%A9%E5%AE%B6%E7%9A%84%E6%8C%87%E7%A4%BA%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7">若经验值为必要数值时,可依照游戏玩家的指示提升等级</h5>
+<p>若欲将获得的经验值“分配给各参数”时,则使用此方法。</p>
+<p>由于游戏玩家本身可以选择欲提升的能力,故可设计出攻击力特别好、或防御力特别强的特殊人物。</p>
+<p>本书的程序实例是在经验值累积到一定程度时,才提高等级。</p>
+<h4 id="%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E6%8F%90" name="%E6%8F%90%E5%8D%87%E7%AD%89%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E6%8F%90">提升等级的处理提</h4>
+<p>升等级的时机是在攻击结束时,画面显示了给对方的破坏力之后。</p>
+<p>提升等级(Battle.cpp)</p>
+<pre><code class="C++">bool CBattleAction::TimedOut(int timerId)
+{
+    switch (timerId) {
+        ...
+
+      case TIMER_NUMBER_ID: // 破坏力动画
+        ASSERT(status == STATUS_ANIME);
+        if (AttackAnimeCount &lt; 4) {
+            ...
+
+        }
+        else if (AttackAnimeCount &lt; 8) {
+            ...
+
+        }
+        else {
+            int n = NumberView;
+            NumberView = 0;
+            for (int i=0; i&lt;n; i++) {
+                RedrawSprite(Number + i);
+            }
+
+            // 检查提升等级
+            if (turn == PLAYER_TURN &amp;&amp; AttackFrom-&gt;LevelUp()) {
+                LevelUp();
+            }
+            else {
+                AttackPhase3();
+            }
+            return true;
+        }
+        AttackAnimeCount++;
+        break;
+    }
+    return false;
+}</code></pre>
+<p>如有提升等级时,要在移往攻击阶段3(AttackPhase3)之前进行提升等级的处理。提升等级的处理本身就会调用<code>CCharacter::LevelUp</code>。</p>
+<p>提升等级的处理(Character.cpp)</p>
+<pre><code class="C++">bool CCharacter::LevelUp()
+{
+    // 求出下一次提升等级所需的经验值
+    // 这里是每次UP20%
+
+    int next_experience = 100;
+    for (int i=1; i&lt;status.level; i++) {
+        next_experience = next_experience * 12 / 10;
+    }
+
+    // 提升等级？
+    if (status.experience &lt; next_experience)
+        return false;
+
+    // 提升等级
+
+    status.experience -= next_experience;
+
+    status.LevelUp();
+
+    while (LevelUp())
+        ;
+    return true;
+}</code></pre>
+<p>检查提升等级并进行提升等级的处理。提升等级的所需经验值设定为从等级1的“100”开始,每提升1个等级则增加20%。</p>
+<p>更改参数(Param.cpp)</p>
+<pre><code class="C++">void CStatus::LevelUp()
+{
+    // 提升等级
+    level++;
+
+    // UP各项能力20%
+    experience = experience * 12 / 10;
+    attack_power = attack_power * 12 / 10;
+    magic_power = magic_power * 12 / 10;
+    defence_power = defence_power * 12 / 10;
+    resistance = resistance * 12 / 10;
+    max_hit_point = max_hit_point * 12 / 10;
+    max_magic_point = max_magic_point * 12 / 10;
+
+    // 恢复HP和MP
+    hit_point = max_hit_point;
+    magic_point = max_magic_point;
+}</code></pre>
+<p>提升等级时的参数也要比前一等级增加20%。增加20%等于是原来的1.2倍,这里是用整数运算,先乘以12再除以10。</p>
+<p>提升等级的显示(Battle.cpp)</p>
+<pre><code class="C++">void CBattleAction::LevelUp()
+{
+    NumberView = 1;
+    CPoint view = AttackFrom-&gt;GetDrawPos();
+    view.x += (AttackFrom-&gt;GetSize().cx - 32) / 2;
+    view.y -= 12;
+    Number[0].Set(&amp;PopupParts, view, CPoint(0, 32), CSize(32, 9), 0);
+    RedrawSprite(Number);
+
+    AttackAnimeCount = 0;
+    status = STATUS_ANIME;
+    Parent-&gt;SetTimer(TIMER_LEVELUP_ID, TIMER_LEVELUP_TIME);
+
+    // 播放音效
+    Parent-&gt;StartWave(LEVELUP_WAVE);
+}</code></pre>
+<p>提升等级的显示处理跟破坏力一样,在人物头上显示提升等级的记号,再开始执行动画。提升等级时有些音效会比较有感觉,所以也播放音效。</p>
+<p>如果提升等级是在非战斗中,就不需要这些处理动作,但等到战斗结束后要检查所有人物的参数。参数会存储在CParam类,要有这些才能进行检查,如图9-4所示。</p>                            </section>
+                        </div>
+                        <div class="search-results">
+                            <div class="has-results">
+                                <h1 class="search-results-title">
+                                    关于"<span class='search-query'></span>"的搜索结果共<span class='search-results-count'></span>条
+                                </h1>
+                                <ul class="search-results-list"></ul>
+                            </div>
+                            <div class="no-results">
+                                <h1 class="search-results-title">没有"<span class='search-query'></span>"相关内容</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <a href="https://naka1205.github.io/rpgsample/p/DFAF0C32BFFE733B.html" class="navigation navigation-prev " aria-label="播放音效">
+            <i class="fa fa-angle-left"></i>
+        </a>
+                <a href="https://naka1205.github.io/rpgsample/p/B5D1DD2411A4AD87.html" class="navigation navigation-next " aria-label="直接跳跃">
+            <i class="fa fa-angle-right"></i>
+        </a>
+               
+    </div>
+<script>
+var gitbook = gitbook || [];
+gitbook.push(function() {
+    gitbook.page.hasChanged({
+        "page": {
+            "title":  "提升等级",
+            "next": {
+                "title": "直接跳跃"
+            },
+            "previous": {
+                "title": "播放音效"
+            }
+        },
+        "config": {
+            "gitbook": "*",
+            "theme": "default",
+            "variables": {},
+            "plugins": ["-lunr", "-search", "-highlight","search-pro"],
+            "pluginsConfig": {
+                "search-pro": {},
+                "highlight": {},
+                "sharing": {},
+                "fontsettings": {},
+                "theme-default": {}
+            },
+            "structure": {},
+            "pdf": {},
+            "styles": {}
+        },
+        "file": {},
+        "gitbook": {},
+        "basePath": "https://naka1205.github.io/rpgsample",
+        "book": {}
+    });
+});
+</script>
+</div>
+<script src="https://naka1205.github.io/rpgsample/assets/js/gitbook.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/theme.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/jquery.mark.min.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/search.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/buttons.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/fontsettings.js"></script>
+<script src="https://naka1205.github.io/rpgsample/assets/js/plugin.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+</body>
+</html>

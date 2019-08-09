@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+{include file="green/header" title="$state.title" description="$state.description" sitename="$state.site.title" keywords="$state.site.keywords"  /}
+<body id="blog">
+<header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
+    <div class="am-u-sm-8 am-u-sm-centered">
+        {notempty name="state.site.logo"}
+        <img width="200" src="{$state.site.logo}" alt="{$state.site.title}"/>
+        {/notempty}
+        <h2 class="am-hide-sm-only">{$state.site.subtitle}</h2>
+    </div>
+</header>
+<hr>
+<!-- menu start -->
+{include file="green/menu"/}
+<hr>
+<!-- menu end -->
+<!-- content start -->
+{__CONTENT__}
+<!-- content end -->
+{include file="green/footer" /}
+</body>
+</html>
